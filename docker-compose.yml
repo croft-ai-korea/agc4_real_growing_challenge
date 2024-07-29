@@ -1,0 +1,9 @@
+version: '3.7'
+
+services:
+  ai_greenhouse_climate_controller:
+    image: agrifusion:1.0
+    container_name : agrifusion
+    volumes:
+      -  /fileshare/data:/mnt/data
+    restart: always
