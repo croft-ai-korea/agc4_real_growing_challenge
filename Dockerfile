@@ -9,7 +9,7 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Install Python packages
-RUN pip3 install --no-cache-dir pandas matplotlib torch
+RUN pip3 install --no-cache-dir pandas matplotlib torch requests
 
 # Install Node.js and PM2
 RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
@@ -23,6 +23,7 @@ WORKDIR /app
 COPY strategy_5min_test.py /app/strategy_5min_test.py
 COPY strategy_day_test.py /app/strategy_day_test.py
 COPY scheduler.config.js /app/scheduler.config.js
+COPY sample_code.py /app/sample_code.py
 
 # Run the Python script at container startup and prevent the container from stopping
 CMD ["sh", "-c", "pm2 start scheduler.config.js && tail -f /dev/null"]
