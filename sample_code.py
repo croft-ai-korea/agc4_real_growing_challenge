@@ -28,6 +28,8 @@ for module in response:
     
 print("=========================================================================")
 module_id = 68112
+# module_id = 14821
+# module_id = 14822
 response = requests.get(     
 "https://api.letsgrow.com/api/ModuleDefinitions/{}/Items".format(module_id), 
     headers={ 
@@ -38,9 +40,33 @@ response = requests.get(
 ).json() 
   
 for collection in response["ModuleItems"]: 
-    name = collection['Description'].replace(" ", "_")
+    if collection['IsWriteable'] == False:
+        continue
+    name = collection['Description'].replace(" ", "")
+    name = name.replace("µmol/m²/s", "")
+    name = name.replace("W/m²", "")
+    name = name.replace("m/s", "")
+    name = name.replace("J/cm²", "")
+    name = name.replace("(status1=rain,0=dry)", "")
+    name = name.replace("", "")  
+    name = name.replace(":", "")
+    name = name.replace("-", "")
+    name = name.replace("%", "")
+    name = name.replace("°C","")
+    name = name.replace("°", "")
+    name = name.replace("g/","")
+    name = name.replace("(1=on2=out)","")
+    name = name.replace("l/","") 
+    name = name.replace("(from3276,8till3276,8)","")
+    name = name.replace("(from-3276,8till3276,8)","")
+    name = name.replace("/","")
+    name = name.replace("#","")
+    name = name.replace("m²","")    
+    name = name.replace("m³","")  
     id = collection['ColId']
-    print(f"'{name}':{id}") 
+    # print(f"'{name}':{id},") 
+    # print(f"'{id}',")
+    print(f"'{name}',")  
     
 print("=========================================================================")
 # collection_id = 2607102

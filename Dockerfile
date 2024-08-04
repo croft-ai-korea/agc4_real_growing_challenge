@@ -6,10 +6,18 @@ RUN apt-get update && apt-get install -y \
     python3 \
     python3-pip \
     curl \
+    libpq-dev \
     && rm -rf /var/lib/apt/lists/*
 
 # Install Python packages
-RUN pip3 install --no-cache-dir pandas matplotlib torch requests
+RUN pip3 install --no-cache-dir \
+    pandas \
+    matplotlib \
+    torch \
+    requests \
+    numpy \
+    psycopg2-binary \
+    matplotlib
 
 # Install Node.js and PM2
 RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
