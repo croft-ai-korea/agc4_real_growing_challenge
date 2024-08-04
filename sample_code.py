@@ -38,7 +38,9 @@ response = requests.get(
 ).json() 
   
 for collection in response["ModuleItems"]: 
-    print(collection) 
+    name = collection['Description'].replace(" ", "_")
+    id = collection['ColId']
+    print(f"'{name}':{id}") 
     
 print("=========================================================================")
 # collection_id = 2607102
