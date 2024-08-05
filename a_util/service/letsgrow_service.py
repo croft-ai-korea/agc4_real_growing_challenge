@@ -13,12 +13,14 @@ sys.path.append('./')
 from a_util.rest_api.letsgrow import LetGrow
 from a_util.db.letsgrow_db_util import LetsgrowDao
 from a_util.db.db_util import db_select_pandas_sql, db_select_pandas_sql_dict, db_select_one, db_insert,db_select_by_param
+from a_util.letsgrow_const import GREENHOUSE_MODULE_ID, WEATHER_MODULE_ID, FORCAST_MODULE_ID
+from aaaa.config import config
 
 
 class LetsgrowService:
     def __init__(self):
-        self.letgrow_id = 'ChallengeCVA'
-        self.letgrows_pwd = 'pKh5$2Defg'
+        self.letgrow_id = config['letsgrow']['username']
+        self.letgrows_pwd = config['letsgrow']['password']
         # self.letsgrow = LetGrow(self.letgrow_id, self.letgrows_pwd)
         self.letsgrow = None
         self.letsgrow_Dao = LetsgrowDao()
@@ -32,20 +34,17 @@ class LetsgrowService:
             self.letsgrow = LetGrow(self.letgrow_id, self.letgrows_pwd)
 
     def GH_data_read(self, begin_time):
-
-        rslt = self.letsgrow.read_all_values_oneday('42984', begin_time)
-        # rslt = self.letsgrow.read_all_values_onehour('42984', begin_time)
-        # print(rslt)
+        rslt = self.letsgrow.read_all_values_oneday(GREENHOUSE_MODULE_ID, begin_time)
         return rslt
 
     def EXT_data_read(self, begin_time):
-        return self.letsgrow.read_all_values_oneday('42975', begin_time)
+        return self.letsgrow.read_all_values_oneday(GREENHOUSE_MODULE_ID, begin_time)
 
     def FC_data_read(self, begin_time):
-        return self.letsgrow.read_all_values_oneday('14822', begin_time)
+        return self.letsgrow.read_all_values_oneday(FORCAST_MODULE_ID, begin_time)
 
     def OUT_data_read(self, begin_time):
-        return self.letsgrow.read_all_values_oneday('14821', begin_time)
+        return self.letsgrow.read_all_values_oneday(WEATHER_MODULE_ID, begin_time)
 
     def letsgrow_to_db_day(self, begin_time):
         self.connect_letsgrow()
@@ -63,17 +62,17 @@ class LetsgrowService:
             data['TimeStamp'] = datetime.strptime(data['TimeStamp'],"%Y-%m-%dT%H:%M").replace(year=begin_time.year,month=begin_time.month,day=begin_time.day).strftime("%Y-%m-%dT%H:%M")
   
         self.connect_letsgrow()
-        self.letsgrow.write_values('42984', json_data)
+        self.letsgrow.write_values(GREENHOUSE_MODULE_ID, json_data)
         
         with open('a_util/rest_api/save_control.json', 'w') as json_file:
-            json.dump(json_data,json_file)
+            json.dump(GREENHOUSE_MODULE_ID,json_file)
 
     def db_to_letsgrow(self, begin_time):
         self.connect_letsgrow()
 
         gh_values = self.letsgrow_Dao.getSetpoint(begin_time)
         # gh_values = self.letsgrow_Dao.getSetpointOfOneHour(begin_time)
-        self.letsgrow.write_values('42984', gh_values)
+        self.letsgrow.write_values(GREENHOUSE_MODULE_ID, gh_values)
 
     def pd_control_to_db(self, setpoint: pd.DataFrame):
         self.letsgrow_Dao.save_setpoint(setpoint)

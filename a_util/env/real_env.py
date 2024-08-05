@@ -120,27 +120,27 @@ class GreenHouseInput:
 
      
     def get_Iglob_sum(self):
-        return wsm_to_molm2_day_per5min(self.forecast["fc_radiation5min"])  # to-do check 5min or not
+        return wsm_to_molm2_day_per5min(self.forecast["FC_radiation_5min"])  # to-do check 5min or not
     def get_temp_av(self):
-        return self.forecast["fc_outsidetemperature5min"].mean()  # to-do check 5min or not
+        return self.forecast["FC_outside_temperature_5min"].mean()  # to-do check 5min or not
     def get_windspeed_av(self):
-        return self.forecast["fc_windspeed5min"].mean()  # to-do check 5min or not
+        return self.forecast["FC_wind_speed_5min"].mean()  # to-do check 5min or not
     def get_peakRadiationTime(self):
-        result = np.convolve(np.array(self.forecast["fc_radiation5min"]), np.ones(shape=36))  # to-do check 5min or not
+        result = np.convolve(np.array(self.forecast["FC_radiation_5min"]), np.ones(shape=36))  # to-do check 5min or not
         p_data = np.where(result == result.max())[0]-18
         if len(p_data) != 1:
             return 150
         else:
             return p_data[0]
     def get_temp_night_av(self):
-        iglob_data = self.forecast["fc_radiation5min"]  # to-do check 5min or not
-        temp_data = self.forecast["fc_outsidetemperature5min"]  # to-do check 5min or not
+        iglob_data = self.forecast["FC_radiation_5min"]  # to-do check 5min or not
+        temp_data = self.forecast["FC_outside_temperature_5min"]  # to-do check 5min or not
         return temp_data[iglob_data==0].mean()
     def get_Iglob_sum_under_LED(self):
-        iglob_data = self.forecast["fc_radiation5min"]  # to-do check 5min or not
+        iglob_data = self.forecast["FC_radiation_5min"]  # to-do check 5min or not
         return iglob_data[iglob_data>self.LED_iglob_threshold].sum()*5*60*2/1000000*0.65
     def get_LED_ON_TIME(self):
-        iglob_data = self.forecast["fc_radiation5min"]  # to-do check 5min or not
+        iglob_data = self.forecast["FC_radiation_5min"]  # to-do check 5min or not
         if True in list(iglob_data > self.LED_iglob_threshold):
             LED_ON_TIME = [self.rise_time_int - 240,
                             list(iglob_data > self.LED_iglob_threshold).index(True)*5,

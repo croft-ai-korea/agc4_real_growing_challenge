@@ -8,6 +8,7 @@ import pandas as pd
 
 sys.path.append('./')
 from aaaa.config import config
+from a_util.db.schema import create_table_query
 
 timescale_config = config['timescale']
 
@@ -118,6 +119,29 @@ def db_insert_many(sql, l: List[dict]):
             conn.commit()
             pool.putconn(conn)
 
+def create_table_if_not_exists():
+    check_table_query = """
+    SELECT EXISTS (
+        SELECT FROM pg_tables
+        WHERE schemaname = 'public' AND tablename = 'measure'
+    );
+    """
+    
+    with pool.getconn() as conn:
+        cursor = conn.cursor()
+        cursor.execute(check_table_query)
+        exists = cursor.fetchone()[0]
+
+        if not exists:
+            cursor.execute(create_table_query)
+            conn.commit()
+            print("Table 'measure' created.")
+        else:
+            print("Table 'measure' already exists.")
+        pool.putconn(conn)    
+
 if __name__ == "__main__":
-    r = db_select(""" select * from measure """)
-    print(r)
+    create_table_if_not_exists()
+    
+    # r = db_select(""" select * from measure """)
+    # print(r)

@@ -137,6 +137,7 @@ class LetsgrowDao:
         return result
 
     def getSetpointOfOneHour(self, begin_time) -> List[dict]:
+        # to-do modify query
         sql = f""" 
                 SELECT 
                     time,heating_temp_sp,vent_temp_sp,net_pipe_sp,lee_vent_min_sp,
@@ -173,6 +174,7 @@ class LetsgrowDao:
         pass
 
     def getSetpoint(self, begin_time) -> List[List[dict]]:
+        # to-do modify query
         sql = f""" 
                 SELECT 
                     time,heating_temp_sp,vent_temp_sp,net_pipe_sp,lee_vent_min_sp
