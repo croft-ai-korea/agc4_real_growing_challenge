@@ -26,7 +26,7 @@ def make_dummy_save_control_json(date:datetime = datetime(2024,7,15,0,0)):
         )
         save_control.append(
             {
-                'colId' : COLID_MAP_NAME['sp_dayofharvestdaynumber'],
+                'colId' : COLID_MAP_NAME['sp_day_of_harvest_day_number'],
                 'TimeStamp' : formatted_timestamp,
                 'Value' : 90.0,
                 'Offset' : 0
@@ -34,7 +34,7 @@ def make_dummy_save_control_json(date:datetime = datetime(2024,7,15,0,0)):
         )
         save_control.append(
             {
-                'colId' : COLID_MAP_NAME['sp_heatingtempsetpoint5min'],
+                'colId' : COLID_MAP_NAME['sp_heating_temp_setpoint_5min'],
                 'TimeStamp' : formatted_timestamp,
                 'Value' : 18.0,
                 'Offset' : 0
@@ -42,7 +42,7 @@ def make_dummy_save_control_json(date:datetime = datetime(2024,7,15,0,0)):
         )
         save_control.append(
             {
-                'colId' : COLID_MAP_NAME['sp_ventilationtempsetpoint5min'],
+                'colId' : COLID_MAP_NAME['sp_vent_ilation_temp_setpoint_5min'],
                 'TimeStamp' : formatted_timestamp,
                 'Value' : 20.0,
                 'Offset' : 0
@@ -50,7 +50,7 @@ def make_dummy_save_control_json(date:datetime = datetime(2024,7,15,0,0)):
         )
         save_control.append(
             {
-                'colId' : COLID_MAP_NAME['sp_leesideminventpositionsetpoint5min'],
+                'colId' : COLID_MAP_NAME['sp_leeside_minvent_position_setpoint_5min'],
                 'TimeStamp' : formatted_timestamp,
                 'Value' : 5.0,
                 'Offset' : 0
@@ -58,7 +58,7 @@ def make_dummy_save_control_json(date:datetime = datetime(2024,7,15,0,0)):
         )
         save_control.append(
             {
-                'colId' : COLID_MAP_NAME['sp_netpipeminimumsetpoint5min'],
+                'colId' : COLID_MAP_NAME['sp_net_pipe_minimum_setpoint_5min'],
                 'TimeStamp' : formatted_timestamp,
                 'Value' : 0.0,
                 'Offset' : 0
@@ -66,7 +66,7 @@ def make_dummy_save_control_json(date:datetime = datetime(2024,7,15,0,0)):
         )
         save_control.append(
             {
-                'colId' : COLID_MAP_NAME['sp_ValuetoiSii15min'],
+                'colId' : COLID_MAP_NAME['sp_Value_to_iSii_1_5min'],
                 'TimeStamp' : formatted_timestamp,
                 'Value' : 0.0,
                 'Offset' : 0
@@ -74,7 +74,7 @@ def make_dummy_save_control_json(date:datetime = datetime(2024,7,15,0,0)):
         )
         save_control.append(
             {
-                'colId' : COLID_MAP_NAME['sp_energyscreensetpoint5min'],
+                'colId' : COLID_MAP_NAME['sp_energy_screen_setpoint_5min'],
                 'TimeStamp' : formatted_timestamp,
                 'Value' : 50.0,
                 'Offset' : 0
@@ -82,7 +82,7 @@ def make_dummy_save_control_json(date:datetime = datetime(2024,7,15,0,0)):
         )
         save_control.append(
             {
-                'colId' : COLID_MAP_NAME['sp_blackoutscreensetpoint5min'],
+                'colId' : COLID_MAP_NAME['sp_blackout_screen_setpoint_5min'],
                 'TimeStamp' : formatted_timestamp,
                 'Value' : 0.0,
                 'Offset' : 0
@@ -90,7 +90,7 @@ def make_dummy_save_control_json(date:datetime = datetime(2024,7,15,0,0)):
         )
         save_control.append(
             {
-                'colId' : COLID_MAP_NAME['sp_CO2setpointppm5min'],
+                'colId' : COLID_MAP_NAME['sp_CO2_setpoint_ppm_5min'],
                 'TimeStamp' : formatted_timestamp,
                 'Value' : 500.0,
                 'Offset' : 0
@@ -98,7 +98,7 @@ def make_dummy_save_control_json(date:datetime = datetime(2024,7,15,0,0)):
         )
         save_control.append(
             {
-                'colId' : COLID_MAP_NAME['sp_Humiditydeficitsetpoint5min'],
+                'colId' : COLID_MAP_NAME['sp_humidity_deficit_setpoint_5min'],
                 'TimeStamp' : formatted_timestamp,
                 'Value' : 4.0,
                 'Offset' : 0
@@ -106,7 +106,7 @@ def make_dummy_save_control_json(date:datetime = datetime(2024,7,15,0,0)):
         )
         save_control.append(
             {
-                'colId' : COLID_MAP_NAME['sp_irrigationintervaltimesetpointmin5min'],
+                'colId' : COLID_MAP_NAME['sp_irrigation_interval_time_setpoint_min_5min'],
                 'TimeStamp' : formatted_timestamp,
                 'Value' : 20.0,
                 'Offset' : 0

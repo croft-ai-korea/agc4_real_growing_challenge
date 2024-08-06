@@ -12,7 +12,7 @@ import psycopg2
 import sys
 
 sys.path.append('./')
-from a_util.letsgrow_const import COLID_MAP_NAME, COLID_MAP_NUMBER
+from a_util.letsgrow_const import COLID_MAP_NAME, COLID_MAP_NUMBER, LETSGROW_CONTROL
 from aaaa.config import config
 from a_util.db.db_util import db_select_one, db_insert, db_select, db_select_pandas_sql_dict_real, db_select_pandas_sql, db_insert_many, db_select_by_param, db_select_pandas_sql_dict
 
@@ -69,9 +69,6 @@ class LetsgrowDao:
             #print(sql)
             #print(dataItem)
             db_insert(sql,dataItem)
-
-
-
 
     def insert_day(self, l:List[Any]):
         if len(l) < 1:
@@ -175,10 +172,12 @@ class LetsgrowDao:
 
     def getSetpoint(self, begin_time) -> List[List[dict]]:
         # to-do modify query
+        
+        setpoints = ",".join(LETSGROW_CONTROL)
+        
         sql = f""" 
                 SELECT 
-                    time,heating_temp_sp,vent_temp_sp,net_pipe_sp,lee_vent_min_sp
-                    ,scr_enrg_sp,scr_blck_sp,lamps_sp,co2_sp,dx_sp ,plant_density,day_of_harvest
+                    time,{setpoints}
                 from measure 
                 where 
                     time >= %(f)s
@@ -214,7 +213,7 @@ class LetsgrowDao:
                 select min(tm) from (
                     select max(time) as tm
                     from measure
-                    where out_tout is not null
+                    where outside_temperature_5min is not null
                     union
                     select now() - interval '4 hour' as tm
                 ) tbl

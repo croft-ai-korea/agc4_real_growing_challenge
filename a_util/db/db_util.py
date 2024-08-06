@@ -140,8 +140,26 @@ def create_table_if_not_exists():
             print("Table 'measure' already exists.")
         pool.putconn(conn)    
 
+def db_drop_table_if_exists(table_name: str):
+    drop_table_query = f"""
+    DROP TABLE IF EXISTS {table_name};
+    """
+    
+    with pool.getconn() as conn:
+        cursor = conn.cursor()
+        try:
+            cursor.execute(drop_table_query)
+            conn.commit()
+            print(f"Table '{table_name}' has been dropped.")
+        except Exception as e:
+            print(f"Error dropping table '{table_name}':", e)
+        finally:
+            pool.putconn(conn)
+
 if __name__ == "__main__":
     create_table_if_not_exists()
+    
+    # db_drop_table_if_exists('measure')
     
     # r = db_select(""" select * from measure """)
     # print(r)

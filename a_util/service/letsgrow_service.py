@@ -50,7 +50,7 @@ class LetsgrowService:
         self.connect_letsgrow()
 
         self.db_insert_day(self.GH_data_read(begin_time))
-        self.db_insert_day(self.EXT_data_read(begin_time))
+        # self.db_insert_day(self.EXT_data_read(begin_time))
         self.db_insert_day(self.FC_data_read(begin_time))
         self.db_insert_day(self.OUT_data_read(begin_time))
 
@@ -65,7 +65,7 @@ class LetsgrowService:
         self.letsgrow.write_values(GREENHOUSE_MODULE_ID, json_data)
         
         with open('a_util/rest_api/save_control.json', 'w') as json_file:
-            json.dump(GREENHOUSE_MODULE_ID,json_file)
+            json.dump(json_data,json_file)
 
     def db_to_letsgrow(self, begin_time):
         self.connect_letsgrow()
@@ -75,7 +75,7 @@ class LetsgrowService:
         self.letsgrow.write_values(GREENHOUSE_MODULE_ID, gh_values)
 
     def pd_control_to_db(self, setpoint: pd.DataFrame):
-        self.letsgrow_Dao.save_setpoint(setpoint)
+        self.letsgrow_Dao.save_setpoint(setpoint)        
         # db_insert_pandas(control)
 
     def pd_control_to_db_hour(self, setpoint: pd.DataFrame):

@@ -15,7 +15,8 @@ from a_util.letsgrow_const import LETGROW_FORCAST, LETSGROW_CONTROL
 class GreenhouseControl:
     def __init__(self, startdate, strategies:list):
         self.strategies = strategies
-        self.today = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
+        # self.today = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
+        self.today = datetime(2024,8,1,0,0,0)
         self.startdate = startdate
         self.lg_service = LetsgrowService()
         self.indoor_env = self.lg_service.data_from_db_day(self.today)
@@ -26,19 +27,14 @@ class GreenhouseControl:
         self.green_input = GreenHouseInput(self.startdate, self.indoor_env,self.indoor_env_yesterday, self.plant_status, self.today)
         self.green_out = GreenHouseOutput(self.today)
         ## to-do
-        self.density = [ 
-                        90,90,90,90,90,90,90,
-                        60,60,60,60,60,60,60,
-                        45,45,45,45,45,45,45,
-                        30,30,30,30,30,30,30,
-                        22.5,22.5,22.5,22.5,22.5,22.5,
-                        18,18,18,18,18,18,18,
-                        15,15,15,15,15,15,15
-                    ]
+        self.density = [ 90,90,90,90,90,90,90,
+                         60,60,60,60,60,60,60,
+                         45,45,45,45,45,45,45,
+                         30,30,30,30,30,30,30,
+                         22.5,22.5,22.5,22.5,22.5,22.5,
+                         18,18,18,18,18,18,18,
+                         15,15,15,15,15,15,15  ]
         self.green_cost = cost_calculate(self.green_input,self.density)
-
-
-
 
     def get_plant_status(self, start_date):
         #todo
@@ -97,7 +93,6 @@ class GreenhouseControl:
             green_input => {self.green_input}
             green_out  => {self.green_out} 
         """ 
-
         pass
 
 class GreenHouseInput:
@@ -120,27 +115,27 @@ class GreenHouseInput:
 
      
     def get_Iglob_sum(self):
-        return wsm_to_molm2_day_per5min(self.forecast["FC_radiation_5min"])  # to-do check 5min or not
+        return wsm_to_molm2_day_per5min(self.forecast["fc_radiation_5min"])  # to-do check 5min or not
     def get_temp_av(self):
-        return self.forecast["FC_outside_temperature_5min"].mean()  # to-do check 5min or not
+        return self.forecast["fc_outside_temperature_5min"].mean()  # to-do check 5min or not
     def get_windspeed_av(self):
-        return self.forecast["FC_wind_speed_5min"].mean()  # to-do check 5min or not
+        return self.forecast["fc_wind_speed_5min"].mean()  # to-do check 5min or not
     def get_peakRadiationTime(self):
-        result = np.convolve(np.array(self.forecast["FC_radiation_5min"]), np.ones(shape=36))  # to-do check 5min or not
+        result = np.convolve(np.array(self.forecast["fc_radiation_5min"]), np.ones(shape=36))  # to-do check 5min or not
         p_data = np.where(result == result.max())[0]-18
         if len(p_data) != 1:
             return 150
         else:
             return p_data[0]
     def get_temp_night_av(self):
-        iglob_data = self.forecast["FC_radiation_5min"]  # to-do check 5min or not
-        temp_data = self.forecast["FC_outside_temperature_5min"]  # to-do check 5min or not
+        iglob_data = self.forecast["fc_radiation_5min"]  # to-do check 5min or not
+        temp_data = self.forecast["fc_outside_temperature_5min"]  # to-do check 5min or not
         return temp_data[iglob_data==0].mean()
     def get_Iglob_sum_under_LED(self):
-        iglob_data = self.forecast["FC_radiation_5min"]  # to-do check 5min or not
+        iglob_data = self.forecast["fc_radiation_5min"]  # to-do check 5min or not
         return iglob_data[iglob_data>self.LED_iglob_threshold].sum()*5*60*2/1000000*0.65
     def get_LED_ON_TIME(self):
-        iglob_data = self.forecast["FC_radiation_5min"]  # to-do check 5min or not
+        iglob_data = self.forecast["fc_radiation_5min"]  # to-do check 5min or not
         if True in list(iglob_data > self.LED_iglob_threshold):
             LED_ON_TIME = [self.rise_time_int - 240,
                             list(iglob_data > self.LED_iglob_threshold).index(True)*5,
@@ -188,7 +183,7 @@ class GreenHouseOutput:
 
     def plant_model_init(self,today):
         index = pd.date_range(today, periods=288, freq='5min')
-        columns = [LETSGROW_CONTROL]
+        columns = LETSGROW_CONTROL
         return pd.DataFrame(index=index, columns=columns)
 
     def __str__(self) -> str:

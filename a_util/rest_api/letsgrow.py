@@ -93,26 +93,40 @@ class LetGrow:
         return rslt
 
     def read_all_values_oneday(self, moduleId, begin_time: datetime):
-        colIds = LETSGROW_MOD_COLS_MAP[moduleId]
+        colIds_list = LETSGROW_MOD_COLS_MAP[moduleId]
         begin_date_str: str = begin_time.strftime("%Y-%m-%dT%H:%M:%S")
         endtime_str: str = (begin_time + timedelta(days=1)).strftime("%Y-%m-%dT%H:%M:%S")
-
-        col_str = ""
-        for value in colIds:
-            col_str = col_str + 'colIds= ' + value + '&'
+                
+        # for cid in colIds_list:
+            # colIds = []
+            # colIds.append(cid)        
             
-        response = requests.get(
-            base_url + F"/api/ModuleDefinitions/{moduleId}/Values?{col_str}dateTimeStart={begin_date_str}&dateTimeEnd={endtime_str}",
-            headers=self.headers)
-        # print(response)
-        rslt = json.loads(response.text)
+        result = []
 
-        if ('Message' in rslt):
-            print(rslt)
-            raise "error in response body text Message"
+        # Split colIds_list into chunks of 100 items
+        for i in range(0, len(colIds_list), 100):
+            colIds = colIds_list[i:i+100]
+            col_str = ""
+            
+            for value in colIds:
+                col_str = col_str + 'colIds=' + value + '&'
+                
+            response = requests.get(
+                base_url + f"/api/ModuleDefinitions/{moduleId}/Values?{col_str}dateTimeStart={begin_date_str}&dateTimeEnd={endtime_str}",
+                headers=self.headers
+            )
+            
+            # Load the JSON response
+            rslt = json.loads(response.text)
+            
+            if ('Message' in rslt):
+                print(rslt)
+                raise "error in response body text Message"
+    
+            # Append the results to the final result list
+            result.extend(rslt)
 
-
-        return rslt
+        return result
 
     def read_all_values_onehour(self, moduleId, begin_time: datetime):
         colIds = LETSGROW_MOD_COLS_MAP[moduleId]
