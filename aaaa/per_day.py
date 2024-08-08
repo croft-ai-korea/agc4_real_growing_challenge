@@ -22,25 +22,27 @@ def per_day():
         print("error: ", e)
         traceback.print_exc()
 
-    greenhouse = GreenhouseControl(datetime(2024,7,15), [
-        base_strategy,
-        # temp_strategy,
-        # radiation_strategy,
-        # co2_strategy,
-        # humidity_strategy,
-        # radiation_strategy,
-        # statistics_temp_strategy_perday,
-        # statistics_ventilation_strategy_perday,
-        # statistics_radiation_strategy_perday,
-        # statistics_co2_strategy_perday,
-        # statistics_HD_strategy_perday,
-        # enrg_screen_strategy,
-        # netPipeMin_strategy,
-        # leeVentMin_strategy,
-        # blk_screen_strategy,
-        # density_strategy,
-        # harvest_strategy
-    ]
+    greenhouse = GreenhouseControl(
+        startdate=datetime(2024,7,15), 
+        strategies = [
+                base_strategy,
+                # temp_strategy,
+                # radiation_strategy,
+                # co2_strategy,
+                # humidity_strategy,
+                # radiation_strategy,
+                # statistics_temp_strategy_perday,
+                # statistics_ventilation_strategy_perday,
+                # statistics_radiation_strategy_perday,
+                # statistics_co2_strategy_perday,
+                # statistics_HD_strategy_perday,
+                # enrg_screen_strategy,
+                # netPipeMin_strategy,
+                # leeVentMin_strategy,
+                # blk_screen_strategy,
+                # density_strategy,
+                # harvest_strategy
+            ]
     )
 
     plant_model_output = greenhouse.calc_strategy()

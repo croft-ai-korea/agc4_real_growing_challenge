@@ -15,8 +15,8 @@ from a_util.letsgrow_const import LETGROW_FORCAST, LETSGROW_CONTROL
 class GreenhouseControl:
     def __init__(self, startdate, strategies:list):
         self.strategies = strategies
-        # self.today = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
-        self.today = datetime(2024,8,1,0,0,0)
+        self.today = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
+        # self.today = datetime(2024,8,1,0,0,0)
         self.startdate = startdate
         self.lg_service = LetsgrowService()
         self.indoor_env = self.lg_service.data_from_db_day(self.today)
@@ -99,6 +99,7 @@ class GreenHouseInput:
     def __init__(self, startdate, indoor_env, indoor_env_yesterday, plant_status, today):
         self.now = datetime.now() 
         self.today = today
+        print(self.today)
         self.nthday = (self.today - startdate).days
         self.forecast = indoor_env[LETGROW_FORCAST]
         self.setpoint = indoor_env[LETSGROW_CONTROL]
@@ -106,8 +107,8 @@ class GreenHouseInput:
         self.indoor_env_yesterday = indoor_env_yesterday
         self.plant_status = plant_status
         self.rise_time, self.set_time = sun_cal(self.today, self.forecast, True)
-        self.rise_time_int = self.rise_time.hour * 60 + self.rise_time.minute
-        self.set_time_int = self.set_time.hour * 60 + self.set_time.minute
+        self.rise_time_int = (self.rise_time.hour * 60 + self.rise_time.minute)//5
+        self.set_time_int = (self.set_time.hour * 60 + self.set_time.minute)//5
         self.statistics_strategy_json = "strategyDay.json"  # to-do
         self.LED_iglob_threshold = 500
         self.par_setpoint = 205

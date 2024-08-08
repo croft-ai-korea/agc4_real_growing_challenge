@@ -2,14 +2,14 @@ import sys
 from typing import List
 
 import psycopg2
-from psycopg2.extras import RealDictCursor, DictCursor, execute_batch
+from psycopg2.extras import RealDictCursor, DictCursor, execute_batch, execute_values
 from psycopg2 import pool
 import pandas as pd
 
 sys.path.append('./')
 from aaaa.config import config
-from a_util.db.schema import create_table_query
-
+from a_util.db.schema import create_measure_table_query, create_simulation_table_query
+from a_util.db.schema import simulation_data_insert_query
 timescale_config = config['timescale']
 
 
@@ -119,11 +119,11 @@ def db_insert_many(sql, l: List[dict]):
             conn.commit()
             pool.putconn(conn)
 
-def create_table_if_not_exists():
-    check_table_query = """
+def create_table_if_not_exists(table_name:str, query:str):
+    check_table_query = f"""
     SELECT EXISTS (
         SELECT FROM pg_tables
-        WHERE schemaname = 'public' AND tablename = 'measure'
+        WHERE schemaname = 'public' AND tablename = '{table_name}'
     );
     """
     
@@ -133,11 +133,11 @@ def create_table_if_not_exists():
         exists = cursor.fetchone()[0]
 
         if not exists:
-            cursor.execute(create_table_query)
+            cursor.execute(query)
             conn.commit()
-            print("Table 'measure' created.")
+            print(f"Table {table_name} created.")
         else:
-            print("Table 'measure' already exists.")
+            print(f"Table {table_name} already exists.")
         pool.putconn(conn)    
 
 def db_drop_table_if_exists(table_name: str):
@@ -156,8 +156,22 @@ def db_drop_table_if_exists(table_name: str):
         finally:
             pool.putconn(conn)
 
+def db_simulation_data_insert(df:pd.DataFrame):
+    data_tuples = [tuple(x) for x in df.to_numpy()]
+    with pool.getconn() as conn:
+        cursor = conn.cursor()
+        try:
+            execute_values(cursor, simulation_data_insert_query, data_tuples)
+            conn.commit()  # 데이터 삽입 후 커밋
+        except Exception as e:
+            print(f"Error inserting simulation data: {e}")
+            conn.rollback()  # 오류 발생 시 
+        finally:
+            pool.putconn(conn)
+        
 if __name__ == "__main__":
-    create_table_if_not_exists()
+    # create_table_if_not_exists(table_name='measure', query=create_measure_table_query)
+    create_table_if_not_exists(table_name='simulation', query=create_simulation_table_query)
     
     # db_drop_table_if_exists('measure')
     

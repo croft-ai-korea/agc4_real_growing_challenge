@@ -39,6 +39,18 @@ def base_strategy(_in: GreenHouseInput, _out: GreenHouseOutput) -> GreenHouseOut
         - no light : heat 17, vent 18  
     
     """
-    _out.setting_point['sp_heating_temp_setpoint_5min'] = [19]*288
+    _out.setting_point['sp_heating_temp_setpoint_5min'] = [18]*288
+    _out.setting_point['sp_heating_temp_setpoint_5min'][_in.rise_time_int:_in.set_time_int] = 19
+    _out.setting_point['sp_vent_ilation_temp_setpoint_5min'] = _out.setting_point['sp_heating_temp_setpoint_5min']+1
+    _out.setting_point['sp_leeside_minvent_position_setpoint_5min'] = [5]*288
+    _out.setting_point['sp_net_pipe_minimum_setpoint_5min'] = [0]*288
+    _out.setting_point['sp_value_to_isii_1_5min'] = [0]*288
+    _out.setting_point['sp_energy_screen_setpoint_5min'] = [50]*288
+    _out.setting_point['sp_blackout_screen_setpoint_5min'] = [0]*288
+    _out.setting_point['sp_co2_setpoint_ppm_5min'] = [500]*288
+    _out.setting_point['sp_humidity_deficit_setpoint_5min'] = [4]*288
+    _out.setting_point['sp_irrigation_interval_time_setpoint_min_5min'] = [30]*288
+    _out.setting_point['sp_plantdensity'] = [56]*288
+    _out.setting_point['sp_day_of_harvest_day_number'] = [351]*288   
     
     return _out
