@@ -67,7 +67,7 @@ def simulation_test():
 
     ### modify setting point
     greenhouse_control.endDate = '31-12-2023'
-    startDate = '01-01-2021'
+    startDate = '05-09-2023'
     greenhouse_control.startDate = startDate
     print(greenhouse_control.plantDensity)
     greenhouse_control.plantDensity = "1 56; 32 42; 42 30; 52 20"
