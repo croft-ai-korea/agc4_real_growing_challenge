@@ -15,8 +15,8 @@ from a_util.letsgrow_const import LETGROW_FORCAST, LETSGROW_CONTROL
 class GreenhouseControl:
     def __init__(self, startdate, strategies:list):
         self.strategies = strategies
-        self.today = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
-        # self.today = datetime(2024,8,1,0,0,0)
+        # self.today = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
+        self.today = datetime(2024,8,10,0,0,0)
         self.startdate = startdate
         self.lg_service = LetsgrowService()
         self.indoor_env = self.lg_service.data_from_db_day(self.today)

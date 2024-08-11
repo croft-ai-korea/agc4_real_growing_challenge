@@ -46,35 +46,37 @@ def get_collectionId(token:str, module_id:str):
         }, 
     ).json() 
       
-    print("collection id names")
-    for collection in response["ModuleItems"]: 
-        if collection['IsWriteable'] == False:
-            continue
-        name = collection['Description'].replace(" ", "")
-        name = name.replace("µmol/m²/s", "")
-        name = name.replace("W/m²", "")
-        name = name.replace("m/s", "")
-        name = name.replace("J/cm²", "")
-        name = name.replace("(status1=rain,0=dry)", "")
-        name = name.replace("", "")  
-        name = name.replace(":", "")
-        name = name.replace("-", "")
-        name = name.replace("%", "")
-        name = name.replace("°C","")
-        name = name.replace("°", "")
-        name = name.replace("g/","")
-        name = name.replace("(1=on2=out)","")
-        name = name.replace("l/","") 
-        name = name.replace("(from3276,8till3276,8)","")
-        name = name.replace("(from-3276,8till3276,8)","")
-        name = name.replace("/","")
-        name = name.replace("#","")
-        name = name.replace("m²","")    
-        name = name.replace("m³","")  
-        id = collection['ColId']
-        # print(f"'{name}':{id},") 
-        # print(f"'{id}',")
-        print(f"'{name}',")  
+    # print("collection id names")
+    # for collection in response["ModuleItems"]: 
+    #     if collection['IsWriteable'] == False:
+    #         continue
+    #     name = collection['Description'].replace(" ", "")
+    #     name = name.replace("µmol/m²/s", "")
+    #     name = name.replace("W/m²", "")
+    #     name = name.replace("m/s", "")
+    #     name = name.replace("J/cm²", "")
+    #     name = name.replace("(status1=rain,0=dry)", "")
+    #     name = name.replace("", "")  
+    #     name = name.replace(":", "")
+    #     name = name.replace("-", "")
+    #     name = name.replace("%", "")
+    #     name = name.replace("°C","")
+    #     name = name.replace("°", "")
+    #     name = name.replace("g/","")
+    #     name = name.replace("(1=on2=out)","")
+    #     name = name.replace("l/","") 
+    #     name = name.replace("(from3276,8till3276,8)","")
+    #     name = name.replace("(from-3276,8till3276,8)","")
+    #     name = name.replace("/","")
+    #     name = name.replace("#","")
+    #     name = name.replace("m²","")    
+    #     name = name.replace("m³","")  
+    #     id = collection['ColId']
+    #     # print(f"'{name}':{id},") 
+    #     # print(f"'{id}',")
+    #     print(f"'{name}',")  
+    
+    return response
         
 def put_value(token:str, module_id:str, collection_id:str, value_data:Dict[str,Any]):
     # collection_id = 2607102
@@ -159,9 +161,19 @@ def make_query(columns:List[str]):
 if __name__ == "__main__":
     make_query(COLID_MAP_NAME.keys())
     
-    # username = "Agrifusion"
-    # password = "78G$dV32La"  
-    # token = get_token(username=username, password=password)
+    username = "Agrifusion"
+    password = "78G$dV32La"  
+    token = get_token(username=username, password=password)
+    
+    result = get_module_ids(token)
+    
+    moduleId = 68112
+    
+    result2 = get_collectionId(token, moduleId)
+        
+    # print(result)
+    
+    print("ok")
     
     # for colid in LETSGROW_MOD_COLS_MAP[GREENHOUSE_MODULE_ID]:
     #     start_date = datetime(2024,8,2,0,0,0)
