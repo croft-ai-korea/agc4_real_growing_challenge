@@ -7,7 +7,7 @@ from random import random
 from datetime import datetime
 from psycopg2.extras import execute_values
 
-from temp.manual_parameter import heatingTemp, hours_light, max_iglob, ventOffset
+from a_util.manual_parameter import heatingTemp, hours_light, max_iglob, ventOffset
 from a_util.simulator.greenhouse import Greenhouse, get_day_data
 from a_util.simulator.simulator import send_server, json_parsing, sim_greenhouse, get_endDate_from_output
 from a_util.simulator.simulator import modify_temperature, modify_intensity, modify_hours_light

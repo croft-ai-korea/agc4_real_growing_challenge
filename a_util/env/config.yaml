@@ -1,0 +1,4 @@
+# Greenhouse configuration
+LED_iglob_threshold: 500
+par_setpoint: 205
+LED_max: 75
