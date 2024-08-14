@@ -204,36 +204,6 @@ COLID_MAP_NAME = {
 
 COLID_MAP_NUMBER = inv_map = {str(v): k for k, v in COLID_MAP_NAME.items()} 
 
-LETGROW_FORCAST = [
-    'fc_temperature_5min',
-    'fc_temperature',
-    'fc_rh_5min',
-    'fc_rh',
-    'fc_radiation_5min',
-    'fc_radiation',
-    'fc_radiation_sum_5min',
-    'fc_radiation_sum',
-    'fc_wind_speed_5min',
-    'fc_wind_speed',
-    'fc_degree_of_cloudiness18_5min',
-    'fc_degree_of_cloudiness18'
-]
-
-LETSGROW_CONTROL = [
-    'sp_plantdensity',
-    'sp_day_of_harvest_day_number',
-    'sp_heating_temp_setpoint_5min',
-    'sp_vent_ilation_temp_setpoint_5min',
-    'sp_leeside_minvent_position_setpoint_5min',
-    'sp_net_pipe_minimum_setpoint_5min',
-    'sp_value_to_isii_1_5min',
-    'sp_energy_screen_setpoint_5min',
-    'sp_blackout_screen_setpoint_5min',
-    'sp_co2_setpoint_ppm_5min',
-    'sp_humidity_deficit_setpoint_5min',
-    'sp_irrigation_interval_time_setpoint_min_5min'
-]
-
 EXTRA_SENSOR_MODULE_ID = '69296'
 GREENHOUSE_MODULE_ID = '68112'
 WEATHER_MODULE_ID = '14821'
@@ -449,3 +419,89 @@ LETSGROW_MOD_COLS_MAP = {
     ],
 }
 
+LETGROW_FORCAST = [
+    'fc_temperature_5min',
+    'fc_temperature',
+    'fc_rh_5min',
+    'fc_rh',
+    'fc_radiation_5min',
+    'fc_radiation',
+    'fc_radiation_sum_5min',
+    'fc_radiation_sum',
+    'fc_wind_speed_5min',
+    'fc_wind_speed',
+    'fc_degree_of_cloudiness18_5min',
+    'fc_degree_of_cloudiness18'
+]
+
+LETSGROW_CONTROL = [
+    'sp_plantdensity',
+    'sp_day_of_harvest_day_number',
+    'sp_heating_temp_setpoint_5min',
+    'sp_vent_ilation_temp_setpoint_5min',
+    'sp_leeside_minvent_position_setpoint_5min',
+    'sp_net_pipe_minimum_setpoint_5min',
+    'sp_value_to_isii_1_5min',
+    'sp_energy_screen_setpoint_5min',
+    'sp_blackout_screen_setpoint_5min',
+    'sp_co2_setpoint_ppm_5min',
+    'sp_humidity_deficit_setpoint_5min',
+    'sp_irrigation_interval_time_setpoint_min_5min'
+]
+
+LETSGROW_INSIDE = [
+    'temperature_greenhouse_5min',
+    'rh_greenhouse_5min',
+    'co2_greenhouse_ppm_5min',
+    'humidity_deficit_greenhouse_5min',
+    'vent_lee_5min',
+    'vent_wind_5min',
+    'lower_circuit_5min',
+    'energy_curtain_5min',
+    'blackout_curtain_5min',
+    'co2_actuation_regulation_5min',
+    'co2_dosagesum_24h_5min',
+    'water_supply_minutes_5min',
+    'drain_5min',
+    'drain_ec_5min',
+    'drain_ph_5min',
+    'heating_temp_vip_5min',
+    'heating_temp_setpoint',
+    'vent_ilation_temp_leeside_vip_5min',
+    'vent_ilation_tempwind_side_vip_5min',
+    'vent_ilation_temp_setpoint',
+    'leeside_window_position_minimum_vip_5min',
+    'leeside_minvent_position_setpoint',
+    'net_pipe_minimum_vip_5min',
+    'net_pipe_minimum_setpoint',
+    'energy_screen_vip_screen_position_5min',
+    'energy_screen_setpoint',
+    'blackout_screen_vip_screen_position_5min',
+    'blackout_screen_setpoint',
+    'co2_vip_ppm_5min',
+    'co2_setpoint_ppm',
+    'humidity_deficit_vip_5min',
+    'humidity_deficit_setpoint',
+    'water_supply_interval_time_vip_min_5min',
+    'irrigation_interval_time_setpoint_min'
+]
+
+LETSGROW_OUTSIDE = [
+    'outside_temperature_5min',
+    'outside_temperature_long_standing_average',
+    'outside_rh_5min',
+    'outside_humidity_deficit_5min',
+    'outside_absolute_humidity_content_air_5min',
+    'outside_radiation_5min', 
+    'outside_radiation_sum_5min',       
+    'outside_radiation_sum_longstanding_average',   
+    'outside_wind_speed_5min',       
+    'outside_wind_direction_type',  
+    'outside_wind_direction_registration_5min',     
+    'outside_wind_direction_5min',                 
+    'outside_wind_direction_5min',                
+    'outside_rain_5min',                           
+    'outside_par_measurement_5min',
+    'outside_heat_emission_pyrgeometer_5min',
+    'outside_netto_radiation_calc_5min' 
+]

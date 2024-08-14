@@ -23,8 +23,8 @@ def per_day():
         print("error: ", e)
         traceback.print_exc()
         
-    # today = datetime(2024,8,9,0,0,0)    # 특정 날자 세팅
-    today = None   # 만약 오늘을 집어넣고 싶으면 today는 None으로 설정
+    now = datetime(2024,8,11,0,0,0)    # 특정 날자 세팅
+    # now = None   # 만약 오늘을 집어넣고 싶으면 today는 None으로 설정
         
     greenhouse = GreenhouseControl(            
         startdate=datetime(2024,7,15), 
@@ -47,11 +47,10 @@ def per_day():
                 # density_strategy,
                 # harvest_strategy
             ],
-        today = today
+        now = now
     )
 
-    plant_model_output = greenhouse.calc_strategy()
-    setpoint = greenhouse.calc_setpoint(plant_model_output)
+    setpoint = greenhouse.apply_strategy()
         
     # #print(greenhouse)
     greenhouse.save_to_db(setpoint)

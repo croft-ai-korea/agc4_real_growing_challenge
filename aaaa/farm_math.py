@@ -1,10 +1,14 @@
 import math
+from typing import Any, List
+from datetime import datetime, timedelta
+import numpy as np
+import pandas as pd
 
 def sun_cal(date, forecast, wur_cal=True):
     if (wur_cal == False):
         par_sum = 0
         par_trig = True
-        for key, value in enumerate(forecast['fc_iglob']):
+        for key, value in enumerate(forecast['fc_radiation_5min']):
             # glass transmission
             par_sum = par_sum + wsm_to_umolm2(value)
             if (par_sum > 50 and par_trig):
@@ -36,24 +40,63 @@ def sun_cal(date, forecast, wur_cal=True):
         print("sun_rise = {} and sun_set = {}".format(date_Rise, date_Set))
     return date_Rise, date_Set
 
-
-def wsm_to_jcm2_day(rad_array):
+def wsm_to_jcm2_day(rad_array: Any):
     return rad_array.sum() * 0.0001 * 60 * 60
 
 def jcm2_to_molm2_day(jcm_var):
     return jcm_var * 0.0215
 
+def get_DLI(light_array:Any, 
+            interval:int = 5, 
+            transmittance:float = 1.0, 
+            type:str="umol", 
+            window:List = None,
+            energy_screen_array = None,
+            black_out_screen_array = None,            
+            ):
+    """
+        interval : min
+        type : "umol", "watt"
+        window : [start_time_int, end_time_int]  
+                 if interval is not 5, then must need correspond value
+    """
+    if window is None:
+        window = [0, 287]
+    if energy_screen_array is None:
+        energy_screen_array = np.array([0]*288)
+    if black_out_screen_array is None:
+        black_out_screen_array = np.array([0]*288)
+    
+    energy_screen_effect = ((100-energy_screen_array)+0.7*energy_screen_array)/100
+    blackout_screen_effect = (100-black_out_screen_array)/100
+    
+    light_array_with_screen_effect = light_array*energy_screen_effect*blackout_screen_effect
+        
+    if type == "umol":
+        return sum(light_array_with_screen_effect[window[0]:window[1]])*transmittance*interval*60*1e-6
+    elif type == "watt":
+        return 2.1*sum(light_array_with_screen_effect[window[0]:window[1]])*transmittance*interval*60*1e-6
+
+
+def get_peakTime(array):
+    result = np.convolve(np.array(array), np.ones(shape=36))  # to-do check 5min or not
+    p_data = np.where(result == result.max())[0]-18
+    if len(p_data) != 1:
+        return 150
+    else:
+        return p_data[0]
+
+def datetime_to_int(input:datetime):
+    return (input.hour*60+input.minute)//5
+
 # 4.6 μmole.m2/s = 1 W/m2
-# 2.1μmole.m2/s = 1 W/m2 (305 - 2800nm)
+# 2.1 μmole.m2/s = 1 W/m2 (305 - 2800nm)
 # glass transmission
-def wsm_to_umolm2(rad_array):
-    return rad_array * 2.4
+def watt_to_umolm2(rad_array):
+    return rad_array * 2.1
 
 def wsm_to_molm2_day(rad_array):
-    return sum(rad_array) * 2.4 * 60 * 60 * 1e-6
-
-def wsm_to_molm2_day_per5min(rad_array):
-    return sum(rad_array) * 2.4 * 60 * 5 * 1e-6
+    return sum(rad_array) * 2.1 * 60 * 60 * 1e-6
 
 def VPD_cal(green_temp,green_humidity,plant_Temp):
     VPsat = (610.7*10**((7.5*plant_Temp)/(237.3+plant_Temp)))/1000

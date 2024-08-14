@@ -2,3 +2,10 @@
 LED_iglob_threshold: 500
 par_setpoint: 205
 LED_max: 75
+
+watt_umol_ratio : 2.1
+greenhouse_transmittance : 0.7
+energy_screen : 0.7
+
+base_target_DLI : 30
+base_LED_umol : 100
