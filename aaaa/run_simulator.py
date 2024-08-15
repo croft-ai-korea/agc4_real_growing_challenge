@@ -26,7 +26,7 @@ from aaaa.per_day_simul import per_day
 from a_util.service.letsgrow_service_simul import LetsgrowService
 
 
-USE_NEW_TABLE = False
+USE_NEW_TABLE = True
 
 def run_simulator():    
     control_json_path = "temp/Par_Out_23_12.54.89_control.json"
@@ -67,7 +67,7 @@ def run_simulator():
         
         db_data_insert(df=df, query=simulation_forcast_insert_query)
         
-        per_day(config=config)    
+    per_day(config=config)    
 
     lg_service = LetsgrowService()
     lg_simul_data = lg_service.data_from_db(config['start_date'], config['end_date'])
