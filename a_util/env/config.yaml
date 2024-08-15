@@ -2,3 +2,14 @@
 LED_iglob_threshold: 500
 par_setpoint: 205
 LED_max: 75
+
+watt_umol_ratio : 2.1
+greenhouse_transmittance : 0.49
+energy_screen : 0.7
+
+base_target_DLI : 30
+base_LED_umol : 100
+
+transplant_date : 2023-09-05 00:00:00
+start_date : 2023-09-05 00:00:00
+end_date : 2023-12-31 00:00:00

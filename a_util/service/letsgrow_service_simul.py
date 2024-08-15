@@ -11,7 +11,7 @@ import numpy
 
 sys.path.append('./')
 from a_util.rest_api.letsgrow import LetGrow
-from a_util.db.letsgrow_db_util import LetsgrowDao
+from a_util.db.letsgrow_db_util_simul import LetsgrowDao
 from a_util.db.db_util import db_select_pandas_sql, db_select_pandas_sql_dict, db_select_one, db_insert,db_select_by_param
 from a_util.letsgrow_const import GREENHOUSE_MODULE_ID, WEATHER_MODULE_ID, FORCAST_MODULE_ID
 from aaaa.config import config
