@@ -62,6 +62,9 @@ def base_strategy(_in: GreenHouseInput, _out: GreenHouseOutput):
       - peak 7:00-23:00: 0.3 euro per kwh
       - low 23:00-7:00: 0.2 euro per kwh
       
+      6 hour rest
+      18 photo period
+      
     
     set : 100umol
     set DLI = 15
@@ -101,6 +104,8 @@ def base_strategy(_in: GreenHouseInput, _out: GreenHouseOutput):
 
     """
     min_vent_position setting
+    
+    
     """
 
     _out.setting_point['sp_leeside_minvent_position_setpoint_5min'] = [5]*288
@@ -108,36 +113,73 @@ def base_strategy(_in: GreenHouseInput, _out: GreenHouseOutput):
 
     """
     net_pipe_minimum setting
+      night : temp ok not use
+      get rid of humidity -> start heating -> maintain min temp some value
+      small capacity..
+      if humidity is to high:
+          during september
+                      
     """   
     _out.setting_point['sp_net_pipe_minimum_setpoint_5min'] = [0]*288
 
     """
     co2 setting
+        - 1st stage : 550,  4 Sep ~ 18 Sep, 12 days after transplanting (48/m2) - just leaves
+        - 2nd stage : 550,  18 Sep ~ 22 Sep, 16 days (36/m2) - first flowering
+        - 3rd stage : 800,  22 Sep ~ 29 Sep, 23 days (25/m2) - first fruiting, generative growth
+        - 4th stage : 800,  29 Sep - 9 Oct (lost days…)
+        - 5th stage : 800,  9 October - 9 November, 33 days (20/m2)
+      after fruit stage :  more than 1000 correlation vent
+      
+      
     """
-    _out.setting_point['sp_co2_setpoint_ppm_5min']  = 200
+    _out.setting_point['sp_co2_setpoint_ppm_5min']  = 300
     _out.setting_point['sp_co2_setpoint_ppm_5min'][_in.set_time_int-3*12:_in.set_time_int+2*12] = 500
 
     """
     hd setting
     """    
-    _out.setting_point['sp_humidity_deficit_setpoint_5min'] = [4]*288
+    _out.setting_point['sp_humidity_deficit_setpoint_5min'] = [2]*288
 
 
     """ 
     irrigation setting
+        => sh
+        1. everyday when light on, trigger
+        2. stage 1: every 1 mol light accumulate 5ml 
+        3. stage 2-3: every 1 mol accumulate 8.3ml
+        
+            1) stage 1: 2
+            2) stage 2-3: 3
+            3) stage 4: 5
+        4. ave daily ec is lower - next day every 1 mol light accumulate -1ml
+        5. ave daily ec is higher or no drain - next day every 1 mol light accumulate +1ml
+        => move to per_hour stategy
+    
+    every 20ml trigger
+    
+    reset light sum value to 0 at midnight
+    
     """
     _out.setting_point['sp_irrigation_interval_time_setpoint_min_5min'] = [1440]*288
     if 'led_start_time_int' in locals() or 'led_start_time_int' in globals():
         _out.setting_point['sp_irrigation_interval_time_setpoint_min_5min'][led_start_time_int] = 4
     else:
         _out.setting_point['sp_irrigation_interval_time_setpoint_min_5min'][_in.set_time_int] = 4
-        
+    
     ## to-do 
-    ## 4 몰 될때마다 관수 집어넣기
-        
+    # 4 mol light -> one shot    
+    # time_to_irrigation = calc_irrigation_time_with_DLI(_in.indoor_env['fc_radiation_5min'], criterion = 4)
+               
 
     """
     plantdensity setting
+      additonal sensors
+    - TRH sensor in the bush for plant density 
+       humidity rule.. 
+       depth image -> height sensing 
+       using given date 
+          
     """    
     _out.setting_point['sp_plantdensity'] = [_in.density[_in.nthday]]*288
 
@@ -145,5 +187,10 @@ def base_strategy(_in: GreenHouseInput, _out: GreenHouseOutput):
     harvest setting
     """ 
     _out.setting_point['sp_day_of_harvest_day_number'] = [351]*288   
+    
+    """
+    
+    
+    """
 
     return _out

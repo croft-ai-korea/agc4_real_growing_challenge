@@ -3,6 +3,7 @@ from typing import Any, List
 from datetime import datetime, timedelta
 import numpy as np
 import pandas as pd
+import json 
 
 def sun_cal(date, forecast, wur_cal=True):
     if (wur_cal == False):
@@ -45,6 +46,28 @@ def wsm_to_jcm2_day(rad_array: Any):
 
 def jcm2_to_molm2_day(jcm_var):
     return jcm_var * 0.0215
+
+def get_simulation_setpoint(array, start_date):
+    # 데이터를 1시간 단위로 리샘플링
+    hourly_data = array.resample('H').mean()
+
+    # heatingTemp 딕셔너리 생성
+    heatingTemp = {}
+
+    # 데이터를 원하는 포맷으로 변환
+    for idx, (timestamp, value) in enumerate(hourly_data.items()):  # 변경된 부분
+        days_since_start = (timestamp.date() - start_date.date()).days
+        
+        if days_since_start not in heatingTemp:
+            heatingTemp[days_since_start] = {}
+        
+        hour = timestamp.hour
+        heatingTemp[days_since_start][str(hour)] = value
+
+    # # 결과 출력 (JSON 형식으로)
+    # heatingTemp_json = json.dumps(heatingTemp, indent=4)
+    
+    return heatingTemp
 
 def get_DLI(light_array:Any, 
             interval:int = 5, 

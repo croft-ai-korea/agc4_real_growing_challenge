@@ -5,13 +5,13 @@ import pandas as pd
 import numpy as np
 import os
 import copy
-
+import json
 import yaml 
 import psycopg2
 from random import random
 from datetime import datetime, timedelta
 from psycopg2.extras import execute_values
-from aaaa.farm_math import datetime_to_int, fruit_price
+from aaaa.farm_math import datetime_to_int, fruit_price, get_simulation_setpoint
 from a_util.manual_parameter import heatingTemp, hours_light, max_iglob, ventOffset
 from a_util.simulator.greenhouse import Greenhouse, get_day_data
 from a_util.simulator.simulator import send_server, json_parsing, sim_greenhouse, get_endDate_from_output
@@ -23,45 +23,55 @@ from a_util.db.db_util import create_table_if_not_exists, db_drop_table_if_exist
 from a_util.db.schema import create_simulation_table_query, simulation_result_columns_to_insert
 from a_util.db.schema import simulation_result_insert_query, simulation_forcast_insert_query
 from aaaa.per_day_simul import per_day 
+from a_util.service.letsgrow_service_simul import LetsgrowService
 
+
+USE_NEW_TABLE = False
 
 def run_simulator():    
     control_json_path = "temp/Par_Out_23_12.54.89_control.json"
     Par_Out_reference = "temp/Par_Out_23_12.54.89.json"
-
-    db_drop_table_if_exists(table_name = 'simulation')
-    create_table_if_not_exists(table_name = 'simulation', query=create_simulation_table_query)
     
     ## make strategy
     config_path = "./a_util/env/config.yaml"
 
     with open(config_path, 'r') as file:
         config = yaml.safe_load(file)
-    
+        
     start_datetime = config['start_date']
-    end_datetime = config['end_date']
-    
-    reference_csv_path = "./a_util/reference.csv"        
-    df = pd.read_csv(reference_csv_path)
-    column_rename = {
-        "DateTime" : "time",
-        "common.Iglob.Value":"fc_radiation_5min",
-        "common.Tout.Value":"fc_temperature_5min",
-        "common.RHout.Value":"fc_rh_5min",
-        "common.Windsp.Value":"fc_wind_speed_5min",
-    }         
-    df.rename(columns=column_rename, inplace=True)
-    df['time'] = pd.to_datetime(df['time'])
-    df.set_index('time', inplace=True)
-    df = df.resample('5T').interpolate(method='linear')
-    df.reset_index(inplace=True)
-    df = df[(df['time']>=start_datetime) & (df['time'] <= end_datetime)]
-    df = df[["time","fc_radiation_5min","fc_temperature_5min","fc_rh_5min","fc_wind_speed_5min"]]
-    
-    db_data_insert(df=df, query=simulation_forcast_insert_query)
         
-    per_day(config=config)    
+    
+    if USE_NEW_TABLE:
+        db_drop_table_if_exists(table_name = 'simulation')
+        create_table_if_not_exists(table_name = 'simulation', query=create_simulation_table_query)
         
+        start_datetime = config['start_date']
+        end_datetime = config['end_date']
+        
+        reference_csv_path = "./a_util/reference.csv"        
+        df = pd.read_csv(reference_csv_path)
+        column_rename = {
+            "DateTime" : "time",
+            "common.Iglob.Value":"fc_radiation_5min",
+            "common.Tout.Value":"fc_temperature_5min",
+            "common.RHout.Value":"fc_rh_5min",
+            "common.Windsp.Value":"fc_wind_speed_5min",
+        }         
+        df.rename(columns=column_rename, inplace=True)
+        df['time'] = pd.to_datetime(df['time'])
+        df.set_index('time', inplace=True)
+        df = df.resample('5T').interpolate(method='linear')
+        df.reset_index(inplace=True)
+        df = df[(df['time']>=start_datetime) & (df['time'] <= end_datetime)]
+        df = df[["time","fc_radiation_5min","fc_temperature_5min","fc_rh_5min","fc_wind_speed_5min"]]
+        
+        db_data_insert(df=df, query=simulation_forcast_insert_query)
+        
+        per_day(config=config)    
+
+    lg_service = LetsgrowService()
+    lg_simul_data = lg_service.data_from_db(config['start_date'], config['end_date'])
+                
     ### Initialize and set up the greenhouse
     greenhouse_control = Greenhouse(logging_enabled=False)
     greenhouse_control.initialize_devices(control_json_path = control_json_path)
@@ -85,8 +95,13 @@ def run_simulator():
     greenhouse_control.load_weather_data_and_analysis(reference)
 
     greenhouse_control.device_illumination['lmp1'].intensity = 250
+    
+    heating_setpoint = get_simulation_setpoint(lg_simul_data['sp_heating_temp_setpoint_5min'],
+                                                            config['start_date'])
+    # vent_setpoint = get_simulation_setpoint(lg_simul_data['sp_vent_ilation_temp_setpoint_5min'],
+    #                                                         config['start_date'])
 
-    greenhouse_control.device_setpoints['setpoints'].temp.heatingTemp = convert_key_from_start_date(heatingTemp, startDate)
+    greenhouse_control.device_setpoints['setpoints'].temp.heatingTemp = convert_key_from_start_date(heating_setpoint, startDate)
     greenhouse_control.device_setpoints['setpoints'].temp.ventOffset = convert_key_from_start_date(ventOffset, startDate)
     # heatingTemp = copy.deepcopy(greenhouse_control.device_setpoints['setpoints'].temp.heatingTemp)
     # intensity = copy.deepcopy(greenhouse_control.device_illumination['lmp1'].intensity)
@@ -154,6 +169,8 @@ def run_simulator():
     df['gains'] = np.nan
     df['net_profit'] = np.nan
     df['total_cost'] = np.nan
+    
+    df['net_profit_per_year'] = np.nan
 
     df = df.resample('5T').interpolate(method='linear')
 
@@ -169,7 +186,7 @@ def run_simulator():
     electric_coeff = np.array([0.2]*288)
     electric_coeff[datetime_to_int(datetime(2024,1,1,7,0,0)):datetime_to_int(datetime(2024,1,1,23,0,0))] = 0.3 
 
-    coeef = 90
+    coeef = 365
 
     while True:
         filtered_index = (df.index>=start_date)&(df.index<start_date+timedelta(days=1))
@@ -234,6 +251,7 @@ def run_simulator():
         
         # net profit
         df.loc[filtered_index,'net_profit'] = df.loc[filtered_index,'gains'] - df.loc[filtered_index,'total_cost']
+        df.loc[filtered_index,'net_profit_per_year'] = df.loc[filtered_index,'net_profit'] * 365       
                     
         print("net profit : ", df.loc[filtered_index,'net_profit'][-1]*coeef, "gain : ", df.loc[filtered_index,'gains'][-1]*coeef, "total cost : ", df.loc[filtered_index,'total_cost'][-1]*coeef)
        

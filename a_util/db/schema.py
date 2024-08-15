@@ -245,7 +245,8 @@ create table simulation
     variable_co2_costs_day_sum                       double precision,
     gains                                            double precision,
     total_cost                                       double precision,                                     
-    net_profit                                       double precision,                                    
+    net_profit                                       double precision, 
+    net_profit_per_year                              double precision,                                   
     sp_plantdensity                                  double precision,
     sp_day_of_harvest_day_number                     double precision,
     sp_heating_temp_setpoint_5min                    double precision,
@@ -456,58 +457,115 @@ INSERT INTO simulation (
     time, temperature_greenhouse_5min, rh_greenhouse_5min, co2_greenhouse_ppm_5min,
     outside_radiation_5min, outside_temperature_5min, outside_rh_5min, 
     outside_wind_speed_5min, par_sensor_above, tpipe, conpipes_tsuppipe, 
-    pconpipe, vent_lee_5min, vent_wind_5min, sp_heating_temp_setpoint_5min, 
-    sp_vent_ilation_temp_setpoint_5min, energy_curtain_5min, blackout_curtain_5min, 
-    lmp_elecuse, mc_pure_air, sp_co2_setpoint_ppm_5min, fruit_fresh_weight, 
-    dvs_fruit, dry_matter_fract, crop_abs, sp_plantdensity, elec_price_peakhour, 
+    pconpipe, vent_lee_5min, vent_wind_5min, energy_curtain_5min, blackout_curtain_5min, 
+    lmp_elecuse, mc_pure_air, fruit_fresh_weight,
+    dvs_fruit, dry_matter_fract, crop_abs, elec_price_peakhour, 
     water_supply_minutes_5min, red_fruits_weight, fixed_costs, fixed_costs_accumulation, 
     fixed_greenhouse_costs, fixed_co2_costs, fixed_lamp_costs, fixed_screen_costs, 
     variable_costs_day_sum, variable_costs_accumulation, variable_electricity_costs, 
     variable_electricity_costs_day_sum, variable_heating_costs, variable_heating_costs_day_sum, 
-    variable_co2_costs, variable_co2_costs_day_sum, gains, net_profit, total_cost
+    variable_co2_costs, variable_co2_costs_day_sum, gains, net_profit, total_cost, net_profit_per_year
 ) VALUES %s
 ON CONFLICT ("time") DO UPDATE SET
     (temperature_greenhouse_5min, rh_greenhouse_5min, co2_greenhouse_ppm_5min, 
      outside_radiation_5min, outside_temperature_5min, outside_rh_5min, 
      outside_wind_speed_5min, par_sensor_above, tpipe, conpipes_tsuppipe, 
-     pconpipe, vent_lee_5min, vent_wind_5min, sp_heating_temp_setpoint_5min, 
-     sp_vent_ilation_temp_setpoint_5min, energy_curtain_5min, blackout_curtain_5min, 
-     lmp_elecuse, mc_pure_air, sp_co2_setpoint_ppm_5min, fruit_fresh_weight, 
-     dvs_fruit, dry_matter_fract, crop_abs, sp_plantdensity, elec_price_peakhour, 
+     pconpipe, vent_lee_5min, vent_wind_5min, energy_curtain_5min, blackout_curtain_5min, 
+     lmp_elecuse, mc_pure_air, fruit_fresh_weight, 
+     dvs_fruit, dry_matter_fract, crop_abs, elec_price_peakhour, 
      water_supply_minutes_5min, red_fruits_weight, fixed_costs, fixed_costs_accumulation, 
      fixed_greenhouse_costs, fixed_co2_costs, fixed_lamp_costs, fixed_screen_costs, 
      variable_costs_day_sum, variable_costs_accumulation, variable_electricity_costs, 
      variable_electricity_costs_day_sum, variable_heating_costs, variable_heating_costs_day_sum, 
-     variable_co2_costs, variable_co2_costs_day_sum, gains, net_profit, total_cost) 
+     variable_co2_costs, variable_co2_costs_day_sum, gains, net_profit, total_cost, net_profit_per_year) 
     = 
     (EXCLUDED.temperature_greenhouse_5min, EXCLUDED.rh_greenhouse_5min, EXCLUDED.co2_greenhouse_ppm_5min, 
      EXCLUDED.outside_radiation_5min, EXCLUDED.outside_temperature_5min, EXCLUDED.outside_rh_5min, 
      EXCLUDED.outside_wind_speed_5min, EXCLUDED.par_sensor_above, EXCLUDED.tpipe, EXCLUDED.conpipes_tsuppipe, 
-     EXCLUDED.pconpipe, EXCLUDED.vent_lee_5min, EXCLUDED.vent_wind_5min, EXCLUDED.sp_heating_temp_setpoint_5min, 
-     EXCLUDED.sp_vent_ilation_temp_setpoint_5min, EXCLUDED.energy_curtain_5min, EXCLUDED.blackout_curtain_5min, 
-     EXCLUDED.lmp_elecuse, EXCLUDED.mc_pure_air, EXCLUDED.sp_co2_setpoint_ppm_5min, EXCLUDED.fruit_fresh_weight, 
-     EXCLUDED.dvs_fruit, EXCLUDED.dry_matter_fract, EXCLUDED.crop_abs, EXCLUDED.sp_plantdensity, EXCLUDED.elec_price_peakhour, 
+     EXCLUDED.pconpipe, EXCLUDED.vent_lee_5min, EXCLUDED.vent_wind_5min, 
+     EXCLUDED.energy_curtain_5min, EXCLUDED.blackout_curtain_5min, 
+     EXCLUDED.lmp_elecuse, EXCLUDED.mc_pure_air, EXCLUDED.fruit_fresh_weight, 
+     EXCLUDED.dvs_fruit, EXCLUDED.dry_matter_fract, EXCLUDED.crop_abs, EXCLUDED.elec_price_peakhour, 
      EXCLUDED.water_supply_minutes_5min, EXCLUDED.red_fruits_weight, EXCLUDED.fixed_costs, EXCLUDED.fixed_costs_accumulation, 
      EXCLUDED.fixed_greenhouse_costs, EXCLUDED.fixed_co2_costs, EXCLUDED.fixed_lamp_costs, EXCLUDED.fixed_screen_costs, 
      EXCLUDED.variable_costs_day_sum, EXCLUDED.variable_costs_accumulation, EXCLUDED.variable_electricity_costs, 
      EXCLUDED.variable_electricity_costs_day_sum, EXCLUDED.variable_heating_costs, EXCLUDED.variable_heating_costs_day_sum, 
-     EXCLUDED.variable_co2_costs, EXCLUDED.variable_co2_costs_day_sum, EXCLUDED.gains, EXCLUDED.net_profit, EXCLUDED.total_cost)
+     EXCLUDED.variable_co2_costs, EXCLUDED.variable_co2_costs_day_sum, EXCLUDED.gains, EXCLUDED.net_profit, EXCLUDED.total_cost, EXCLUDED.net_profit_per_year)
 """
 
 simulation_result_columns_to_insert = [
     "time", "temperature_greenhouse_5min", "rh_greenhouse_5min", "co2_greenhouse_ppm_5min",
     "outside_radiation_5min", "outside_temperature_5min", "outside_rh_5min", 
     "outside_wind_speed_5min", "par_sensor_above", "tpipe", "conpipes_tsuppipe", 
-    "pconpipe", "vent_lee_5min", "vent_wind_5min", "sp_heating_temp_setpoint_5min", 
-    "sp_vent_ilation_temp_setpoint_5min", "energy_curtain_5min", "blackout_curtain_5min", 
-    "lmp_elecuse", "mc_pure_air", "sp_co2_setpoint_ppm_5min", "fruit_fresh_weight", 
-    "dvs_fruit", "dry_matter_fract", "crop_abs", "sp_plantdensity", "elec_price_peakhour", 
+    "pconpipe", "vent_lee_5min", "vent_wind_5min",  
+    "energy_curtain_5min", "blackout_curtain_5min", 
+    "lmp_elecuse", "mc_pure_air", "fruit_fresh_weight", 
+    "dvs_fruit", "dry_matter_fract", "crop_abs", "elec_price_peakhour", 
     "water_supply_minutes_5min", "red_fruits_weight", "fixed_costs", "fixed_costs_accumulation", 
     "fixed_greenhouse_costs", "fixed_co2_costs", "fixed_lamp_costs", "fixed_screen_costs", 
     "variable_costs_day_sum", "variable_costs_accumulation", "variable_electricity_costs", 
     "variable_electricity_costs_day_sum", "variable_heating_costs", "variable_heating_costs_day_sum", 
-    "variable_co2_costs", "variable_co2_costs_day_sum", "gains", "net_profit", "total_cost"
+    "variable_co2_costs", "variable_co2_costs_day_sum", "gains", "net_profit", "total_cost", "net_profit_per_year"
 ]
+
+
+# simulation_result_insert_query = """
+# INSERT INTO simulation (
+#     time, temperature_greenhouse_5min, rh_greenhouse_5min, co2_greenhouse_ppm_5min,
+#     outside_radiation_5min, outside_temperature_5min, outside_rh_5min, 
+#     outside_wind_speed_5min, par_sensor_above, tpipe, conpipes_tsuppipe, 
+#     pconpipe, vent_lee_5min, vent_wind_5min, sp_heating_temp_setpoint_5min, 
+#     sp_vent_ilation_temp_setpoint_5min, energy_curtain_5min, blackout_curtain_5min, 
+#     lmp_elecuse, mc_pure_air, sp_co2_setpoint_ppm_5min, fruit_fresh_weight, 
+#     dvs_fruit, dry_matter_fract, crop_abs, sp_plantdensity, elec_price_peakhour, 
+#     water_supply_minutes_5min, red_fruits_weight, fixed_costs, fixed_costs_accumulation, 
+#     fixed_greenhouse_costs, fixed_co2_costs, fixed_lamp_costs, fixed_screen_costs, 
+#     variable_costs_day_sum, variable_costs_accumulation, variable_electricity_costs, 
+#     variable_electricity_costs_day_sum, variable_heating_costs, variable_heating_costs_day_sum, 
+#     variable_co2_costs, variable_co2_costs_day_sum, gains, net_profit, total_cost, net_profit_per_year
+# ) VALUES %s
+# ON CONFLICT ("time") DO UPDATE SET
+#     (temperature_greenhouse_5min, rh_greenhouse_5min, co2_greenhouse_ppm_5min, 
+#      outside_radiation_5min, outside_temperature_5min, outside_rh_5min, 
+#      outside_wind_speed_5min, par_sensor_above, tpipe, conpipes_tsuppipe, 
+#      pconpipe, vent_lee_5min, vent_wind_5min, sp_heating_temp_setpoint_5min, 
+#      sp_vent_ilation_temp_setpoint_5min, energy_curtain_5min, blackout_curtain_5min, 
+#      lmp_elecuse, mc_pure_air, sp_co2_setpoint_ppm_5min, fruit_fresh_weight, 
+#      dvs_fruit, dry_matter_fract, crop_abs, sp_plantdensity, elec_price_peakhour, 
+#      water_supply_minutes_5min, red_fruits_weight, fixed_costs, fixed_costs_accumulation, 
+#      fixed_greenhouse_costs, fixed_co2_costs, fixed_lamp_costs, fixed_screen_costs, 
+#      variable_costs_day_sum, variable_costs_accumulation, variable_electricity_costs, 
+#      variable_electricity_costs_day_sum, variable_heating_costs, variable_heating_costs_day_sum, 
+#      variable_co2_costs, variable_co2_costs_day_sum, gains, net_profit, total_cost, net_profit_per_year) 
+#     = 
+#     (EXCLUDED.temperature_greenhouse_5min, EXCLUDED.rh_greenhouse_5min, EXCLUDED.co2_greenhouse_ppm_5min, 
+#      EXCLUDED.outside_radiation_5min, EXCLUDED.outside_temperature_5min, EXCLUDED.outside_rh_5min, 
+#      EXCLUDED.outside_wind_speed_5min, EXCLUDED.par_sensor_above, EXCLUDED.tpipe, EXCLUDED.conpipes_tsuppipe, 
+#      EXCLUDED.pconpipe, EXCLUDED.vent_lee_5min, EXCLUDED.vent_wind_5min, EXCLUDED.sp_heating_temp_setpoint_5min, 
+#      EXCLUDED.sp_vent_ilation_temp_setpoint_5min, EXCLUDED.energy_curtain_5min, EXCLUDED.blackout_curtain_5min, 
+#      EXCLUDED.lmp_elecuse, EXCLUDED.mc_pure_air, EXCLUDED.sp_co2_setpoint_ppm_5min, EXCLUDED.fruit_fresh_weight, 
+#      EXCLUDED.dvs_fruit, EXCLUDED.dry_matter_fract, EXCLUDED.crop_abs, EXCLUDED.sp_plantdensity, EXCLUDED.elec_price_peakhour, 
+#      EXCLUDED.water_supply_minutes_5min, EXCLUDED.red_fruits_weight, EXCLUDED.fixed_costs, EXCLUDED.fixed_costs_accumulation, 
+#      EXCLUDED.fixed_greenhouse_costs, EXCLUDED.fixed_co2_costs, EXCLUDED.fixed_lamp_costs, EXCLUDED.fixed_screen_costs, 
+#      EXCLUDED.variable_costs_day_sum, EXCLUDED.variable_costs_accumulation, EXCLUDED.variable_electricity_costs, 
+#      EXCLUDED.variable_electricity_costs_day_sum, EXCLUDED.variable_heating_costs, EXCLUDED.variable_heating_costs_day_sum, 
+#      EXCLUDED.variable_co2_costs, EXCLUDED.variable_co2_costs_day_sum, EXCLUDED.gains, EXCLUDED.net_profit, EXCLUDED.total_cost, EXCLUDED.net_profit_per_year)
+# """
+
+# simulation_result_columns_to_insert = [
+#     "time", "temperature_greenhouse_5min", "rh_greenhouse_5min", "co2_greenhouse_ppm_5min",
+#     "outside_radiation_5min", "outside_temperature_5min", "outside_rh_5min", 
+#     "outside_wind_speed_5min", "par_sensor_above", "tpipe", "conpipes_tsuppipe", 
+#     "pconpipe", "vent_lee_5min", "vent_wind_5min", "sp_heating_temp_setpoint_5min", 
+#     "sp_vent_ilation_temp_setpoint_5min", "energy_curtain_5min", "blackout_curtain_5min", 
+#     "lmp_elecuse", "mc_pure_air", "sp_co2_setpoint_ppm_5min", "fruit_fresh_weight", 
+#     "dvs_fruit", "dry_matter_fract", "crop_abs", "sp_plantdensity", "elec_price_peakhour", 
+#     "water_supply_minutes_5min", "red_fruits_weight", "fixed_costs", "fixed_costs_accumulation", 
+#     "fixed_greenhouse_costs", "fixed_co2_costs", "fixed_lamp_costs", "fixed_screen_costs", 
+#     "variable_costs_day_sum", "variable_costs_accumulation", "variable_electricity_costs", 
+#     "variable_electricity_costs_day_sum", "variable_heating_costs", "variable_heating_costs_day_sum", 
+#     "variable_co2_costs", "variable_co2_costs_day_sum", "gains", "net_profit", "total_cost", "net_profit_per_year"
+# ]
 
 simulation_forcast_insert_query = """
 INSERT INTO simulation (
