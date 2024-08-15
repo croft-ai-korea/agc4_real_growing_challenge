@@ -18,7 +18,8 @@ def per_day():
     try:
         today = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
         lg_service = LetsgrowService()
-        lg_service.jsonbak_to_letsgrow(today)
+        lg_service.jsonbak_to_letsgrow(begin_time=today,
+                                       json_path='a_util/rest_api/save_control.json')
     except Exception as e:
         print("error: ", e)
         traceback.print_exc()

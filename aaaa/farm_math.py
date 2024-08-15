@@ -33,11 +33,11 @@ def sun_cal(date, forecast, wur_cal=True):
 
         Rise = 12.6 - ellipseCorrection / 60 - 0.5 * Day_length
         Set = 12.6 - ellipseCorrection / 60 + 0.5 * Day_length
-        print("Rise",Rise)
-        print("Set",Set)
+        # print("Rise",Rise)
+        # print("Set",Set)
         date_Rise = date.replace(hour=math.floor(Rise), minute=math.floor(Rise % math.floor(Rise) * 60))
         date_Set = date.replace(hour=math.floor(Set), minute=math.floor(Set % math.floor(Set) * 60))
-        print("sun_rise = {} and sun_set = {}".format(date_Rise, date_Set))
+        # print("sun_rise = {} and sun_set = {}".format(date_Rise, date_Set))
     return date_Rise, date_Set
 
 def wsm_to_jcm2_day(rad_array: Any):
@@ -77,6 +77,19 @@ def get_DLI(light_array:Any,
     elif type == "watt":
         return 2.1*sum(light_array_with_screen_effect[window[0]:window[1]])*transmittance*interval*60*1e-6
 
+def fruit_price(weight):
+    """
+       weight for red tomato 
+    """
+    if weight < 50:
+        return -0.75
+    elif weight < 80:
+        return 1.8*(weight-80)/(80-50)+1.8-0.75
+    elif weight <150:
+        return (2-1.8)*(weight-150)/(150-80)+2-0.75
+    else:
+        return 2-0.75
+    
 
 def get_peakTime(array):
     result = np.convolve(np.array(array), np.ones(shape=36))  # to-do check 5min or not

@@ -68,26 +68,25 @@ def base_strategy(_in: GreenHouseInput, _out: GreenHouseOutput):
       
     """
     _out.setting_point['sp_value_to_isii_1_5min'] = [0]*288
-    DLI_need = _in.parameters['base_target_DLI'] - _in.expected_DLI
+    DLI_need = _in.config['base_target_DLI'] - _in.expected_DLI
     if DLI_need > 0:
-        LED_time_per_5min = ((DLI_need * 1e6) / (_in.parameters['base_LED_umol']*60))//5
+        LED_time_per_5min = ((DLI_need * 1e6) / (_in.config['base_LED_umol']*60))//5
         
-        filtered_by_threshold = _in.indoor_env['fc_radiation_5min'][_in.indoor_env['fc_radiation_5min']>_in.parameters['base_target_DLI']]
+        filtered_by_threshold = _in.indoor_env['fc_radiation_5min'][_in.indoor_env['fc_radiation_5min']>_in.config['base_target_DLI']]
         if len(filtered_by_threshold) > 0:
             led_end_time_int = datetime_to_int(filtered_by_threshold.index[0])
-            led_start_time_int = led_end_time_int-LED_time_per_5min
-          
+            led_start_time_int = int(led_end_time_int-LED_time_per_5min)          
         else:
             led_center_time_int = get_peakTime(_in.indoor_env['fc_radiation_5min'])  
             led_start_time_int = led_center_time_int - LED_time_per_5min//2
-            led_end_time_int = led_end_time_int + LED_time_per_5min//2
+            led_end_time_int = led_center_time_int + LED_time_per_5min//2
             
-        if led_start_time_int < datetime_to_int(datetime(2024,1,1,2,0,0)):
-            led_start_time_int = datetime_to_int(datetime(2024,1,1,2,0,0))  
-        if led_end_time_int > datetime_to_int(datetime(2024,1,1,11,0,0)):
-            led_end_time_int = datetime_to_int(datetime(2024,1,1,11,0,0))
+        if led_start_time_int < datetime_to_int(datetime(2000,1,1,2,0,0)):
+            led_start_time_int = datetime_to_int(datetime(2000,1,1,2,0,0))  
+        if led_end_time_int > datetime_to_int(datetime(2000,1,1,11,0,0)):
+            led_end_time_int = datetime_to_int(datetime(2000,1,1,11,0,0))
         
-        _out.setting_point['sp_value_to_isii_1_5min'][led_start_time_int:led_end_time_int] = _in.parameters['base_LED_umol']            
+        _out.setting_point['sp_value_to_isii_1_5min'][led_start_time_int:led_end_time_int] = _in.config['base_LED_umol']            
      
     """
     screen setting

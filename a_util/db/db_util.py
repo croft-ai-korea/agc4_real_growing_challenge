@@ -9,7 +9,6 @@ import pandas as pd
 sys.path.append('./')
 from aaaa.config import config
 from a_util.db.schema import create_measure_table_query, create_simulation_table_query
-from a_util.db.schema import simulation_data_insert_query
 timescale_config = config['timescale']
 
 
@@ -155,13 +154,13 @@ def db_drop_table_if_exists(table_name: str):
             print(f"Error dropping table '{table_name}':", e)
         finally:
             pool.putconn(conn)
-
-def db_simulation_data_insert(df:pd.DataFrame):
+            
+def db_data_insert(df:pd.DataFrame, query):
     data_tuples = [tuple(x) for x in df.to_numpy()]
     with pool.getconn() as conn:
         cursor = conn.cursor()
         try:
-            execute_values(cursor, simulation_data_insert_query, data_tuples)
+            execute_values(cursor, query, data_tuples)
             conn.commit()  # 데이터 삽입 후 커밋
         except Exception as e:
             print(f"Error inserting simulation data: {e}")
@@ -170,13 +169,13 @@ def db_simulation_data_insert(df:pd.DataFrame):
             pool.putconn(conn)
         
 if __name__ == "__main__":
-    db_drop_table_if_exists(table_name = 'measure')
-    create_table_if_not_exists(table_name='measure', query=create_measure_table_query)
+    # db_drop_table_if_exists(table_name = 'measure')
+    # create_table_if_not_exists(table_name='measure', query=create_measure_table_query)
     
-    # db_drop_table_if_exists(table_name = 'simulation')
-    # create_table_if_not_exists(table_name='simulation', query=create_simulation_table_query)
+    db_drop_table_if_exists(table_name = 'simulation')
+    create_table_if_not_exists(table_name='simulation', query=create_simulation_table_query)
     
     # db_drop_table_if_exists('measure')
-    
+
     # r = db_select(""" select * from measure """)
     # print(r)

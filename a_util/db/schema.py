@@ -216,34 +216,36 @@ create table simulation
     time              timestamp not null
         constraint simulation_pkey
             primary key,
-    comp1_air_t                                      double precision,
-    comp1_air_rh                                     double precision,
-    comp1_air_ppm                                    double precision,
-    common_iglob_value                               double precision,
-    common_tout_value                                double precision,
-    common_rhout_value                               double precision,
-    common_windsp_value                              double precision,
-    comp1_parsensor_above                            double precision,
-    comp1_tpipe1_value                               double precision,
-    comp1_conpipes_tsupipe1                          double precision,
-    comp1_pconpipe1_value                            double precision,
-    comp1_conwin_winlee                              double precision,
-    comp1_conwin_winwnd                              double precision,
-    comp1_setpoints_spheat                           double precision,
-    comp1_setpoints_spvent                           double precision,
-    comp1_scr1_pos                                   double precision,
-    comp1_scr2_pos                                   double precision,
-    comp1_lmp1_elecuse                               double precision,
-    comp1_mcpureair_value                            double precision,
-    comp1_setpoints_spco2                            double precision,
-    comp1_growth_fruitfreshweight                    double precision,
-    comp1_growth_dvsfruit                            double precision,
-    comp1_growth_drymatterfract                      double precision,
-    comp1_growth_cropabs                             double precision,
-    comp1_growth_plantdensity                        double precision,
-    common_elecprice_peakhour                        double precision,
-    comp1_growth_wateruseperpot                      double precision,
-    comp1_growth_redfruitsweight                     double precision,
+    par_sensor_above                                 double precision,
+    tpipe                                            double precision,
+    conpipes_tsuppipe                                double precision,
+    pconpipe                                         double precision,
+    lmp_elecuse                                      double precision,
+    fruit_fresh_weight                               double precision,
+    dvs_fruit                                        double precision,
+    dry_matter_fract                                 double precision,
+    crop_abs                                         double precision,
+    elec_price_peakhour                              double precision,
+    red_fruits_weight                                double precision,
+    mc_pure_air                                      double precision,
+    fixed_costs                                      double precision,
+    fixed_costs_accumulation                         double precision,       
+    fixed_greenhouse_costs                           double precision,
+    fixed_co2_costs                                  double precision,    
+    fixed_lamp_costs                                 double precision,
+    fixed_screen_costs                               double precision,
+    fixed_spacing_system_costs                       double precision,
+    variable_costs_day_sum                           double precision,         
+    variable_costs_accumulation                      double precision,                
+    variable_electricity_costs                       double precision,               
+    variable_electricity_costs_day_sum               double precision,                       
+    variable_heating_costs                           double precision,           
+    variable_heating_costs_day_sum                   double precision,                   
+    variable_co2_costs                               double precision,       
+    variable_co2_costs_day_sum                       double precision,
+    gains                                            double precision,
+    total_cost                                       double precision,                                     
+    net_profit                                       double precision,                                    
     sp_plantdensity                                  double precision,
     sp_day_of_harvest_day_number                     double precision,
     sp_heating_temp_setpoint_5min                    double precision,
@@ -449,14 +451,66 @@ alter table measure
 """
 
 
-simulation_data_insert_query = """
+simulation_result_insert_query = """
 INSERT INTO simulation (
-    time, comp1_air_t, comp1_air_rh, comp1_air_ppm, common_iglob_value, common_tout_value,
-    common_rhout_value, common_windsp_value, comp1_parsensor_above, comp1_tpipe1_value,
-    comp1_conpipes_tsupipe1, comp1_pconpipe1_value, comp1_conwin_winlee, comp1_conwin_winwnd,
-    comp1_setpoints_spheat, comp1_setpoints_spvent, comp1_scr1_pos, comp1_scr2_pos,
-    comp1_lmp1_elecuse, comp1_mcpureair_value, comp1_setpoints_spco2, comp1_growth_fruitfreshweight,
-    comp1_growth_dvsfruit, comp1_growth_drymatterfract, comp1_growth_cropabs, comp1_growth_plantdensity,
-    common_elecprice_peakhour, comp1_growth_wateruseperpot, comp1_growth_redfruitsweight
+    time, temperature_greenhouse_5min, rh_greenhouse_5min, co2_greenhouse_ppm_5min,
+    outside_radiation_5min, outside_temperature_5min, outside_rh_5min, 
+    outside_wind_speed_5min, par_sensor_above, tpipe, conpipes_tsuppipe, 
+    pconpipe, vent_lee_5min, vent_wind_5min, sp_heating_temp_setpoint_5min, 
+    sp_vent_ilation_temp_setpoint_5min, energy_curtain_5min, blackout_curtain_5min, 
+    lmp_elecuse, mc_pure_air, sp_co2_setpoint_ppm_5min, fruit_fresh_weight, 
+    dvs_fruit, dry_matter_fract, crop_abs, sp_plantdensity, elec_price_peakhour, 
+    water_supply_minutes_5min, red_fruits_weight, fixed_costs, fixed_costs_accumulation, 
+    fixed_greenhouse_costs, fixed_co2_costs, fixed_lamp_costs, fixed_screen_costs, 
+    variable_costs_day_sum, variable_costs_accumulation, variable_electricity_costs, 
+    variable_electricity_costs_day_sum, variable_heating_costs, variable_heating_costs_day_sum, 
+    variable_co2_costs, variable_co2_costs_day_sum, gains, net_profit, total_cost
+) VALUES %s
+ON CONFLICT ("time") DO UPDATE SET
+    (temperature_greenhouse_5min, rh_greenhouse_5min, co2_greenhouse_ppm_5min, 
+     outside_radiation_5min, outside_temperature_5min, outside_rh_5min, 
+     outside_wind_speed_5min, par_sensor_above, tpipe, conpipes_tsuppipe, 
+     pconpipe, vent_lee_5min, vent_wind_5min, sp_heating_temp_setpoint_5min, 
+     sp_vent_ilation_temp_setpoint_5min, energy_curtain_5min, blackout_curtain_5min, 
+     lmp_elecuse, mc_pure_air, sp_co2_setpoint_ppm_5min, fruit_fresh_weight, 
+     dvs_fruit, dry_matter_fract, crop_abs, sp_plantdensity, elec_price_peakhour, 
+     water_supply_minutes_5min, red_fruits_weight, fixed_costs, fixed_costs_accumulation, 
+     fixed_greenhouse_costs, fixed_co2_costs, fixed_lamp_costs, fixed_screen_costs, 
+     variable_costs_day_sum, variable_costs_accumulation, variable_electricity_costs, 
+     variable_electricity_costs_day_sum, variable_heating_costs, variable_heating_costs_day_sum, 
+     variable_co2_costs, variable_co2_costs_day_sum, gains, net_profit, total_cost) 
+    = 
+    (EXCLUDED.temperature_greenhouse_5min, EXCLUDED.rh_greenhouse_5min, EXCLUDED.co2_greenhouse_ppm_5min, 
+     EXCLUDED.outside_radiation_5min, EXCLUDED.outside_temperature_5min, EXCLUDED.outside_rh_5min, 
+     EXCLUDED.outside_wind_speed_5min, EXCLUDED.par_sensor_above, EXCLUDED.tpipe, EXCLUDED.conpipes_tsuppipe, 
+     EXCLUDED.pconpipe, EXCLUDED.vent_lee_5min, EXCLUDED.vent_wind_5min, EXCLUDED.sp_heating_temp_setpoint_5min, 
+     EXCLUDED.sp_vent_ilation_temp_setpoint_5min, EXCLUDED.energy_curtain_5min, EXCLUDED.blackout_curtain_5min, 
+     EXCLUDED.lmp_elecuse, EXCLUDED.mc_pure_air, EXCLUDED.sp_co2_setpoint_ppm_5min, EXCLUDED.fruit_fresh_weight, 
+     EXCLUDED.dvs_fruit, EXCLUDED.dry_matter_fract, EXCLUDED.crop_abs, EXCLUDED.sp_plantdensity, EXCLUDED.elec_price_peakhour, 
+     EXCLUDED.water_supply_minutes_5min, EXCLUDED.red_fruits_weight, EXCLUDED.fixed_costs, EXCLUDED.fixed_costs_accumulation, 
+     EXCLUDED.fixed_greenhouse_costs, EXCLUDED.fixed_co2_costs, EXCLUDED.fixed_lamp_costs, EXCLUDED.fixed_screen_costs, 
+     EXCLUDED.variable_costs_day_sum, EXCLUDED.variable_costs_accumulation, EXCLUDED.variable_electricity_costs, 
+     EXCLUDED.variable_electricity_costs_day_sum, EXCLUDED.variable_heating_costs, EXCLUDED.variable_heating_costs_day_sum, 
+     EXCLUDED.variable_co2_costs, EXCLUDED.variable_co2_costs_day_sum, EXCLUDED.gains, EXCLUDED.net_profit, EXCLUDED.total_cost)
+"""
+
+simulation_result_columns_to_insert = [
+    "time", "temperature_greenhouse_5min", "rh_greenhouse_5min", "co2_greenhouse_ppm_5min",
+    "outside_radiation_5min", "outside_temperature_5min", "outside_rh_5min", 
+    "outside_wind_speed_5min", "par_sensor_above", "tpipe", "conpipes_tsuppipe", 
+    "pconpipe", "vent_lee_5min", "vent_wind_5min", "sp_heating_temp_setpoint_5min", 
+    "sp_vent_ilation_temp_setpoint_5min", "energy_curtain_5min", "blackout_curtain_5min", 
+    "lmp_elecuse", "mc_pure_air", "sp_co2_setpoint_ppm_5min", "fruit_fresh_weight", 
+    "dvs_fruit", "dry_matter_fract", "crop_abs", "sp_plantdensity", "elec_price_peakhour", 
+    "water_supply_minutes_5min", "red_fruits_weight", "fixed_costs", "fixed_costs_accumulation", 
+    "fixed_greenhouse_costs", "fixed_co2_costs", "fixed_lamp_costs", "fixed_screen_costs", 
+    "variable_costs_day_sum", "variable_costs_accumulation", "variable_electricity_costs", 
+    "variable_electricity_costs_day_sum", "variable_heating_costs", "variable_heating_costs_day_sum", 
+    "variable_co2_costs", "variable_co2_costs_day_sum", "gains", "net_profit", "total_cost"
+]
+
+simulation_forcast_insert_query = """
+INSERT INTO simulation (
+    time, fc_radiation_5min, fc_temperature_5min, fc_rh_5min, fc_wind_speed_5min
 ) VALUES %s
 """
