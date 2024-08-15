@@ -18,7 +18,7 @@ from a_util.simulator.simulator import send_server, json_parsing, sim_greenhouse
 from a_util.simulator.simulator import modify_temperature, modify_intensity, modify_hours_light
 from a_util.simulator.simulator import modify_temperature_random, modify_intensity_random, modify_hours_light_random
 from a_util.simulator.simulator import convert_key_from_start_date, get_realtime_data, get_reference_table
-from a_util.simulator.simulator import action_table_to_server_format
+from a_util.simulator.simulator import action_table_to_server_format, generate_density_from_string
 from a_util.db.db_util import create_table_if_not_exists, db_drop_table_if_exists, db_data_insert
 from a_util.db.schema import create_simulation_table_query, simulation_result_columns_to_insert
 from a_util.db.schema import simulation_result_insert_query, simulation_forcast_insert_query
@@ -29,8 +29,8 @@ from a_util.service.letsgrow_service_simul import LetsgrowService
 USE_NEW_TABLE = False
 
 def run_simulator():    
-    control_json_path = "temp/Par_Out_23_12.54.89_control.json"
-    Par_Out_reference = "temp/Par_Out_23_12.54.89.json"
+    control_json_path = "temp/Par_Out_23_11.57.45_control.json"
+    Par_Out_reference = "temp/Par_Out_23_11.57.45.json"
     
     ## make strategy
     config_path = "./a_util/env/config.yaml"
@@ -89,20 +89,26 @@ def run_simulator():
     greenhouse_control.startDate = startDate
     print(greenhouse_control.plantDensity)
     greenhouse_control.plantDensity = "1 56; 32 42; 42 30; 52 20"
+    
+    #density list 만듬
+    density_list = generate_density_from_string(greenhouse_control.plantDensity, 200)
+
 
     ### set weather data and analysis 
     reference = json_parsing(response_json_path = Par_Out_reference)
     greenhouse_control.load_weather_data_and_analysis(reference)
 
-    greenhouse_control.device_illumination['lmp1'].intensity = 250
+    # greenhouse_control.device_illumination['lmp1'].intensity = 250
     
-    heating_setpoint = get_simulation_setpoint(lg_simul_data['sp_heating_temp_setpoint_5min'],
-                                                            config['start_date'])
-    # vent_setpoint = get_simulation_setpoint(lg_simul_data['sp_vent_ilation_temp_setpoint_5min'],
-    #                                                         config['start_date'])
+    heating_setpoint = get_simulation_setpoint(lg_simul_data['sp_heating_temp_setpoint_5min'],config['start_date'])
+    vent_setpoint = get_simulation_setpoint(lg_simul_data['sp_vent_ilation_temp_setpoint_5min'],config['start_date'])
 
     greenhouse_control.device_setpoints['setpoints'].temp.heatingTemp = convert_key_from_start_date(heating_setpoint, startDate)
-    greenhouse_control.device_setpoints['setpoints'].temp.ventOffset = convert_key_from_start_date(ventOffset, startDate)
+    # greenhouse_control.device_setpoints['setpoints'].temp.ventOffset = convert_key_from_start_date(ventOffset, startDate)
+    greenhouse_control.device_setpoints['setpoints'].temp.ventOffset = convert_key_from_start_date(vent_setpoint, startDate)
+    
+    
+    greenhouse_control.device_illumination['lmp1'].intensity = convert_key_from_start_date(heating_setpoint, startDate)
     # heatingTemp = copy.deepcopy(greenhouse_control.device_setpoints['setpoints'].temp.heatingTemp)
     # intensity = copy.deepcopy(greenhouse_control.device_illumination['lmp1'].intensity)
     # max_iglob = copy.deepcopy(greenhouse_control.device_illumination['lmp1'].max_iglob)
@@ -249,12 +255,20 @@ def run_simulator():
         Pd = fruit_price(df.loc[filtered_index,'red_fruits_weight'][-1])    
         df.loc[filtered_index,'gains'] = Pd / sum(plant_density_inverse)
         
+            # 추가
+        gain_value = df.loc[filtered_index, 'gains'][-1] * coeef
+        if gain_value < 0:
+            gain_value = 0
+
         # net profit
         df.loc[filtered_index,'net_profit'] = df.loc[filtered_index,'gains'] - df.loc[filtered_index,'total_cost']
         df.loc[filtered_index,'net_profit_per_year'] = df.loc[filtered_index,'net_profit'] * 365       
-                    
-        print("net profit : ", df.loc[filtered_index,'net_profit'][-1]*coeef, "gain : ", df.loc[filtered_index,'gains'][-1]*coeef, "total cost : ", df.loc[filtered_index,'total_cost'][-1]*coeef)
-       
+
+        # print("net profit : ", df.loc[filtered_index,'net_profit'][-1]*coeef, "gain : ", df.loc[filtered_index,'gains'][-1]*coeef, "total cost : ", df.loc[filtered_index,'total_cost'][-1]*coeef)
+        
+        net_profit_value = df.loc[filtered_index,'net_profit'][-1]*coeef - df.loc[filtered_index, 'gains'][-1]*coeef - gain_value 
+        print("net profit : ", net_profit_value, "gain : ", gain_value, "total cost : ", df.loc[filtered_index,'total_cost'][-1]*coeef)
+    
 
     df.reset_index(inplace=True)
     db_data_insert(df=df[simulation_result_columns_to_insert], query=simulation_result_insert_query)

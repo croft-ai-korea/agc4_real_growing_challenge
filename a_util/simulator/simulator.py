@@ -13,6 +13,52 @@ from random import random
 import numpy as np
 import copy
 
+def parse_simulation_data(simulation_data):
+    simulation_days = []
+    plant_densities = []
+    
+    # 데이터를 세미콜론으로 분할
+    entries = simulation_data.split(';')
+    
+    for entry in entries:
+        day, density = entry.strip().split()
+        simulation_days.append(int(day))
+        plant_densities.append(int(density))
+    
+    return simulation_days, plant_densities
+
+def generate_density_from_string(simulation_data, total_days):
+    simulation_days, plant_densities = parse_simulation_data(simulation_data)
+    
+    density = []
+    
+    # 시작 시점과 끝 시점을 만들어, 각각의 기간에 해당하는 density값을 추가
+    for i in range(len(simulation_days) - 1):
+        start_day = simulation_days[i]
+        end_day = simulation_days[i + 1]
+        density.extend([plant_densities[i]] * (end_day - start_day))
+    
+    # 마지막 density값을 나머지 일자에 대해 채움
+    density.extend([plant_densities[-1]] * (total_days - simulation_days[-1] + 1))
+    
+    return density
+
+def generate_simulation_string(density_list):
+    simulation_data = []
+    current_density = density_list[0]
+    start_day = 1
+
+    for i in range(1, len(density_list)):
+        if density_list[i] != current_density:
+            simulation_data.append(f"{start_day} {current_density}")
+            current_density = density_list[i]
+            start_day = i + 1
+
+    # 마지막 density값을 추가
+    simulation_data.append(f"{start_day} {current_density}")
+
+    return "; ".join(simulation_data)
+
 def convert_key_from_start_date(setting_point, start_date):
     setting_point_to_server = {}
     start_date_time = datetime.strptime(start_date, "%d-%m-%Y")
