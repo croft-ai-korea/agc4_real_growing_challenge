@@ -4,7 +4,6 @@ import traceback
 
 import pandas as pd
 import numpy as np
-import yaml 
 
 sys.path.append('./')
 from a_util.service.letsgrow_service import LetsgrowService
@@ -14,25 +13,18 @@ from aaaa.cost_cal import cost_calculate, greenhouse_const
 from a_util.letsgrow_const import LETGROW_FORCAST, LETSGROW_CONTROL
 
 class GreenhouseControl:
-    def __init__(self, startdate, strategies:list, today = None):
+    def __init__(self, startdate, strategies:list):
         self.strategies = strategies
-        if today is None:
-            self.today = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
-        else:
-            self.today = today
+        # self.today = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
+        self.today = datetime(2024,8,10,0,0,0)
         self.startdate = startdate
         self.lg_service = LetsgrowService()
         self.indoor_env = self.lg_service.data_from_db_day(self.today)
         self.indoor_env_yesterday = self.lg_service.data_from_db_day(self.today-timedelta(days=1))
         self.plant_status = self.get_plant_status(self.today)
         self.forecast_data = self.get_forecast_real()
-        
-        self.green_input = GreenHouseInput(config_path="./a_util/env/config.yaml",
-                                           startdate=self.startdate,
-                                           indoor_env=self.indoor_env,
-                                           indoor_env_yesterday=self.indoor_env_yesterday,
-                                           plant_status=self.plant_status,
-                                           today=self.today)
+
+        self.green_input = GreenHouseInput(self.startdate, self.indoor_env,self.indoor_env_yesterday, self.plant_status, self.today)
         self.green_out = GreenHouseOutput(self.today)
         ## to-do
         self.density = [ 90,90,90,90,90,90,90,
@@ -41,7 +33,7 @@ class GreenhouseControl:
                          30,30,30,30,30,30,30,
                          22.5,22.5,22.5,22.5,22.5,22.5,
                          18,18,18,18,18,18,18,
-                         15,15,15,15,15,15,15]
+                         15,15,15,15,15,15,15  ]
         self.green_cost = cost_calculate(self.green_input,self.density)
 
     def get_plant_status(self, start_date):
@@ -104,7 +96,7 @@ class GreenhouseControl:
         pass
 
 class GreenHouseInput:
-    def __init__(self, config_path, startdate, indoor_env, indoor_env_yesterday, plant_status, today):
+    def __init__(self, startdate, indoor_env, indoor_env_yesterday, plant_status, today):
         self.now = datetime.now() 
         self.today = today
         print(self.today)
@@ -118,13 +110,9 @@ class GreenHouseInput:
         self.rise_time_int = (self.rise_time.hour * 60 + self.rise_time.minute)//5
         self.set_time_int = (self.set_time.hour * 60 + self.set_time.minute)//5
         self.statistics_strategy_json = "strategyDay.json"  # to-do
-        
-        with open(config_path, 'r') as file:
-            config = yaml.safe_load(file)
-        
-        self.LED_iglob_threshold = config.get('LED_iglob_threshold', 500)
-        self.par_setpoint = config.get('par_setpoint', 205)
-        self.LED_max = config.get('LED_max', 75)
+        self.LED_iglob_threshold = 500
+        self.par_setpoint = 205
+        self.LED_max = 75
 
      
     def get_Iglob_sum(self):

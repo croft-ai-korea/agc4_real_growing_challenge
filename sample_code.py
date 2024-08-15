@@ -167,18 +167,9 @@ if __name__ == "__main__":
     
     result = get_module_ids(token)
     
-    moduleId = 14821
+    moduleId = 68112
     
     result2 = get_collectionId(token, moduleId)
-    
-    for col in result2['ModuleItems']:
-        if col['IsWriteable']:
-            print(col['Description'])
-    
-    # moduleId = 69296
-    
-    # result3 = get_collectionId(token, moduleId)
-    
         
     # print(result)
     

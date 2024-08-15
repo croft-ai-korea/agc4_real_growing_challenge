@@ -53,7 +53,7 @@ def wsm_to_molm2_day(rad_array):
     return sum(rad_array) * 2.4 * 60 * 60 * 1e-6
 
 def wsm_to_molm2_day_per5min(rad_array):
-    return sum(rad_array) * 2.4 * 60 * 5 * 1e-6
+    return sum(rad_array) * 2.4 * 60 * 12 * 1e-6
 
 def VPD_cal(green_temp,green_humidity,plant_Temp):
     VPsat = (610.7*10**((7.5*plant_Temp)/(237.3+plant_Temp)))/1000

@@ -17,11 +17,24 @@ from a_util.simulator.simulator import action_table_to_server_format
 from a_util.db.db_util import create_table_if_not_exists, db_drop_table_if_exists, db_simulation_data_insert
 from a_util.db.schema import create_simulation_table_query
 
+import pydevd_pycharm
+pydevd_pycharm.settrace('221.163.22.148', port=3232, stdoutToServer=True, stderrToServer=True)
+
+
+def swap_columns(df, use_challenge=True):
+    reverse_mappings = {v: k for k, v in mappings.items()}
+    if use_challenge:
+        df = df.rename(columns=mappings)
+    else:
+        df = df.rename(columns=reverse_mappings)
+    
+    return df
+
 
 def simulation_test():
     sys.path.append('./')
-    control_json_path = "temp/Par_Out_23_12.54.89_control.json"
-    Par_Out_reference = "temp/Par_Out_23_12.54.89.json"
+    control_json_path = "temp/Par_Out_23_11.57.45_control.json"
+    Par_Out_reference = "temp/Par_Out_23_11.57.45.json"
 
     db_drop_table_if_exists(table_name = 'simulation')
     create_table_if_not_exists(table_name = 'simulation', query=create_simulation_table_query)
