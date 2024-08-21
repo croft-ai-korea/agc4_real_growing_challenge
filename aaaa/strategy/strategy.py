@@ -189,7 +189,8 @@ def base_strategy(_in: GreenHouseInput, _out: GreenHouseOutput):
     _out.setting_point['sp_day_of_harvest_day_number'] = [351]*288   
     
     """
-    
+    additional sensor
+    image sensor + TRH sensoer(inside the bush)
     
     """
 
