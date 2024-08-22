@@ -1,7 +1,7 @@
 import requests 
 from typing import List, Dict, Any
-from a_util.letsgrow_const import COLID_MAP_NAME, COLID_MAP_NUMBER
-from a_util.letsgrow_const import LETGROW_FORCAST, LETSGROW_MOD_COLS_MAP
+# from a_util.letsgrow_const import COLID_MAP_NAME, COLID_MAP_NUMBER
+# from a_util.letsgrow_const import LETGROW_FORCAST, LETSGROW_MOD_COLS_MAP
 from a_util.letsgrow_const import GREENHOUSE_MODULE_ID, WEATHER_MODULE_ID, FORCAST_MODULE_ID
 from datetime import datetime, timedelta
 
@@ -159,28 +159,36 @@ def make_query(columns:List[str]):
 
         
 if __name__ == "__main__":
-    make_query(COLID_MAP_NAME.keys())
+    # make_query(COLID_MAP_NAME.keys())
     
     username = "Agrifusion"
     password = "78G$dV32La"  
+    
+    # username = "agrifusionsensors"
+    # password = "Vg5#sLkSa8"  
+    
     token = get_token(username=username, password=password)
     
     result = get_module_ids(token)
     
-    moduleId = 14821
+    moduleId = 69296
     
     result2 = get_collectionId(token, moduleId)
     
-    for col in result2['ModuleItems']:
-        if col['IsWriteable']:
-            print(col['Description'])
+    colid = 2664621
+    # colid = 2664622
     
-    # moduleId = 69296
+    start_date = datetime(2024,8,10,0,0,0)
+    end_date = datetime(2024,8,22,0,0,0)
     
-    # result3 = get_collectionId(token, moduleId)
-    
+    result3 = get_data(token,
+                        moduleId,
+                        colid,
+                        start_date.isoformat(),
+                        end_date.isoformat()
+                        )    
         
-    # print(result)
+    print("biosignals : " , result3)
     
     print("ok")
     

@@ -148,9 +148,17 @@ while True:
     Pd = fruit_price(df.loc[filtered_index,'red_fruits_weight'][-1])    
     df.loc[filtered_index,'gains'] = Pd / sum(plant_density_inverse)
     
+    # 추가
+    gain_value = df.loc[filtered_index, 'gains'][-1] * coeef
+    if gain_value < 0:
+        gain_value = 0
+
     # net profit
     df.loc[filtered_index,'net_profit'] = df.loc[filtered_index,'gains'] - df.loc[filtered_index,'total_cost']
-                
-    print("net profit : ", df.loc[filtered_index,'net_profit'][-1]*coeef, "gain : ", df.loc[filtered_index,'gains'][-1]*coeef, "total cost : ", df.loc[filtered_index,'total_cost'][-1]*coeef)
+
+    # print("net profit : ", df.loc[filtered_index,'net_profit'][-1]*coeef, "gain : ", df.loc[filtered_index,'gains'][-1]*coeef, "total cost : ", df.loc[filtered_index,'total_cost'][-1]*coeef)
+    
+    net_profit_value = df.loc[filtered_index,'net_profit'][-1]*coeef - df.loc[filtered_index, 'gains'][-1]*coeef - gain_value 
+    print("net profit : ", net_profit_value, "gain : ", gain_value, "total cost : ", df.loc[filtered_index,'total_cost'][-1]*coeef)
     
     
