@@ -11,8 +11,8 @@ import psycopg2
 from random import random
 from datetime import datetime, timedelta
 from psycopg2.extras import execute_values
-from aaaa.farm_math import datetime_to_int, fruit_price, get_simulation_setpoint
-from a_util.manual_parameter import heatingTemp, hours_light, max_iglob, ventOffset
+from aaaa.farm_math import datetime_to_int, fruit_price, get_simulation_setpoint , get_simulation_setpoint_light_time
+from a_util.manual_parameter import heatingTemp, hours_light, max_iglob, ventOffset, endTime, intensity
 from a_util.simulator.greenhouse import Greenhouse, get_day_data
 from a_util.simulator.simulator import send_server, json_parsing, sim_greenhouse, get_endDate_from_output
 from a_util.simulator.simulator import modify_temperature, modify_intensity, modify_hours_light
@@ -39,15 +39,12 @@ def run_simulator():
         config = yaml.safe_load(file)
         
     start_datetime = config['start_date']
-        
+    end_datetime = config['end_date']    
     
     if USE_NEW_TABLE:
         db_drop_table_if_exists(table_name = 'simulation')
         create_table_if_not_exists(table_name = 'simulation', query=create_simulation_table_query)
-        
-        start_datetime = config['start_date']
-        end_datetime = config['end_date']
-        
+                
         reference_csv_path = "./a_util/reference.csv"        
         df = pd.read_csv(reference_csv_path)
         column_rename = {
@@ -67,7 +64,7 @@ def run_simulator():
         
         db_data_insert(df=df, query=simulation_forcast_insert_query)
         
-        per_day(config=config)    
+    per_day(config=config)    
 
     lg_service = LetsgrowService()
     lg_simul_data = lg_service.data_from_db(config['start_date'], config['end_date'])
@@ -82,17 +79,12 @@ def run_simulator():
 
 
     ### modify setting point
-    # greenhouse_control.endDate = end_datetime.strftime("%d-%m-%Y")
-    greenhouse_control.endDate = "31-12-2023"
+    greenhouse_control.endDate = end_datetime.strftime("%d-%m-%Y")
+    # greenhouse_control.endDate = "31-12-2023"
     startDate = start_datetime.strftime("%d-%m-%Y")
     
     greenhouse_control.startDate = startDate
-    print(greenhouse_control.plantDensity)
-    greenhouse_control.plantDensity = "1 56; 32 42; 42 30; 52 20"
-    
-    #density list 만듬
-    density_list = generate_density_from_string(greenhouse_control.plantDensity, 200)
-
+    greenhouse_control.plantDensity = config['plant_density']
 
     ### set weather data and analysis 
     reference = json_parsing(response_json_path = Par_Out_reference)
@@ -101,13 +93,18 @@ def run_simulator():
     # greenhouse_control.device_illumination['lmp1'].intensity = 250
     
     heating_setpoint = get_simulation_setpoint(lg_simul_data['sp_heating_temp_setpoint_5min'],config['start_date'])
-    # vent_setpoint = get_simulation_setpoint(lg_simul_data['sp_vent_ilation_temp_setpoint_5min'],config['start_date'])
-
     greenhouse_control.device_setpoints['setpoints'].temp.heatingTemp = convert_key_from_start_date(heating_setpoint, startDate)
-    # greenhouse_control.device_setpoints['setpoints'].temp.ventOffset = convert_key_from_start_date(ventOffset, startDate)
-    # greenhouse_control.device_setpoints['setpoints'].temp.ventOffset = convert_key_from_start_date(vent_setpoint, startDate)
     
-    greenhouse_control.device_illumination['lmp1'].intensity = 200
+    vent_offset = get_simulation_setpoint(lg_simul_data['sp_vent_ilation_temp_setpoint_5min']-lg_simul_data['sp_heating_temp_setpoint_5min'],config['start_date'])
+    greenhouse_control.device_setpoints['setpoints'].temp.ventOffset = convert_key_from_start_date(vent_offset, startDate)
+    
+    greenhouse_control.device_illumination['lmp1'].intensity = config['base_LED_umol']
+    hours_light_temp, end_time = get_simulation_setpoint_light_time(lg_simul_data['sp_value_to_isii_1_5min'])
+    
+    greenhouse_control.device_illumination['lmp1'].end_time = end_time
+    # greenhouse_control.device_illumination['lmp1'].hours_light = convert_key_from_start_date(hours_light, startDate)
+    greenhouse_control.device_illumination['lmp1'].hours_light = hours_light_temp
+    
     # greenhouse_control.device_illumination['lmp1'].intensity = convert_key_from_start_date(heating_setpoint, startDate)
     # heatingTemp = copy.deepcopy(greenhouse_control.device_setpoints['setpoints'].temp.heatingTemp)
     # intensity = copy.deepcopy(greenhouse_control.device_illumination['lmp1'].intensity)

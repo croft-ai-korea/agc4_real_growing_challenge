@@ -12,7 +12,7 @@ from a_util.service.letsgrow_service_simul import LetsgrowService
 from aaaa.farm_math import sun_cal, get_DLI, datetime_to_int
 from aaaa.cost_cal import cost_calculate, greenhouse_const
 from a_util.letsgrow_const import LETSGROW_CONTROL
-
+from a_util.simulator.simulator import action_table_to_server_format, generate_density_from_string
 class GreenhouseControl:
     def __init__(self, config,lg_service, lg_simul_date, strategies:list, now = None):
         self.strategies = strategies
@@ -107,21 +107,9 @@ class GreenHouseInput:
                                    window=[0,self.now_int],
                                    energy_screen_array=self.indoor_env['sp_energy_screen_setpoint_5min'],
                                    black_out_screen_array=self.indoor_env['sp_blackout_screen_setpoint_5min']
-                                   )
-        self.density = [ 56,56,56,56,56,56,56,56,56,56,56,56,56,56,
-                    56,56,56,56,56,56,56,56,56,56,56,56,56,56,
-                    56,56,56,42,42,42,42,42,42,42,42,42,42,42,
-                    30,30,30,30,30,30,30,30,30,30,20,20,20,20,
-                    20,20,20,20,20,20,20,20,20,20,20,20,20,20,
-                    20,20,20,20,20,20,20,20,20,20,20,20,20,20,
-                    20,20,20,20,20,20,20,20,20,20,20,20,20,20,
-                    20,20,20,20,20,20,20,20,20,20,20,20,20,20,
-                    20,20,20,20,20,20,20,20,20,20,20,20,20,20,
-                    20,20,20,20,20,20,20,20,20,20,20,20,20,20,
-                    20,20,20,20,20,20,20,20,20,20,20,20,20,20,
-                    20,20,20,20,20,20,20,20,20,20,20,20,20,20,
-                    20,20,20,20,20,20,20,20,20,20,20,20,20,20,                    
-                    ]
+                                   )        
+        
+        self.density = generate_density_from_string(config['plant_density'], 200)
           
 
 

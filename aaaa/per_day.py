@@ -1,6 +1,7 @@
 import sys
 from datetime import datetime, timedelta
 import json
+import yaml
 import traceback
 import time
 
@@ -23,12 +24,16 @@ def per_day():
     except Exception as e:
         print("error: ", e)
         traceback.print_exc()
-        
-    now = datetime(2024,8,11,0,0,0)    # 특정 날자 세팅
+
+    config_path = "./a_util/env/config.yaml"
+    with open(config_path, 'r') as file:
+        config = yaml.safe_load(file)
+                
+    now = datetime(2024,8,17,0,0,0)    # 특정 날자 세팅
     # now = None   # 만약 오늘을 집어넣고 싶으면 today는 None으로 설정
         
-    greenhouse = GreenhouseControl(            
-        startdate=datetime(2024,7,15), 
+    greenhouse = GreenhouseControl(      
+        config=config,  
         strategies = [
                 base_strategy,
                 # temp_strategy,

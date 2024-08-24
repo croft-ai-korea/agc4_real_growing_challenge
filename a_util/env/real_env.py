@@ -12,25 +12,24 @@ from a_util.service.letsgrow_service import LetsgrowService
 from aaaa.farm_math import sun_cal, get_DLI, datetime_to_int
 from aaaa.cost_cal import cost_calculate, greenhouse_const
 from a_util.letsgrow_const import LETSGROW_CONTROL
-
-CONFIG_PATH = "./a_util/env/config.yaml"
+from a_util.simulator.simulator import generate_density_from_string
 
 class GreenhouseControl:
-    def __init__(self, startdate, strategies:list, now = None):
+    def __init__(self, config, strategies:list, now = None):
+        self.config = config
         self.strategies = strategies
         if now is None:
             self.now = datetime.now()
         else:
             self.now = now
         self.today = self.now.replace(hour=0, minute=0, second=0, microsecond=0)
-        
-        self.startdate = startdate
+        self.startdate = config['start_date']
         self.lg_service = LetsgrowService()
         self.indoor_env = self.lg_service.data_from_db_day(self.today)
         self.indoor_env_yesterday = self.lg_service.data_from_db_day(self.today-timedelta(days=1))
         self.plant_status = None
         
-        self.green_input = GreenHouseInput(config_path=CONFIG_PATH,
+        self.green_input = GreenHouseInput(config=self.config,
                                            startdate=self.startdate,
                                            indoor_env=self.indoor_env,
                                            indoor_env_yesterday=self.indoor_env_yesterday,
@@ -82,12 +81,13 @@ class GreenhouseControl:
         pass
 
 class GreenHouseInput:
-    def __init__(self, config_path, startdate, indoor_env, indoor_env_yesterday, plant_status, now):
+    def __init__(self, config, startdate, indoor_env, indoor_env_yesterday, plant_status, now):
         self.now = now 
         self.today = now.replace(hour=0, minute=0, second=0, microsecond=0)
         print(self.today)
         self.nthday = (self.today - startdate).days        
-        
+        self.config = config    
+
         self.indoor_env = indoor_env
         self.indoor_env_yesterday = indoor_env_yesterday
         self.plant_status = plant_status
@@ -97,31 +97,28 @@ class GreenHouseInput:
         self.rise_time_int = datetime_to_int(self.rise_time)
         self.set_time_int = datetime_to_int(self.set_time)
         self.now_int = datetime_to_int(self.now)
-                      
-        with open(config_path, 'r') as file:
-            self.parameters = yaml.safe_load(file)
             
         ## pre calculate data
         self.expected_DLI = get_DLI(self.indoor_env['fc_radiation_5min'],
-                                    transmittance=self.parameters["greenhouse_transmittance"],
+                                    transmittance=self.config["greenhouse_transmittance"],
                                     type="watt")
         self.current_DLI = get_DLI(self.indoor_env['outside_par_measurement_5min'],
-                                   transmittance=self.parameters["greenhouse_transmittance"],
+                                   transmittance=self.config["greenhouse_transmittance"],
                                    window=[0,self.now_int],
                                    energy_screen_array=self.indoor_env['sp_energy_screen_setpoint_5min'],
                                    black_out_screen_array=self.indoor_env['sp_blackout_screen_setpoint_5min']
                                    )
-        self.density = [ 56,56,56,56,56,56,56,56,56,56,56,56,56,56,
-                    56,56,56,56,56,56,56,56,56,56,56,56,56,56,
-                    56,56,56,42,42,42,42,42,42,42,42,42,42,42,
-                    30,30,30,30,30,30,30,30,30,30,20,20,20,20,
-                    20,20,20,20,20,20,20,20,20,20,20,20,20,20,
-                    20,20,20,20,20,20,20,20,20,20,20,20,20,20,
-                    20,20,20,20,20,20,20,20,20,20,20,20,20,20]
+        
+        self.density = generate_density_from_string(config['plant_density'], 200)
+        
+        # self.density = [ 56,56,56,56,56,56,56,56,56,56,56,56,56,56,
+        #             56,56,56,56,56,56,56,56,56,56,56,56,56,56,
+        #             56,56,56,42,42,42,42,42,42,42,42,42,42,42,
+        #             30,30,30,30,30,30,30,30,30,30,20,20,20,20,
+        #             20,20,20,20,20,20,20,20,20,20,20,20,20,20,
+        #             20,20,20,20,20,20,20,20,20,20,20,20,20,20,
+        #             20,20,20,20,20,20,20,20,20,20,20,20,20,20]
           
-
-
-
     def __str__(self) -> str:
         return F"""
         today => {self.today}

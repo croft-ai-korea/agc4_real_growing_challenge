@@ -69,14 +69,24 @@ ventOffset = {
 # }
 
 hours_light = {
-    0 : 0,
-    45 : 16
+    0 : 8,
+    45 : 8
 }
 
 max_iglob = {
     0 : 10,
     24 : 10,
     44 : 10    
+}
+
+endTime = {
+    0 : 20,
+    24 : 14
+}
+
+intensity = {
+    0 : 100,
+    30 : 50
 }
 
 # vent_set = 10

@@ -5,7 +5,7 @@ from datetime import timedelta, datetime
 import pandas as pd
 import numpy as np
 from a_util.env.real_env import GreenHouseInput, GreenHouseOutput
-from aaaa.farm_math import sun_cal, get_DLI, datetime_to_int, get_peakTime
+from aaaa.farm_math import sun_cal, get_DLI, datetime_to_int, get_peakTime, calc_irrigation_time_with_DLI
 import json
 import os
 
@@ -134,7 +134,10 @@ def base_strategy(_in: GreenHouseInput, _out: GreenHouseOutput):
       
     """
     _out.setting_point['sp_co2_setpoint_ppm_5min']  = 300
-    _out.setting_point['sp_co2_setpoint_ppm_5min'][_in.set_time_int-3*12:_in.set_time_int+2*12] = 500
+    if _in.today <= datetime(2023,9,22):
+      _out.setting_point['sp_co2_setpoint_ppm_5min'][_in.set_time_int-3*12:_in.set_time_int+2*12] = 550
+    else:
+      _out.setting_point['sp_co2_setpoint_ppm_5min'][_in.set_time_int-3*12:_in.set_time_int+2*12] = 800         
 
     """
     hd setting

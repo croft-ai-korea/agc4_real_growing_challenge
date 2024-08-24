@@ -12,6 +12,9 @@ base_LED_umol : 100
 
 
 # 2021~2023
-transplant_date : 2023-09-05 00:00:00
-start_date : 2023-09-05 00:00:00
-end_date : 2023-12-31 00:00:00
+transplant_date : 2024-08-05 00:00:00
+start_date : 2024-08-05 00:00:00
+end_date : 2024-12-31 00:00:00
+
+
+plant_density : "1 56; 32 42; 42 30; 52 20"

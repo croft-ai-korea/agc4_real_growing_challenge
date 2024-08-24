@@ -47,27 +47,81 @@ def wsm_to_jcm2_day(rad_array: Any):
 def jcm2_to_molm2_day(jcm_var):
     return jcm_var * 0.0215
 
-def get_simulation_setpoint(array, start_date):
+def get_simulation_setpoint_hour(array, start_date):
     # 데이터를 1시간 단위로 리샘플링
     hourly_data = array.resample('H').mean()
 
     # heatingTemp 딕셔너리 생성
-    heatingTemp = {}
+    setting_points = {}
 
     # 데이터를 원하는 포맷으로 변환
     for idx, (timestamp, value) in enumerate(hourly_data.items()):  # 변경된 부분
         days_since_start = (timestamp.date() - start_date.date()).days
         
-        if days_since_start not in heatingTemp:
-            heatingTemp[days_since_start] = {}
+        if days_since_start not in setting_points:
+            setting_points[days_since_start] = {}
         
         hour = timestamp.hour
-        heatingTemp[days_since_start][str(hour)] = value
+        setting_points[days_since_start][str(hour)] = value
 
     # # 결과 출력 (JSON 형식으로)
     # heatingTemp_json = json.dumps(heatingTemp, indent=4)
     
-    return heatingTemp
+    return setting_points
+
+def get_simulation_setpoint(array, start_date):
+    # 데이터를 1시간 단위로 리샘플링
+    hourly_data = array.resample('H').mean()
+
+    # heatingTemp 딕셔너리 생성
+    setting_points = {}
+
+    # 데이터를 원하는 포맷으로 변환
+    for idx, (timestamp, value) in enumerate(hourly_data.items()):  # 변경된 부분
+        days_since_start = (timestamp.date() - start_date.date()).days
+        
+        if days_since_start not in setting_points:
+            setting_points[days_since_start] = {}
+        
+        hour = timestamp.hour
+        setting_points[days_since_start][str(hour)] = value
+
+    # # 결과 출력 (JSON 형식으로)
+    # heatingTemp_json = json.dumps(heatingTemp, indent=4)
+    
+    return setting_points
+
+
+def get_simulation_setpoint_light_time(series):
+    # 데이터를 1시간 단위로 리샘플링
+    df = series.resample('H').mean()
+    df = df.to_frame(name='value')
+    df['date'] = df.index.strftime("%d-%m")      
+    
+    # heatingTemp 딕셔너리 생성
+    end_time = {}    
+    hours_light = {}    
+    
+    # Group by each day
+    for date, group in df.groupby('date', sort=False):
+
+        non_zero_indices = group[group['value'] != 0].index
+        if not non_zero_indices.empty:
+            start_hour = non_zero_indices[0].hour
+            end_hour = non_zero_indices[-1].hour
+            
+            end_time[date] = end_hour
+            hours_light[date] = end_hour-start_hour
+                                
+    return hours_light, end_time
+
+def calc_irrigation_time_with_DLI(light_array:Any):
+    
+    
+    print("ok")
+    pass
+
+
 
 def get_DLI(light_array:Any, 
             interval:int = 5, 
