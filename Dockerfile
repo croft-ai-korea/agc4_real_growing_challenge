@@ -45,7 +45,7 @@ ENV     timescale_host=timescaledb
 ENV     timescale_port=5432
 
 ENV     letsgrow_username=Agrifusion
-ENV     letsgrow_password=78G$dV32La
+ENV     letsgrow_password=78G\$dV32La
 ENV     letsgrow_endpoint=https://api.letsgrow.com/
 ENV     letsgrow_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZ3JpZnVzaW9uIiwianRpIjoiMTYzZDFhMzUtMzhlYS00NmIyLTg5MWItYjAyYzVlZjE2ZDkyIiwiaWF0IjoiMDgvMDQvMjAyNCAwNzoxMTo1NiIsImV4cCI6MTcyMjg0MTkxNiwiaXNzIjoiTGV0c0dyb3ciLCJhdWQiOiJMZXRzR3JvdyJ9.SbFQ-OtOtKPrMjgbXGGZVha_tPk2qO5d7OEkPDQr1bo
 
