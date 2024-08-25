@@ -28,11 +28,12 @@ RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
 WORKDIR /app
 
 # Add the Python script
-COPY strategy_5min_test.py /app/strategy_5min_test.py
-COPY strategy_day_test.py /app/strategy_day_test.py
-COPY scheduler.config.js /app/scheduler.config.js
-COPY sample_code.py /app/sample_code.py
-COPY final_challenge /app/final_challenge
+COPY . /app
+#COPY strategy_5min_test.py /app/strategy_5min_test.py
+#COPY strategy_day_test.py /app/strategy_day_test.py
+#COPY scheduler.config.js /app/scheduler.config.js
+#COPY sample_code.py /app/sample_code.py
+#COPY final_challenge /app/final_challenge
 
 # Run the Python script at container startup and prevent the container from stopping
 CMD ["sh", "-c", "pm2 start scheduler.config.js && tail -f /dev/null"]
