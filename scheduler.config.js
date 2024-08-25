@@ -1,18 +1,20 @@
 module.exports = {
     apps: [
       {
-        name: "stragety_day",
+        name: "per_5min",
         script: "python3",
-        args: "strategy_day_test.py",
-        cron_restart: "0 0 * * *", // Run at midnight
-        restart_delay : 60000
+        args: "aaaa/per_5min.py",
+        cron_restart: "*/5 * * * *", // Run every 5  minutes
+        restart_delay : 60000,
+        watch: true
       },
       {
         name: "stragety_5min",
         script: "python3",
-        args: "strategy_5min_test.py",
-        cron_restart: "*/1 * * * *", // Run every 1 minutes
-        restart_delay : 60000
+        args: "aaaa/per_day.py",
+        cron_restart: "10 0 * * *", // Run every day
+        restart_delay : 60000,
+        watch: true
       }
     ]
   };

@@ -2,11 +2,25 @@ version: '3.7'
 
 services:
   ai_greenhouse_climate_controller:
-    image: agrifusion:1.0
+#    image: agrifusion:1.0
+    image: agri:1.1
     container_name : agrifusion
+    environment:
+      - timescale_db=postgres
+      - timescale_user=postgres
+      - timescale_password=admin1234
+      - timescale_host=timescaledb
+      - timescale_port=5432
+      - letsgrow_username=Agrifusion
+      - letsgrow_password=78G$dV32La
+      - letsgrow_endpoint=https://api.letsgrow.com/
+      - letsgrow_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZ3JpZnVzaW9uIiwianRpIjoiMTYzZDFhMzUtMzhlYS00NmIyLTg5MWItYjAyYzVlZjE2ZDkyIiwiaWF0IjoiMDgvMDQvMjAyNCAwNzoxMTo1NiIsImV4cCI6MTcyMjg0MTkxNiwiaXNzIjoiTGV0c0dyb3ciLCJhdWQiOiJMZXRzR3JvdyJ9.SbFQ-OtOtKPrMjgbXGGZVha_tPk2qO5d7OEkPDQr1bo
+
     volumes:
       -  /fileshare/data:/mnt/data
     restart: always
+    depends_on:
+      - timescaledb
 
   timescaledb:
     image: timescale/timescaledb:latest-pg12
@@ -22,27 +36,27 @@ services:
     restart: always
     command: -c ssl=off  # SSL을 비활성화
 
-  grafana:
-    image: grafana/grafana:latest
-    container_name: grafana
-    ports:
-      - "3000:3000"
-    environment:
-      - GF_SECURITY_ADMIN_PASSWORD=croft1!
-      - GF_SECURITY_ADMIN_USER=croft
-    depends_on:
-      - timescaledb
-    restart: always
-    volumes:
-      - /mnt/data/AGC_data/grafana_data:/var/lib/grafana
-      - /mnt/data/AGC_data/grafana_provisioning:/etc/grafana/provisioning
-
-  pgadmin:
-    image: dpage/pgadmin4:8.0
-    container_name: pgadmin
-    restart: always
-    environment:
-      - PGADMIN_DEFAULT_EMAIL=callin2@gmail.com
-      - PGADMIN_DEFAULT_PASSWORD=admin1234!@
-    ports:
-      - 50003:80
+#  grafana:
+#    image: grafana/grafana:latest
+#    container_name: grafana
+#    ports:
+#      - "3003:3000"
+#    environment:
+#      - GF_SECURITY_ADMIN_PASSWORD=croft1!
+#      - GF_SECURITY_ADMIN_USER=croft
+#    depends_on:
+#      - timescaledb
+#    restart: always
+#    volumes:
+#      - /mnt/data/AGC_data/grafana_data:/var/lib/grafana
+#      - /mnt/data/AGC_data/grafana_provisioning:/etc/grafana/provisioning
+#
+#  pgadmin:
+#    image: dpage/pgadmin4:8.0
+#    container_name: pgadmin
+#    restart: always
+#    environment:
+#      - PGADMIN_DEFAULT_EMAIL=callin2@gmail.com
+#      - PGADMIN_DEFAULT_PASSWORD=admin1234!@
+#    ports:
+#      - 50003:80

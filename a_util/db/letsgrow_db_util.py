@@ -3,7 +3,6 @@ from datetime import datetime, timedelta
 from typing import List, Any
 
 import pandas as pd
-import json
 
 warnings.simplefilter(action='ignore', category=Warning)
 pd.reset_option('all')
