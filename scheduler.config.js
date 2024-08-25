@@ -9,7 +9,7 @@ module.exports = {
         watch: true
       },
       {
-        name: "stragety_5min",
+        name: "per_day",
         script: "python3",
         args: "aaaa/per_day.py",
         cron_restart: "10 0 * * *", // Run every day

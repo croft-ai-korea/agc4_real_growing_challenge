@@ -19,7 +19,9 @@ sudo docker-compose up -d
 ```
 sudo docker exec -it agrifusion /bin/bash
 pm2 list
-pm2 logs stragety_5min
+pm2 logs per_5min
+
+
 ```
 
 ## after first build

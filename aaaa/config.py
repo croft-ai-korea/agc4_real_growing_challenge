@@ -14,7 +14,8 @@ timescale_port = os.getenv('timescale_port', 5432)
 
 # lets grow api 호출하는데 필요한 정보
 letsgrow_username = os.getenv('letsgrow_username', 'Agrifusion')
-letsgrow_password = os.getenv('letsgrow_password', '78G$dV32La')
+# letsgrow_password = os.getenv('letsgrow_password', '78G$dV32La')
+letsgrow_password =  '78G$dV32La'
 letsgrow_endpoint = os.getenv('letsgrow_endpoint', 'https://api.letsgrow.com/')
 letsgrow_token = os.getenv('letsgrow_token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZ3JpZnVzaW9uIiwianRpIjoiMTYzZDFhMzUtMzhlYS00NmIyLTg5MWItYjAyYzVlZjE2ZDkyIiwiaWF0IjoiMDgvMDQvMjAyNCAwNzoxMTo1NiIsImV4cCI6MTcyMjg0MTkxNiwiaXNzIjoiTGV0c0dyb3ciLCJhdWQiOiJMZXRzR3JvdyJ9.SbFQ-OtOtKPrMjgbXGGZVha_tPk2qO5d7OEkPDQr1bo')
 
