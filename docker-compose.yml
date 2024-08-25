@@ -2,8 +2,10 @@ version: '3.7'
 
 services:
   ai_greenhouse_climate_controller:
-#    image: agrifusion:1.0
-    image: agri:1.1
+#    image: agrifusion:1.1
+    build:
+      context: .  # The directory containing the Dockerfile
+      dockerfile: Dockerfile  # Opt
     container_name : agrifusion
     environment:
       - timescale_db=postgres
@@ -32,7 +34,8 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - /mnt/data/AGC_data/timescale_data:/var/lib/postgresql/data
+      - ./tsdbdata:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     restart: always
     command: -c ssl=off  # SSL을 비활성화
 

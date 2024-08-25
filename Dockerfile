@@ -1,37 +1,34 @@
 # Use Ubuntu 22.04 as the base image
 #FROM ubuntu:22.04
-#FROM python:3.9-bullseye
-FROM agri:1.0
+FROM python:3.9-bullseye
 
 
 RUN python -m pip install --upgrade pip
 
-## Update and install necessary packages
-#RUN apt-get update && apt-get install -y \
-#    curl \
-#    libpq-dev \
-#    && rm -rf /var/lib/apt/lists/*
-#
-## Install Python packages
+# Update and install necessary packages
+RUN apt-get update && apt-get install -y \
+    curl \
+    libpq-dev \
+    && rm -rf /var/lib/apt/lists/*
 
-#RUN pip3 install --no-cache-dir \
+# Install Python packages
 
-#    pandas \
-#    plotly \
-#    pyyaml \
-#    torch \
-#    requests \
-#    numpy \
-#    matplotlib \
-#    psycopg2-binary
-#
-## Install Node.js and PM2
-#RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
-#    && apt-get install -y nodejs \
-#    && npm install -g pm2
+RUN pip3 install --no-cache-dir \
+    pandas \
+    plotly \
+    pyyaml \
+    torch \
+    requests \
+    numpy \
+    matplotlib \
+    psycopg2-binary
+
+# Install Node.js and PM2
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
+    && apt-get install -y nodejs \
+    && npm install -g pm2
 
 RUN pip3 install --no-cache-dir  plotly pyyaml matplotlib
-
 
 # Set the working directory
 WORKDIR /app
