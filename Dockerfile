@@ -34,7 +34,7 @@ RUN pip3 install --no-cache-dir  plotly pyyaml matplotlib
 WORKDIR /app
 
 # Add the Python script
-COPY . /app
+#COPY . /app
 
 ENV PYTHONPATH=/app
 
