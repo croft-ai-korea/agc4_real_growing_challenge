@@ -214,7 +214,7 @@ class LetsgrowDao:
                     from measure
                     where outside_temperature_5min is not null
                     union
-                    select now() - interval '4 hour' as tm
+                    select (now() at time zone 'Europe/Amsterdam') - interval '0 hour' as tm
                 ) tbl
             '''
         return db_select_one(from_date_sql)

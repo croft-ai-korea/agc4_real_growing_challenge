@@ -1,6 +1,7 @@
 import sys
 from datetime import datetime, timedelta
 import traceback
+import pytz
 
 import pandas as pd
 import numpy as np
@@ -19,14 +20,14 @@ class GreenhouseControl:
         self.config = config
         self.strategies = strategies
         if now is None:
-            self.now = datetime.now()
+            self.now = datetime.now(pytz.timezone('Europe/Amsterdam')).replace(tzinfo=None)
         else:
             self.now = now
         self.today = self.now.replace(hour=0, minute=0, second=0, microsecond=0)
         self.startdate = config['start_date']
-        self.lg_service = LetsgrowService()
-        self.indoor_env = self.lg_service.data_from_db_day(self.today)
-        self.indoor_env_yesterday = self.lg_service.data_from_db_day(self.today-timedelta(days=1))
+        self.lg_service = LetsgrowService()        
+        self.indoor_env = self.get_data_5min(self.today)
+        self.indoor_env_yesterday = self.get_data_5min(self.today-timedelta(days=1))
         self.plant_status = None
         
         self.green_input = GreenHouseInput(config=self.config,
@@ -38,6 +39,24 @@ class GreenhouseControl:
         self.green_out = GreenHouseOutput(today=self.today)
        
         # self.green_cost = cost_calculate(self.green_input,self.density)
+    
+    def get_data_5min(self, date : datetime):
+        df = self.lg_service.data_from_db_day(date)
+
+        # 시작과 끝 시간을 가져옴
+        start_time = df.index[0]
+        end_time = df.index[-1]
+
+        # 인덱스를 5분 간격으로 다시 생성
+        new_index = pd.date_range(start=start_time, end=end_time.replace(hour=23, minute=55), freq='5T')
+
+        # 기존 데이터프레임을 새로운 인덱스에 맞춰 리샘플링 및 보간
+        df_resampled = df.reindex(new_index)
+        df_resampled = df_resampled.interpolate(method='linear')
+
+        # NaN값을 기존 데이터인 None으로 변경
+        df_resampled = df_resampled.applymap(lambda x: None if pd.isna(x) else x)
+        return df_resampled
       
     def get_greenhouse_data_to_db(self):
         """
@@ -102,12 +121,19 @@ class GreenHouseInput:
         self.expected_DLI = get_DLI(self.indoor_env['fc_radiation_5min'],
                                     transmittance=self.config["greenhouse_transmittance"],
                                     type="watt")
-        self.current_DLI = get_DLI(self.indoor_env['outside_par_measurement_5min'],
-                                   transmittance=self.config["greenhouse_transmittance"],
-                                   window=[0,self.now_int],
-                                   energy_screen_array=self.indoor_env['sp_energy_screen_setpoint_5min'],
-                                   black_out_screen_array=self.indoor_env['sp_blackout_screen_setpoint_5min']
-                                   )
+        
+        try : 
+            self.current_DLI = get_DLI(self.indoor_env['outside_par_measurement_5min'],
+                                    transmittance=self.config["greenhouse_transmittance"],
+                                    window=[0,self.now_int],
+                                    energy_screen_array=self.indoor_env['sp_energy_screen_setpoint_5min'],
+                                    black_out_screen_array=self.indoor_env['sp_blackout_screen_setpoint_5min']
+                                    )
+        except Exception as e:
+            # 예외 발생 시 전체 traceback을 출력합니다.
+            print("An error calculate current DLI. so current_DLI set None.")
+            print("If current_DLI is None, you should modify the code as there is an issue. otherwise, ignore the error.")
+            traceback.print_exc()
         
         self.density = generate_density_from_string(config['plant_density'], 200)
         

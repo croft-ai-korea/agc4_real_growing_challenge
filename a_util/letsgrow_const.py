@@ -11,6 +11,10 @@ COLID_MAP_NAME = {
     'sp_co2_setpoint_ppm_5min':2607128,
     'sp_humidity_deficit_setpoint_5min':2607132,
     'sp_irrigation_interval_time_setpoint_min_5min':2607136,    
+    'par1_5min' : 2671498,
+    'par1' : 2671499,
+    'par1_day' : 2671500,
+    'par1_night' : 2671501,   
     'temperature_greenhouse_5min':2607258,
     'temperature_greenhouse':2607259,
     'temperature_greenhouse_day':2607260,
@@ -450,6 +454,7 @@ LETSGROW_CONTROL = [
 ]
 
 LETSGROW_INSIDE = [
+    'par1_5min',
     'temperature_greenhouse_5min',
     'rh_greenhouse_5min',
     'co2_greenhouse_ppm_5min',

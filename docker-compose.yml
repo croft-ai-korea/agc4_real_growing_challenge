@@ -55,12 +55,12 @@ services:
 #      - /mnt/data/AGC_data/grafana_data:/var/lib/grafana
 #      - /mnt/data/AGC_data/grafana_provisioning:/etc/grafana/provisioning
 #
-#  pgadmin:
-#    image: dpage/pgadmin4:8.0
-#    container_name: pgadmin
-#    restart: always
-#    environment:
-#      - PGADMIN_DEFAULT_EMAIL=callin2@gmail.com
-#      - PGADMIN_DEFAULT_PASSWORD=admin1234!@
-#    ports:
-#      - 50003:80
+  pgadmin:
+    image: dpage/pgadmin4:8.0
+    container_name: pgadmin
+    restart: always
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=callin2@gmail.com
+      - PGADMIN_DEFAULT_PASSWORD=admin1234!@
+    ports:
+      - 50003:80

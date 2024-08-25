@@ -169,11 +169,11 @@ def db_data_insert(df:pd.DataFrame, query):
             pool.putconn(conn)
         
 if __name__ == "__main__":
-    # db_drop_table_if_exists(table_name = 'measure')
-    # create_table_if_not_exists(table_name='measure', query=create_measure_table_query)
+    db_drop_table_if_exists(table_name = 'measure')
+    create_table_if_not_exists(table_name='measure', query=create_measure_table_query)
     
-    db_drop_table_if_exists(table_name = 'simulation')
-    create_table_if_not_exists(table_name='simulation', query=create_simulation_table_query)
+    # db_drop_table_if_exists(table_name = 'simulation')
+    # create_table_if_not_exists(table_name='simulation', query=create_simulation_table_query)
     
     # db_drop_table_if_exists('measure')
 

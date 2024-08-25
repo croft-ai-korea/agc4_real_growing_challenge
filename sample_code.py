@@ -28,8 +28,8 @@ def get_module_ids(token:str):
         }, 
     ).json()
     
-    for module in response: 
-        print(module)
+    # for module in response: 
+    #     print(module)
     
     return response
 
@@ -172,7 +172,7 @@ if __name__ == "__main__":
     result = get_module_ids(token)
     
     moduleId = 68112
-    moduleId = 69296
+    # moduleId = 69296
     
     result2 = get_collectionId(token, moduleId)
     
@@ -181,6 +181,9 @@ if __name__ == "__main__":
     
     start_date = datetime(2024,8,10,0,0,0)
     end_date = datetime(2024,8,22,0,0,0)
+    
+    for item in result2['ModuleItems']:
+        print(f"'{item['Description']}' : {item['ColId']}")
     
     result3 = get_data(token,
                         moduleId,

@@ -29,8 +29,8 @@ def per_day():
     with open(config_path, 'r') as file:
         config = yaml.safe_load(file)
                 
-    now = datetime(2024,8,17,0,0,0)    # 특정 날자 세팅
-    # now = None   # 만약 오늘을 집어넣고 싶으면 today는 None으로 설정
+    # now = datetime(2024,8,17,0,0,0)    # 특정 날자 세팅
+    now = None   # 만약 오늘을 집어넣고 싶으면 today는 None으로 설정
         
     greenhouse = GreenhouseControl(      
         config=config,  
