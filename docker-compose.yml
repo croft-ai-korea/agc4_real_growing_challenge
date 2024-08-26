@@ -34,8 +34,8 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - /mnt/data/AGC_data/timescale_data:/var/lib/postgresql/data
-#      - ./tsdbdata:/var/lib/postgresql/data
+      # - /mnt/data/AGC_data/timescale_data:/var/lib/postgresql/data
+      - ./tsdbdata:/var/lib/postgresql/data
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     restart: always
     command: -c ssl=off  # SSL을 비활성화
