@@ -12,8 +12,8 @@ from a_util.service.letsgrow_service import LetsgrowService
 def per_5min() -> None:
     lservice = LetsgrowService()
     
-    from_date = lservice.get_latest_date()
-    # from_date = datetime(2024,8,20,0,0,0)
+    # from_date = lservice.get_latest_date()
+    from_date = datetime(2024,8,26,0,0,0)
     lservice.letsgrow_to_db_day(from_date.replace(hour=0, minute=0, second=0, microsecond=0)) 
     lservice.letsgrow_to_db_day(from_date)     
     

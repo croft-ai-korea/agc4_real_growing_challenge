@@ -20,18 +20,23 @@ def base_strategy(_in: GreenHouseInput, _out: GreenHouseOutput):
     heating/venting temp setting
     - with light max 30 degree 
     - setting
-      - veg 
-        - light : heat 19, vent 20
-        - no light : heat 18, vent 19
-      - generative
-        - light : heat 21, vent 22
-        - no light : heat 17, vent 18  
+        - veg 
+            - light : heat 19, vent 20
+            - no light : heat 18, vent 19
+        - generative
+            - light : heat 21, vent 22
+            - no light : heat 17, vent 18 
+        
     """
-
-    _out.setting_point['sp_heating_temp_setpoint_5min'] = [18]*288
-    _out.setting_point['sp_heating_temp_setpoint_5min'][_in.rise_time_int:_in.set_time_int] = 19
-    _out.setting_point['sp_vent_ilation_temp_setpoint_5min'] = _out.setting_point['sp_heating_temp_setpoint_5min']+1
-
+    # if (_in.now > datetime(2024,10,10,0,0,0)) and (_in.now < datetime(2024,11,2,0,0,0)):
+    if _in.now < datetime(2024,9,22,0,0,0):
+        _out.setting_point['sp_heating_temp_setpoint_5min'] = [18]*288
+        _out.setting_point['sp_heating_temp_setpoint_5min'][_in.rise_time_int:_in.set_time_int] = 19
+        _out.setting_point['sp_vent_ilation_temp_setpoint_5min'] = _out.setting_point['sp_heating_temp_setpoint_5min']+1
+    else:
+        _out.setting_point['sp_heating_temp_setpoint_5min'] = [17]*288
+        _out.setting_point['sp_heating_temp_setpoint_5min'][_in.rise_time_int:_in.set_time_int] = 21
+        _out.setting_point['sp_vent_ilation_temp_setpoint_5min'] = _out.setting_point['sp_heating_temp_setpoint_5min']+1        
     """
     energy screen 
       [october 10/10]
@@ -71,7 +76,14 @@ def base_strategy(_in: GreenHouseInput, _out: GreenHouseOutput):
       
     """
     _out.setting_point['sp_value_to_isii_1_5min'] = [0]*288
-    DLI_need = _in.config['base_target_DLI'] - _in.expected_DLI
+    expected_DLI = get_DLI( _in.indoor_env['fc_radiation_5min'],
+                            type="watt",
+                            transmittance=_in.config["greenhouse_transmittance"],
+                            window=[0,287],
+                            energy_screen_array=_in.indoor_env['sp_energy_screen_setpoint_5min']
+                            )
+ 
+    DLI_need = _in.config['base_target_DLI'] - expected_DLI
     if DLI_need > 0:
         LED_time_per_5min = ((DLI_need * 1e6) / (_in.config['base_LED_umol']*60))//5
         
@@ -90,14 +102,14 @@ def base_strategy(_in: GreenHouseInput, _out: GreenHouseOutput):
             led_end_time_int = datetime_to_int(datetime(2000,1,1,11,0,0))
         
         _out.setting_point['sp_value_to_isii_1_5min'][led_start_time_int:led_end_time_int] = _in.config['base_LED_umol']            
-     
+    else:
+        _out.setting_point['sp_value_to_isii_1_5min'] = [0]*288 
     """
     screen setting
     at night, if led is on, then use blackout screen
     
     """
-    _out.setting_point['sp_blackout_screen_setpoint_5min'] = [0]*288
-    
+    _out.setting_point['sp_blackout_screen_setpoint_5min'] = [0]*288    
     _out.setting_point['sp_blackout_screen_setpoint_5min'][_out.setting_point['sp_value_to_isii_1_5min']>0] = 95
     _out.setting_point['sp_blackout_screen_setpoint_5min'][_in.rise_time_int:_in.set_time_int] = 0
 
@@ -152,6 +164,7 @@ def base_strategy(_in: GreenHouseInput, _out: GreenHouseOutput):
         2. stage 1: every 1 mol light accumulate 5ml 
         3. stage 2-3: every 1 mol accumulate 8.3ml
         
+        EC 기준
             1) stage 1: 2
             2) stage 2-3: 3
             3) stage 4: 5
@@ -169,6 +182,8 @@ def base_strategy(_in: GreenHouseInput, _out: GreenHouseOutput):
         _out.setting_point['sp_irrigation_interval_time_setpoint_min_5min'][led_start_time_int] = 4
     else:
         _out.setting_point['sp_irrigation_interval_time_setpoint_min_5min'][_in.set_time_int] = 4
+
+    _out.setting_point['shot_number'] = 1
     
     ## to-do 
     # 4 mol light -> one shot    
@@ -182,10 +197,22 @@ def base_strategy(_in: GreenHouseInput, _out: GreenHouseOutput):
        humidity rule.. 
        depth image -> height sensing 
        using given date 
+
+      56 : 적산온도 0~342
+      42 : 적산온도 343~427
+      30 : 적산온도 428~577
+      20 : 적산온도 578~
           
     """    
-    _out.setting_point['sp_plantdensity'] = [_in.density[_in.nthday]]*288
-
+    if _in.indoor_env['accumulate_temperature'] < 342 or _in.indoor_env['accumulate_temperature'][-1] is None:
+        _out.setting_point['sp_plantdensity'] = [56]*288
+    elif _in.indoor_env['accumulate_temperature'] < 427:
+        _out.setting_point['sp_plantdensity'] = [42]*288
+    elif _in.indoor_env['accumulate_temperature'] < 577:
+        _out.setting_point['sp_plantdensity'] = [30]*288
+    else:
+        _out.setting_point['sp_plantdensity'] = [20]*288
+        
     """
     harvest setting
     """ 

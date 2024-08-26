@@ -12,7 +12,7 @@ from a_util.service.letsgrow_service import LetsgrowService
 
 from aaaa.farm_math import sun_cal, get_DLI, datetime_to_int
 from aaaa.cost_cal import cost_calculate, greenhouse_const
-from a_util.letsgrow_const import LETSGROW_CONTROL
+from a_util.letsgrow_const import LETSGROW_CONTROL, LETSGROW_CONTROL_WITH_EXTRA_PARAM
 from a_util.simulator.simulator import generate_density_from_string
 
 class GreenhouseControl:
@@ -28,6 +28,48 @@ class GreenhouseControl:
         self.lg_service = LetsgrowService()        
         self.indoor_env = self.get_data_5min(self.today)
         self.indoor_env_yesterday = self.get_data_5min(self.today-timedelta(days=1))
+
+        # 어제의 적산온도를 반영
+        if self.indoor_env_yesterday['accumulate_temperature'][-1] is None:
+            self.indoor_env['accumulate_temperature'] = 0
+        else:
+            temp_average = sum(self.indoor_env_yesterday['temperature_greenhouse_5min'])/len(self.indoor_env_yesterday['temperature_greenhouse_5min'])
+            self.indoor_env['accumulate_temperature'] = self.indoor_env_yesterday['accumulate_temperature'][-1] + temp_average
+        """
+        - 1st stage : 4 Sep ~ 18 Sep
+        - 2nd stage : 18 Sep ~ 22 Sep
+        - 3rd stage : 22 Sep ~ 29 Sep
+        - 4th stage : 29 Sep - 9 Oct
+        - 5th stage : 9 October - 9 November
+
+        irrigation setting
+        => sh
+        1. everyday when light on, trigger
+        2. stage 1: every 1 mol light accumulate 5ml 
+        3. stage 2-3: every 1 mol accumulate 8.3ml
+        
+        EC 기준
+            1) stage 1: 2
+            2) stage 2-3: 3
+            3) stage 4: 5
+        4. ave daily ec is lower - next day every 1 mol light accumulate -1ml
+        5. ave daily ec is higher or no drain - next day every 1 mol light accumulate +1ml
+        => move to per_hour stategy
+    
+        every 20ml trigger
+        
+        reset light sum value to 0 at midnight
+        """
+
+        # EC에 따른 물 공급 반영
+        if self.today < datetime(2024,9,19):
+            self.indoor_env['irrigation_ml'] = 5
+        else:
+            self.indoor_env['irrigation_ml'] = 8.3
+
+        
+        # shot number 초기화
+
         self.plant_status = None
         
         self.green_input = GreenHouseInput(config=self.config,
@@ -117,23 +159,16 @@ class GreenHouseInput:
         self.set_time_int = datetime_to_int(self.set_time)
         self.now_int = datetime_to_int(self.now)
             
-        ## pre calculate data
-        self.expected_DLI = get_DLI(self.indoor_env['fc_radiation_5min'],
-                                    transmittance=self.config["greenhouse_transmittance"],
-                                    type="watt")
+        # self.expected_DLI = get_DLI(self.indoor_env['fc_radiation_5min'],
+        #                             transmittance=self.config["greenhouse_transmittance"],
+        #                             type="watt")
         
-        try : 
-            self.current_DLI = get_DLI(self.indoor_env['outside_par_measurement_5min'],
-                                    transmittance=self.config["greenhouse_transmittance"],
-                                    window=[0,self.now_int],
-                                    energy_screen_array=self.indoor_env['sp_energy_screen_setpoint_5min'],
-                                    black_out_screen_array=self.indoor_env['sp_blackout_screen_setpoint_5min']
-                                    )
-        except Exception as e:
-            # 예외 발생 시 전체 traceback을 출력합니다.
-            print("An error calculate current DLI. so current_DLI set None.")
-            print("If current_DLI is None, you should modify the code as there is an issue. otherwise, ignore the error.")
-            traceback.print_exc()
+        # self.current_DLI = get_DLI(self.indoor_env['outside_par_measurement_5min'],
+        #                             transmittance=self.config["greenhouse_transmittance"],
+        #                             window=[0,self.now_int],
+        #                             energy_screen_array=self.indoor_env['sp_energy_screen_setpoint_5min'],
+        #                             black_out_screen_array=self.indoor_env['sp_blackout_screen_setpoint_5min']
+        #                             )
         
         self.density = generate_density_from_string(config['plant_density'], 200)
         
@@ -169,7 +204,7 @@ class GreenHouseOutput:
 
     def plant_model_init(self,today):
         index = pd.date_range(today, periods=288, freq='5min')
-        columns = LETSGROW_CONTROL
+        columns = LETSGROW_CONTROL_WITH_EXTRA_PARAM
         return pd.DataFrame(index=index, columns=columns)
 
     def __str__(self) -> str:

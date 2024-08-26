@@ -215,6 +215,10 @@ FORCAST_MODULE_ID = '14822'
     
 LETSGROW_MOD_COLS_MAP = {
     '68112' : [
+        '2671498',
+        '2671499',
+        '2671500',
+        '2671501',
         '2607098',
         '2607099',
         '2607258',
@@ -450,8 +454,26 @@ LETSGROW_CONTROL = [
     'sp_blackout_screen_setpoint_5min',
     'sp_co2_setpoint_ppm_5min',
     'sp_humidity_deficit_setpoint_5min',
-    'sp_irrigation_interval_time_setpoint_min_5min'
+    'sp_irrigation_interval_time_setpoint_min_5min',
 ]
+
+LETSGROW_CONTROL_WITH_EXTRA_PARAM = [
+    'sp_plantdensity',
+    'sp_day_of_harvest_day_number',
+    'sp_heating_temp_setpoint_5min',
+    'sp_vent_ilation_temp_setpoint_5min',
+    'sp_leeside_minvent_position_setpoint_5min',
+    'sp_net_pipe_minimum_setpoint_5min',
+    'sp_value_to_isii_1_5min',
+    'sp_energy_screen_setpoint_5min',
+    'sp_blackout_screen_setpoint_5min',
+    'sp_co2_setpoint_ppm_5min',
+    'sp_humidity_deficit_setpoint_5min',
+    'sp_irrigation_interval_time_setpoint_min_5min',
+    'shot_number'
+]
+
+
 
 LETSGROW_INSIDE = [
     'par1_5min',
