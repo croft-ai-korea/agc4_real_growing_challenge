@@ -470,7 +470,9 @@ LETSGROW_CONTROL_WITH_EXTRA_PARAM = [
     'sp_co2_setpoint_ppm_5min',
     'sp_humidity_deficit_setpoint_5min',
     'sp_irrigation_interval_time_setpoint_min_5min',
-    'shot_number'
+    'shot_number',
+    'accumulate_temperature',
+    'irrigation_ml'
 ]
 
 

@@ -77,6 +77,8 @@ class LetsgrowService:
         self.connect_letsgrow()
 
         gh_values = self.letsgrow_Dao.getSetpoint(begin_time)
+        with open('a_util/rest_api/save_control.json', 'w') as json_file:
+            json.dump(gh_values, json_file, indent=4)
         # gh_values = self.letsgrow_Dao.getSetpointOfOneHour(begin_time)
         self.letsgrow.write_values(GREENHOUSE_MODULE_ID, gh_values)
 

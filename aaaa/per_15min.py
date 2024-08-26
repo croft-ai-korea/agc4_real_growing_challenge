@@ -5,6 +5,7 @@ import yaml
 import traceback
 import time
 import pytz
+import pandas as pd
 
 sys.path.append('./')
 
@@ -21,7 +22,7 @@ def per_15min():
     with open(config_path, 'r') as file:
         config = yaml.safe_load(file)
 
-    now = datetime(2024,8,26,0,0,0)  
+    # now = datetime(2024,8,25,23,0,0)  
     now = datetime.now(pytz.timezone('Europe/Amsterdam')).replace(tzinfo=None)
 
     greenhouse = GreenhouseControl(

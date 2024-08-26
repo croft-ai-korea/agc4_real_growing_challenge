@@ -61,11 +61,65 @@ class GreenhouseControl:
         reset light sum value to 0 at midnight
         """
 
-        # EC에 따른 물 공급 반영
-        if self.today < datetime(2024,9,19):
-            self.indoor_env['irrigation_ml'] = 5
-        else:
-            self.indoor_env['irrigation_ml'] = 8.3
+        # EC에 따른 물 공급 반영 wooram
+        try:
+            if self.today < datetime(2024,9,19):
+                if self.indoor_env_yesterday['irrigation_ml'][-1] is None:
+                    self.indoor_env['irrigation_ml'] = 5
+                else:
+                    yesterday_ml = self.indoor_env_yesterday['irrigation_ml'][-1]
+                    yesterday_ec = sum(self.indoor_env_yesterday['drain_ec_5min'])/len(self.indoor_env_yesterday['drain_ec_5min'])
+                    if yesterday_ec < 1.8:
+                        target_ml = yesterday_ml - 1 
+                        if target_ml < 1:
+                            target_ml = 1                    
+                    elif yesterday_ec > 2.2:
+                        target_ml = yesterday_ml + 1
+                        if target_ml > 10:
+                            target_ml = 10
+                    else:
+                        target_ml = yesterday_ml
+                    self.indoor_env['irrigation_ml'] = target_ml     
+            elif self.today < datetime(2024,9,29):
+                if self.today == datetime(2024,9,19):
+                    self.indoor_env['irrigation_ml'] = 8.3
+                else:
+                    yesterday_ml = self.indoor_env_yesterday['irrigation_ml'][-1]
+                    yesterday_ec = sum(self.indoor_env_yesterday['drain_ec_5min'])/len(self.indoor_env_yesterday['drain_ec_5min'])
+                    if yesterday_ec < 2.8:
+                        target_ml = yesterday_ml - 1 
+                        if target_ml < 1:
+                            target_ml = 1                    
+                    elif yesterday_ec > 3.2:
+                        target_ml = yesterday_ml + 1
+                        if target_ml > 16:
+                            target_ml = 16
+                    else:
+                        target_ml = yesterday_ml
+                    self.indoor_env['irrigation_ml'] = target_ml
+            else:
+                if self.today == datetime(2024,9,29):
+                    self.indoor_env['irrigation_ml'] = 8.3
+                else:
+                    yesterday_ml = self.indoor_env_yesterday['irrigation_ml'][-1]
+                    yesterday_ec = sum(self.indoor_env_yesterday['drain_ec_5min'])/len(self.indoor_env_yesterday['drain_ec_5min'])
+                    if yesterday_ec < 4.8:
+                        target_ml = yesterday_ml - 1 
+                        if target_ml < 1:
+                            target_ml = 1                    
+                    elif yesterday_ec > 5.2:
+                        target_ml = yesterday_ml + 1
+                        if target_ml > 16:
+                            target_ml = 16
+                    else:
+                        target_ml = yesterday_ml
+                    self.indoor_env['irrigation_ml'] = target_ml
+        except:
+            print("ec smart control algorithm error")
+            if self.today < datetime(2024,9,19):
+                self.indoor_env['irrigation_ml'] = 5
+            else:
+                self.indoor_env['irrigation_ml'] = 8.3
 
         
         # shot number 초기화
@@ -132,7 +186,7 @@ class GreenhouseControl:
                 print("error: ")
 
         print("strategy calulation done")
-        return self.green_out.plant_model
+        return self.green_out.setting_point
 
     def __str__(self) -> str:
         return  F"""
@@ -200,8 +254,7 @@ class GreenHouseInput:
 class GreenHouseOutput:
     def __init__(self, today:datetime):
         self.today = today
-        self.plant_model = self.plant_model_init(today)
-        self.setting_point = self.plant_model
+        self.setting_point = self.plant_model_init(today)
         self.global_info = {}
 
     def plant_model_init(self,today):

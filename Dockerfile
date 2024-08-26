@@ -51,5 +51,5 @@ ENV     letsgrow_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZ3JpZnVz
 
 
 # Run the Python script at container startup and prevent the container from stopping
-CMD ["sh", "-c", "pm2 start scheduler.config.js && tail -f /dev/null"]
-# CMD ["sh", "-c", "tail -f /dev/null"]
+# CMD ["sh", "-c", "pm2 start scheduler.config.js && tail -f /dev/null"]
+CMD ["sh", "-c", "tail -f /dev/null"]

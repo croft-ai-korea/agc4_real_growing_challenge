@@ -9,6 +9,7 @@ from aaaa.farm_math import sun_cal, get_DLI, datetime_to_int, get_peakTime, calc
 from aaaa.farm_math import datetime_to_int
 import json
 import os
+import pandas as pd
 
 def base_strategy(_in: GreenHouseInput, _out: GreenHouseOutput):
     """  
@@ -185,11 +186,9 @@ def base_strategy(_in: GreenHouseInput, _out: GreenHouseOutput):
         _out.setting_point['sp_irrigation_interval_time_setpoint_min_5min'][_in.set_time_int] = 4
 
     _out.setting_point['shot_number'] = 1
+
+    _out.setting_point['irrigation_ml'] = _in.indoor_env['irrigation_ml']
     
-    ## to-do 
-    # 4 mol light -> one shot    
-    # time_to_irrigation = calc_irrigation_time_with_DLI(_in.indoor_env['fc_radiation_5min'], criterion = 4)
-               
 
     """
     plantdensity setting
@@ -213,6 +212,8 @@ def base_strategy(_in: GreenHouseInput, _out: GreenHouseOutput):
         _out.setting_point['sp_plantdensity'] = [30]*288
     else:
         _out.setting_point['sp_plantdensity'] = [20]*288
+
+    _out.setting_point['accumulate_temperature'] = _in.indoor_env['accumulate_temperature']
         
     """
     harvest setting
@@ -228,7 +229,7 @@ def base_strategy(_in: GreenHouseInput, _out: GreenHouseOutput):
     return _out
 
 def clone_setpoint_strategy(_in: GreenHouseInput, _out: GreenHouseOutput) -> GreenHouseOutput:
-    _out.plant_model = _in.setpoint
+    _out.setting_point = _in.setpoint
     return _out
 
 def irrigation_control_strategy(_in: GreenHouseInput, _out: GreenHouseOutput) -> GreenHouseOutput:
