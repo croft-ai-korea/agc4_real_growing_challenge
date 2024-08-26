@@ -116,12 +116,9 @@ def get_simulation_setpoint_light_time(series):
     return hours_light, end_time
 
 def calc_irrigation_time_with_DLI(light_array:Any):
-    
-    
+        
     print("ok")
     pass
-
-
 
 def get_DLI(light_array:Any, 
             interval:int = 5, 
@@ -166,7 +163,6 @@ def fruit_price(weight):
         return (2-1.8)*(weight-150)/(150-80)+2-0.75
     else:
         return 2-0.75
-    
 
 def get_peakTime(array):
     result = np.convolve(np.array(array), np.ones(shape=36))  # to-do check 5min or not

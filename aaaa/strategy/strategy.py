@@ -6,6 +6,7 @@ import pandas as pd
 import numpy as np
 from a_util.env.real_env import GreenHouseInput, GreenHouseOutput
 from aaaa.farm_math import sun_cal, get_DLI, datetime_to_int, get_peakTime, calc_irrigation_time_with_DLI
+from aaaa.farm_math import datetime_to_int
 import json
 import os
 
@@ -204,11 +205,11 @@ def base_strategy(_in: GreenHouseInput, _out: GreenHouseOutput):
       20 : 적산온도 578~
           
     """    
-    if _in.indoor_env['accumulate_temperature'] < 342 or _in.indoor_env['accumulate_temperature'][-1] is None:
+    if _in.indoor_env['accumulate_temperature'][-1] < 342 or _in.indoor_env['accumulate_temperature'][-1] is None:
         _out.setting_point['sp_plantdensity'] = [56]*288
-    elif _in.indoor_env['accumulate_temperature'] < 427:
+    elif _in.indoor_env['accumulate_temperature'][-1] < 427:
         _out.setting_point['sp_plantdensity'] = [42]*288
-    elif _in.indoor_env['accumulate_temperature'] < 577:
+    elif _in.indoor_env['accumulate_temperature'][-1] < 577:
         _out.setting_point['sp_plantdensity'] = [30]*288
     else:
         _out.setting_point['sp_plantdensity'] = [20]*288
@@ -223,5 +224,56 @@ def base_strategy(_in: GreenHouseInput, _out: GreenHouseOutput):
     image sensor + TRH sensoer(inside the bush)
     
     """
+
+    return _out
+
+def clone_setpoint_strategy(_in: GreenHouseInput, _out: GreenHouseOutput) -> GreenHouseOutput:
+    _out.plant_model = _in.setpoint
+    return _out
+
+def irrigation_control_strategy(_in: GreenHouseInput, _out: GreenHouseOutput) -> GreenHouseOutput:
+    """
+    - 1st stage : 4 Sep ~ 18 Sep
+    - 2nd stage : 18 Sep ~ 22 Sep
+    - 3rd stage : 22 Sep ~ 29 Sep
+    - 4th stage : 29 Sep - 9 Oct
+    - 5th stage : 9 October - 9 November
+
+    irrigation setting
+    => sh
+    1. everyday when light on, trigger
+    2. stage 1: every 1 mol light accumulate 5ml 
+    3. stage 2-3: every 1 mol accumulate 8.3ml
+    
+    EC 기준
+        1) stage 1: 2
+        2) stage 2-3: 3
+        3) stage 4: 5
+    4. ave daily ec is lower - next day every 1 mol light accumulate -1ml
+    5. ave daily ec is higher or no drain - next day every 1 mol light accumulate +1ml
+    => move to per_hour stategy
+
+    every 20ml trigger
+    
+    reset light sum value to 0 at midnight
+    """
+
+    ## parsum
+    print('ok')
+    current_DLI = get_DLI(
+        light_array = _in.indoor_env['par1_5min'],
+        window = [0, datetime_to_int(_in.now)]
+    )
+
+    shot_number = _in.indoor_env['shot_number'][-1]
+
+    irrigation_ml = _in.indoor_env['irrigation_ml'][-1]
+
+    need_ml = current_DLI*irrigation_ml
+
+    if need_ml//20 >= shot_number + 1:
+        target_index = datetime_to_int(_in.now + timedelta(minutes=10))
+        _out.setting_point['sp_irrigation_interval_time_setpoint_min_5min'][target_index] = 4
+        _out.setting_point['shot_number'] = shot_number + 1
 
     return _out

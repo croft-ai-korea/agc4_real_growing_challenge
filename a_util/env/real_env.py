@@ -147,11 +147,13 @@ class GreenHouseInput:
         self.today = now.replace(hour=0, minute=0, second=0, microsecond=0)
         print(self.today)
         self.nthday = (self.today - startdate).days        
-        self.config = config    
+        self.config = config   
 
         self.indoor_env = indoor_env
         self.indoor_env_yesterday = indoor_env_yesterday
         self.plant_status = plant_status
+
+        self.setpoint = self.indoor_env[LETSGROW_CONTROL]
         
         self.rise_time, self.set_time = sun_cal(self.today, self.indoor_env, True)
         
