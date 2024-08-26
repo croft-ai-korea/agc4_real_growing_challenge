@@ -102,7 +102,7 @@ def base_strategy(_in: GreenHouseInput, _out: GreenHouseOutput):
         if led_end_time_int > datetime_to_int(datetime(2000,1,1,11,0,0)):
             led_end_time_int = datetime_to_int(datetime(2000,1,1,11,0,0))
         
-        _out.setting_point['sp_value_to_isii_1_5min'][led_start_time_int:led_end_time_int] = _in.config['base_LED_umol']            
+        _out.setting_point['sp_value_to_isii_1_5min'][led_start_time_int:led_end_time_int] = _in.config['base_LED_umol'] / 2     ## 200umol -> 100%            
     else:
         _out.setting_point['sp_value_to_isii_1_5min'] = [0]*288 
     """
@@ -217,7 +217,7 @@ def base_strategy(_in: GreenHouseInput, _out: GreenHouseOutput):
     """
     harvest setting
     """ 
-    _out.setting_point['sp_day_of_harvest_day_number'] = [351]*288   
+    _out.setting_point['sp_day_of_harvest_day_number'] = [82]*288   
     
     """
     additional sensor
@@ -259,7 +259,6 @@ def irrigation_control_strategy(_in: GreenHouseInput, _out: GreenHouseOutput) ->
     """
 
     ## parsum
-    print('ok')
     current_DLI = get_DLI(
         light_array = _in.indoor_env['par1_5min'],
         window = [0, datetime_to_int(_in.now)]
@@ -270,6 +269,11 @@ def irrigation_control_strategy(_in: GreenHouseInput, _out: GreenHouseOutput) ->
     irrigation_ml = _in.indoor_env['irrigation_ml'][-1]
 
     need_ml = current_DLI*irrigation_ml
+
+    print("shot_number : ", shot_number)
+    print("irrigation_ml : ", irrigation_ml)
+    print("current dli : ", current_DLI)
+    print("need ml : ", need_ml)
 
     if need_ml//20 >= shot_number + 1:
         target_index = datetime_to_int(_in.now + timedelta(minutes=10))

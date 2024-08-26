@@ -16,7 +16,7 @@ from aaaa.strategy.strategy import base_strategy, clone_setpoint_strategy, irrig
 #     statistics_ventilation_strategy_perday,statistics_radiation_strategy_perday,statistics_co2_strategy_perday,statistics_HD_strategy_perday,netPipeMin_strategy,\
 #     leeVentMin_strategy,blk_screen_strategy, density_strategy, harvest_strategy
 
-def per_30min():
+def per_15min():
     config_path = "./a_util/env/config.yaml"
     with open(config_path, 'r') as file:
         config = yaml.safe_load(file)
@@ -38,4 +38,4 @@ def per_30min():
     greenhouse.apply_to_greenhouse()
 
 if __name__ == "__main__":
-    s =  per_30min()
+    s =  per_15min()

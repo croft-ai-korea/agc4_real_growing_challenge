@@ -26,7 +26,7 @@ from aaaa.per_day_simul import per_day
 from a_util.service.letsgrow_service_simul import LetsgrowService
 
 
-USE_NEW_TABLE = False
+USE_NEW_TABLE = True
 
 def run_simulator():    
     control_json_path = "a_util/Par_Out_reference_control.json"

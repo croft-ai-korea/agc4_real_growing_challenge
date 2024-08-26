@@ -40,21 +40,21 @@ services:
     restart: always
     command: -c ssl=off  # SSL을 비활성화
 
-#  grafana:
-#    image: grafana/grafana:latest
-#    container_name: grafana
-#    ports:
-#      - "3003:3000"
-#    environment:
-#      - GF_SECURITY_ADMIN_PASSWORD=croft1!
-#      - GF_SECURITY_ADMIN_USER=croft
-#    depends_on:
-#      - timescaledb
-#    restart: always
-#    volumes:
-#      - /mnt/data/AGC_data/grafana_data:/var/lib/grafana
-#      - /mnt/data/AGC_data/grafana_provisioning:/etc/grafana/provisioning
-#
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    ports:
+      - "3003:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=croft1!
+      - GF_SECURITY_ADMIN_USER=croft
+    depends_on:
+      - timescaledb
+    restart: always
+    volumes:
+      - /mnt/data/AGC_data/grafana_data:/var/lib/grafana
+      - /mnt/data/AGC_data/grafana_provisioning:/etc/grafana/provisioning
+
   pgadmin:
     image: dpage/pgadmin4:8.0
     container_name: pgadmin
