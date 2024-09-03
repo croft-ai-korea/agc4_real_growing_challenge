@@ -86,6 +86,8 @@ def base_strategy(_in: GreenHouseInput, _out: GreenHouseOutput):
                             )
  
     DLI_need = _in.config['base_target_DLI'] - expected_DLI
+    print("DLI_need : ", DLI_need)
+    print("expected_DLI : ", expected_DLI)    
     if DLI_need > 0:
         LED_time_per_5min = ((DLI_need * 1e6) / (_in.config['base_LED_umol']*60))//5
         

@@ -171,20 +171,22 @@ if __name__ == "__main__":
     
     result = get_module_ids(token)
     
-    moduleId = 68112
+    # moduleId = 68112
     # moduleId = 69296
+    moduleId = 14821
     
     result2 = get_collectionId(token, moduleId)
     
-    colid = 2664621
-    # colid = 2664622
+    # for item in result2['ModuleItems']:
+    #     print(f"{item['Description']}  : {item['ColId']}")
     
-    start_date = datetime(2024,8,10,0,0,0)
-    end_date = datetime(2024,8,22,0,0,0)
+    # colid = 2664621
+    # # colid = 2664622
+    colid = 611656
     
-    for item in result2['ModuleItems']:
-        print(f"'{item['Description']}' : {item['ColId']}")
-    
+    start_date = datetime(2024,9,1,0,0,0)
+    end_date = datetime(2024,9,4,0,0,0)
+        
     result3 = get_data(token,
                         moduleId,
                         colid,
@@ -192,7 +194,7 @@ if __name__ == "__main__":
                         end_date.isoformat()
                         )    
         
-    print("biosignals : " , result3)
+    print("data : " , result3)
     
     print("ok")
     
