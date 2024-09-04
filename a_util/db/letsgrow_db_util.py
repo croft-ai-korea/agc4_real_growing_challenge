@@ -229,6 +229,12 @@ class LetsgrowDao:
             "%Y-%m-%dT%H:%M:%S") + "' and time < '" + end_time.strftime("%Y-%m-%dT%H:%M:%S") + "'"
 
         return db_select_pandas_sql(sql)
+    
+    def from_db_specific_columns(self, begin_time: datetime, end_time: datetime, columns:str):
+        sql = f" SELECT \"{columns}\", \"time\" from measure where time >= '" + begin_time.strftime(
+        "%Y-%m-%dT%H:%M:%S") + "' and time < '" + end_time.strftime("%Y-%m-%dT%H:%M:%S") + "'"
+
+        return db_select_pandas_sql(sql)
 
     def from_db_hour(self, begin_time, end_time):
         sql = """ SELECT time_bucket('1 hour', time) AS tm

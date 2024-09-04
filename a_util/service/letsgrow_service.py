@@ -107,9 +107,12 @@ class LetsgrowService:
 
     def data_from_db_day(self, begin_time:datetime):
         return self.letsgrow_Dao.from_db_day(begin_time)
-
+    
     def data_from_db(self, begin_time, end_time):
         return self.letsgrow_Dao.from_db(begin_time, end_time)
+    
+    def data_from_db_specific_columns(self, begin_time, end_time, columns):
+        return self.letsgrow_Dao.from_db_specific_columns(begin_time, end_time, columns)
 
     def data_from_db_hour(self, begin_time, end_time):
         return self.letsgrow_Dao.from_db_hour(begin_time, end_time)

@@ -26,15 +26,21 @@ class GreenhouseControl:
         self.today = self.now.replace(hour=0, minute=0, second=0, microsecond=0)
         self.startdate = config['start_date']
         self.lg_service = LetsgrowService()        
+        
+        self.temperature_from_transplant_day = self.get_data_5min_custom(
+            start_date=datetime(2024,9,1,0,0,0),
+            end_date=self.today,
+            columns='temperature_greenhouse_5min' 
+            )
         self.indoor_env = self.get_data_5min(self.today)
         self.indoor_env_yesterday = self.get_data_5min(self.today-timedelta(days=1))
 
-        # 어제의 적산온도를 반영
-        if self.indoor_env_yesterday['accumulate_temperature'][-1] is None:
-            self.indoor_env['accumulate_temperature'] = 0
-        else:
-            temp_average = sum(self.indoor_env_yesterday['temperature_greenhouse_5min'])/len(self.indoor_env_yesterday['temperature_greenhouse_5min'])
-            self.indoor_env['accumulate_temperature'] = self.indoor_env_yesterday['accumulate_temperature'][-1] + temp_average
+        # # 어제의 적산온도를 반영
+        # if self.indoor_env_yesterday['accumulate_temperature'][-1] is None:
+        #     self.indoor_env['accumulate_temperature'] = 0
+        # else:
+        #     temp_average = sum(self.indoor_env_yesterday['temperature_greenhouse_5min'])/len(self.indoor_env_yesterday['temperature_greenhouse_5min'])
+        #     self.indoor_env['accumulate_temperature'] = self.indoor_env_yesterday['accumulate_temperature'][-1] + temp_average
         """
         - 1st stage : 4 Sep ~ 18 Sep
         - 2nd stage : 18 Sep ~ 22 Sep
@@ -130,7 +136,8 @@ class GreenhouseControl:
                                            startdate=self.startdate,
                                            indoor_env=self.indoor_env,
                                            indoor_env_yesterday=self.indoor_env_yesterday,
-                                           plant_status=self.plant_status,
+                                           temperature_from_transplant_day = self.temperature_from_transplant_day,
+                                           plant_status=self.plant_status,                                           
                                            now=self.now)
         self.green_out = GreenHouseOutput(today=self.today)
        
@@ -139,6 +146,28 @@ class GreenhouseControl:
     def get_data_5min(self, date : datetime):
         df = self.lg_service.data_from_db_day(date)
 
+        # 시작과 끝 시간을 가져옴
+        start_time = df.index[0]
+        end_time = df.index[-1]
+
+        # 인덱스를 5분 간격으로 다시 생성
+        new_index = pd.date_range(start=start_time, end=end_time.replace(hour=23, minute=55), freq='5T')
+
+        # 기존 데이터프레임을 새로운 인덱스에 맞춰 리샘플링 및 보간
+        df_resampled = df.reindex(new_index)
+        df_resampled = df_resampled.interpolate(method='linear')
+
+        # NaN값을 기존 데이터인 None으로 변경
+        df_resampled = df_resampled.applymap(lambda x: None if pd.isna(x) else x)
+        return df_resampled
+    
+    def get_data_5min_custom(self, start_date, end_date, columns):
+        df = self.lg_service.data_from_db_specific_columns(
+            start_date,
+            end_date,
+            columns                
+        )
+        
         # 시작과 끝 시간을 가져옴
         start_time = df.index[0]
         end_time = df.index[-1]
@@ -196,12 +225,14 @@ class GreenhouseControl:
         pass
 
 class GreenHouseInput:
-    def __init__(self, config, startdate, indoor_env, indoor_env_yesterday, plant_status, now):
+    def __init__(self, config, startdate, indoor_env, indoor_env_yesterday, plant_status, temperature_from_transplant_day, now):
         self.now = now 
         self.today = now.replace(hour=0, minute=0, second=0, microsecond=0)
         print(self.today)
         self.nthday = (self.today - startdate).days        
-        self.config = config   
+        self.config = config  
+        
+        self.temperature_from_transplant_day = temperature_from_transplant_day 
 
         self.indoor_env = indoor_env
         self.indoor_env_yesterday = indoor_env_yesterday

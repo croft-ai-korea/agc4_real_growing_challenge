@@ -9,7 +9,10 @@ sys.path.append('./')
 
 from a_util.service.letsgrow_service import LetsgrowService
 from a_util.env.real_env import GreenhouseControl
-from aaaa.strategy.strategy import base_strategy
+from aaaa.strategy.strategy import temperature_strategy_b, energy_screen_strategy_b, \
+    led_strategy_b, blackout_screen_strategy_b, min_vent_strategy_b, net_pipe_minimum_strategy_b, \
+    co2_strategy_b, hd_strategy_b, irrigation_strategy_b, plantdensity_strategy_b, harvest_strategy_b
+# from aaaa.strategy.strategy import base_strategy
 # from aaaa.strategy.strategy import temp_strategy, enrg_screen_strategy, radiation_strategy, co2_strategy, \
 #     humidity_strategy, base_strategy,statistics_temp_strategy_perday,\
 #     statistics_ventilation_strategy_perday,statistics_radiation_strategy_perday,statistics_co2_strategy_perday,statistics_HD_strategy_perday,netPipeMin_strategy,\
@@ -35,23 +38,17 @@ def per_day():
     greenhouse = GreenhouseControl(      
         config=config,  
         strategies = [
-                base_strategy,
-                # temp_strategy,
-                # radiation_strategy,
-                # co2_strategy,
-                # humidity_strategy,
-                # radiation_strategy,
-                # statistics_temp_strategy_perday,
-                # statistics_ventilation_strategy_perday,
-                # statistics_radiation_strategy_perday,
-                # statistics_co2_strategy_perday,
-                # statistics_HD_strategy_perday,
-                # enrg_screen_strategy,
-                # netPipeMin_strategy,
-                # leeVentMin_strategy,
-                # blk_screen_strategy,
-                # density_strategy,
-                # harvest_strategy
+                temperature_strategy_b,
+                energy_screen_strategy_b,
+                led_strategy_b,
+                blackout_screen_strategy_b,
+                min_vent_strategy_b,
+                net_pipe_minimum_strategy_b,
+                co2_strategy_b,
+                hd_strategy_b,
+                irrigation_strategy_b,
+                plantdensity_strategy_b,
+                harvest_strategy_b                
             ],
         now = now
     )

@@ -161,19 +161,19 @@ def make_query(columns:List[str]):
 if __name__ == "__main__":
     # make_query(COLID_MAP_NAME.keys())
     
-    username = "Agrifusion"
-    password = "78G$dV32La"  
+    # username = "Agrifusion"
+    # password = "78G$dV32La"  
     
-    # username = "agrifusionsensors"
-    # password = "Vg5#sLkSa8"  
+    username = "agrifusionsensors"
+    password = "Vg5#sLkSa8"  
     
     token = get_token(username=username, password=password)
     
     result = get_module_ids(token)
     
     # moduleId = 68112
-    # moduleId = 69296
-    moduleId = 14821
+    moduleId = 69296
+    # moduleId = 14821
     
     result2 = get_collectionId(token, moduleId)
     
@@ -182,21 +182,24 @@ if __name__ == "__main__":
     
     # colid = 2664621
     # # colid = 2664622
-    colid = 611656
+    colid = 2664615  # plant weight
+
+    # to-do
+    # put_value 나 put_values로 데이터 전송
     
-    start_date = datetime(2024,9,1,0,0,0)
-    end_date = datetime(2024,9,4,0,0,0)
+    # start_date = datetime(2024,9,1,0,0,0)
+    # end_date = datetime(2024,9,4,0,0,0)
         
-    result3 = get_data(token,
-                        moduleId,
-                        colid,
-                        start_date.isoformat(),
-                        end_date.isoformat()
-                        )    
+    # result3 = get_data(token,
+    #                     moduleId,
+    #                     colid,
+    #                     start_date.isoformat(),
+    #                     end_date.isoformat()
+    #                     )    
         
-    print("data : " , result3)
+    # print("data : " , result3)
     
-    print("ok")
+    # print("ok")
     
     # for colid in LETSGROW_MOD_COLS_MAP[GREENHOUSE_MODULE_ID]:
     #     start_date = datetime(2024,8,2,0,0,0)
