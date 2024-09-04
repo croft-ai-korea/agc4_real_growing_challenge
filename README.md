@@ -11,6 +11,7 @@
 2. docker-compose down
 3. docker-compose up --build -d
 4. checking pm2 working well (per_day, per_15min, per_hour process should be shown as below)
+![image](https://github.com/user-attachments/assets/b2606d8d-1df0-4e60-ad43-722e8de2070a)
 
 
 ## Installation
