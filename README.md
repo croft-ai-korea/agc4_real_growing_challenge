@@ -10,7 +10,7 @@
 1. remove tsdbdata folder
 2. docker-compose down
 3. docker-compose up --build -d
-4. check if pm2 is working well (per_day, per_15min, per_hour process should be shown as below)
+4. check if pm2 is working well (per_day, per_15min, per_5min process should be shown as below)
 ```
 sudo docker exec -it agrifusion /bin/bash
 pm2 list
