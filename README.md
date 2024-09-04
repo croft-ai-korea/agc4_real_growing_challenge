@@ -5,12 +5,17 @@
 - docker
 - enough disk space (8~9GB)
 
-## reinstallation
+## Reinstallation
 - if you want to reinstall this repository, follow instruction below.
 1. remove tsdbdata folder
 2. docker-compose down
 3. docker-compose up --build -d
-4. checking pm2 working well (per_day, per_15min, per_hour process should be shown as below)
+4. check if pm2 is working well (per_day, per_15min, per_hour process should be shown as below)
+```
+sudo docker exec -it agrifusion /bin/bash
+pm2 list
+pm2 logs per_5min
+```
 ![image](https://github.com/user-attachments/assets/b2606d8d-1df0-4e60-ad43-722e8de2070a)
 
 
@@ -28,8 +33,6 @@ sudo docker-compose up -d
 sudo docker exec -it agrifusion /bin/bash
 pm2 list
 pm2 logs per_5min
-
-
 ```
 
 ## after first build
