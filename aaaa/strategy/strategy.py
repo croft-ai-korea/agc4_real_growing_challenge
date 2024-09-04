@@ -55,11 +55,11 @@ def energy_screen_strategy_b(_in: GreenHouseInput, _out: GreenHouseOutput):
     # if (_in.now > datetime(2024,10,10,0,0,0)) and (_in.now < datetime(2024,11,2,0,0,0)):
     if _in.now < datetime(2024,11,2,0,0,0):         ## 임시 테스트용
         _out.setting_point['sp_energy_screen_setpoint_5min'] = [0]*288
-        _out.setting_point['sp_energy_screen_setpoint_5min'][_in.indoor_env['fc_radiation_5min']<50] = 90
+        _out.setting_point['sp_energy_screen_setpoint_5min'][_in.indoor_env['fc_radiation_5min']<100] = 90
         _out.setting_point['sp_energy_screen_setpoint_5min'][_in.indoor_env['fc_radiation_5min']>500] = 75
     if _in.now >= datetime(2024,11,2,0,0,0):
         _out.setting_point['sp_energy_screen_setpoint_5min'] = [0]*288
-        _out.setting_point['sp_energy_screen_setpoint_5min'][_in.indoor_env['fc_radiation_5min']<100] = 90
+        _out.setting_point['sp_energy_screen_setpoint_5min'][_in.indoor_env['fc_radiation_5min']<200] = 90
         _out.setting_point['sp_energy_screen_setpoint_5min'][_in.indoor_env['fc_radiation_5min']>400] = 75        
     
     return _out
@@ -163,9 +163,11 @@ def co2_strategy_b(_in: GreenHouseInput, _out: GreenHouseOutput):
     """
     _out.setting_point['sp_co2_setpoint_ppm_5min']  = 300
     if _in.today <= datetime(2023,9,22):
-      _out.setting_point['sp_co2_setpoint_ppm_5min'][_in.set_time_int-3*12:_in.set_time_int+2*12] = 550
+      _out.setting_point['sp_co2_setpoint_ppm_5min'][_in.set_time_int-1*12:_in.set_time_int+1*12] = 550
+      _out.setting_point['sp_co2_setpoint_ppm_5min'][_out.setting_point['sp_value_to_isii_1_5min']>0] = 550
     else:
-      _out.setting_point['sp_co2_setpoint_ppm_5min'][_in.set_time_int-3*12:_in.set_time_int+2*12] = 800  
+      _out.setting_point['sp_co2_setpoint_ppm_5min'][_in.set_time_int-1*12:_in.set_time_int+1*12] = 800  
+      _out.setting_point['sp_co2_setpoint_ppm_5min'][_out.setting_point['sp_value_to_isii_1_5min']>0] = 800
     
     return _out
   
@@ -303,10 +305,10 @@ def irrigation_control_strategy(_in: GreenHouseInput, _out: GreenHouseOutput) ->
     print("current dli : ", current_DLI)
     print("need ml : ", need_ml)
 
-    # if need_ml//20 >= shot_number:
-    target_index = datetime_to_int(_in.now + timedelta(minutes=10))
-    _out.setting_point['sp_irrigation_interval_time_setpoint_min_5min'][target_index] = 4
-    _out.setting_point['shot_number'] = shot_number + 1
+    if need_ml//20 >= shot_number:
+        target_index = datetime_to_int(_in.now + timedelta(minutes=10))
+        _out.setting_point['sp_irrigation_interval_time_setpoint_min_5min'][target_index] = 4
+        _out.setting_point['shot_number'] = shot_number + 1
 
     return _out
 
