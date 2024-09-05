@@ -23,6 +23,8 @@ def per_15min():
 
     # now = datetime(2024,8,25,23,0,0)  
     now = datetime.now(pytz.timezone('Europe/Amsterdam')).replace(tzinfo=None)
+    
+    print("############################ excution_time : ", now) 
 
     greenhouse = GreenhouseControl(
         config=config, 
@@ -36,6 +38,8 @@ def per_15min():
     setpoint = greenhouse.apply_strategy()
     greenhouse.save_to_db(setpoint)
     greenhouse.apply_to_greenhouse()
+    
+    print("per_15min run successfully") 
 
 if __name__ == "__main__":
     s =  per_15min()

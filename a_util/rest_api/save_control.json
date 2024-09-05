@@ -10364,7 +10364,7 @@
     {
         "colId": 2607136,
         "TimeStamp": "2024-09-05T11:55",
-        "Value": 120.0,
+        "Value": 1440.0,
         "Offset": 0
     },
     {
@@ -10436,1523 +10436,1523 @@
     {
         "colId": 2607136,
         "TimeStamp": "2024-09-05T12:00",
+        "Value": 1440.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607098,
+        "TimeStamp": "2024-09-05T12:05",
+        "Value": 56.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607099,
+        "TimeStamp": "2024-09-05T12:05",
+        "Value": 349.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607102,
+        "TimeStamp": "2024-09-05T12:05",
+        "Value": 19.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607106,
+        "TimeStamp": "2024-09-05T12:05",
+        "Value": 20.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607110,
+        "TimeStamp": "2024-09-05T12:05",
+        "Value": 5.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607114,
+        "TimeStamp": "2024-09-05T12:05",
+        "Value": 0.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607118,
+        "TimeStamp": "2024-09-05T12:05",
+        "Value": 0.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607120,
+        "TimeStamp": "2024-09-05T12:05",
+        "Value": 0.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607124,
+        "TimeStamp": "2024-09-05T12:05",
+        "Value": 0.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607128,
+        "TimeStamp": "2024-09-05T12:05",
+        "Value": 550.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607132,
+        "TimeStamp": "2024-09-05T12:05",
+        "Value": 2.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607136,
+        "TimeStamp": "2024-09-05T12:05",
+        "Value": 1440.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607098,
+        "TimeStamp": "2024-09-05T12:10",
+        "Value": 56.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607099,
+        "TimeStamp": "2024-09-05T12:10",
+        "Value": 349.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607102,
+        "TimeStamp": "2024-09-05T12:10",
+        "Value": 19.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607106,
+        "TimeStamp": "2024-09-05T12:10",
+        "Value": 20.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607110,
+        "TimeStamp": "2024-09-05T12:10",
+        "Value": 5.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607114,
+        "TimeStamp": "2024-09-05T12:10",
+        "Value": 0.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607118,
+        "TimeStamp": "2024-09-05T12:10",
+        "Value": 0.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607120,
+        "TimeStamp": "2024-09-05T12:10",
+        "Value": 0.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607124,
+        "TimeStamp": "2024-09-05T12:10",
+        "Value": 0.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607128,
+        "TimeStamp": "2024-09-05T12:10",
+        "Value": 550.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607132,
+        "TimeStamp": "2024-09-05T12:10",
+        "Value": 2.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607136,
+        "TimeStamp": "2024-09-05T12:10",
+        "Value": 1440.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607098,
+        "TimeStamp": "2024-09-05T12:15",
+        "Value": 56.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607099,
+        "TimeStamp": "2024-09-05T12:15",
+        "Value": 349.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607102,
+        "TimeStamp": "2024-09-05T12:15",
+        "Value": 19.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607106,
+        "TimeStamp": "2024-09-05T12:15",
+        "Value": 20.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607110,
+        "TimeStamp": "2024-09-05T12:15",
+        "Value": 5.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607114,
+        "TimeStamp": "2024-09-05T12:15",
+        "Value": 0.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607118,
+        "TimeStamp": "2024-09-05T12:15",
+        "Value": 0.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607120,
+        "TimeStamp": "2024-09-05T12:15",
+        "Value": 0.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607124,
+        "TimeStamp": "2024-09-05T12:15",
+        "Value": 0.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607128,
+        "TimeStamp": "2024-09-05T12:15",
+        "Value": 550.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607132,
+        "TimeStamp": "2024-09-05T12:15",
+        "Value": 2.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607136,
+        "TimeStamp": "2024-09-05T12:15",
+        "Value": 1440.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607098,
+        "TimeStamp": "2024-09-05T12:20",
+        "Value": 56.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607099,
+        "TimeStamp": "2024-09-05T12:20",
+        "Value": 349.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607102,
+        "TimeStamp": "2024-09-05T12:20",
+        "Value": 19.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607106,
+        "TimeStamp": "2024-09-05T12:20",
+        "Value": 20.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607110,
+        "TimeStamp": "2024-09-05T12:20",
+        "Value": 5.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607114,
+        "TimeStamp": "2024-09-05T12:20",
+        "Value": 0.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607118,
+        "TimeStamp": "2024-09-05T12:20",
+        "Value": 0.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607120,
+        "TimeStamp": "2024-09-05T12:20",
+        "Value": 0.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607124,
+        "TimeStamp": "2024-09-05T12:20",
+        "Value": 0.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607128,
+        "TimeStamp": "2024-09-05T12:20",
+        "Value": 550.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607132,
+        "TimeStamp": "2024-09-05T12:20",
+        "Value": 2.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607136,
+        "TimeStamp": "2024-09-05T12:20",
+        "Value": 1440.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607098,
+        "TimeStamp": "2024-09-05T12:25",
+        "Value": 56.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607099,
+        "TimeStamp": "2024-09-05T12:25",
+        "Value": 349.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607102,
+        "TimeStamp": "2024-09-05T12:25",
+        "Value": 19.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607106,
+        "TimeStamp": "2024-09-05T12:25",
+        "Value": 20.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607110,
+        "TimeStamp": "2024-09-05T12:25",
+        "Value": 5.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607114,
+        "TimeStamp": "2024-09-05T12:25",
+        "Value": 0.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607118,
+        "TimeStamp": "2024-09-05T12:25",
+        "Value": 0.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607120,
+        "TimeStamp": "2024-09-05T12:25",
+        "Value": 0.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607124,
+        "TimeStamp": "2024-09-05T12:25",
+        "Value": 0.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607128,
+        "TimeStamp": "2024-09-05T12:25",
+        "Value": 550.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607132,
+        "TimeStamp": "2024-09-05T12:25",
+        "Value": 2.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607136,
+        "TimeStamp": "2024-09-05T12:25",
+        "Value": 1440.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607098,
+        "TimeStamp": "2024-09-05T12:30",
+        "Value": 56.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607099,
+        "TimeStamp": "2024-09-05T12:30",
+        "Value": 349.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607102,
+        "TimeStamp": "2024-09-05T12:30",
+        "Value": 19.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607106,
+        "TimeStamp": "2024-09-05T12:30",
+        "Value": 20.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607110,
+        "TimeStamp": "2024-09-05T12:30",
+        "Value": 5.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607114,
+        "TimeStamp": "2024-09-05T12:30",
+        "Value": 0.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607118,
+        "TimeStamp": "2024-09-05T12:30",
+        "Value": 0.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607120,
+        "TimeStamp": "2024-09-05T12:30",
+        "Value": 0.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607124,
+        "TimeStamp": "2024-09-05T12:30",
+        "Value": 0.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607128,
+        "TimeStamp": "2024-09-05T12:30",
+        "Value": 550.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607132,
+        "TimeStamp": "2024-09-05T12:30",
+        "Value": 2.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607136,
+        "TimeStamp": "2024-09-05T12:30",
+        "Value": 1440.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607098,
+        "TimeStamp": "2024-09-05T12:35",
+        "Value": 56.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607099,
+        "TimeStamp": "2024-09-05T12:35",
+        "Value": 349.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607102,
+        "TimeStamp": "2024-09-05T12:35",
+        "Value": 19.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607106,
+        "TimeStamp": "2024-09-05T12:35",
+        "Value": 20.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607110,
+        "TimeStamp": "2024-09-05T12:35",
+        "Value": 5.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607114,
+        "TimeStamp": "2024-09-05T12:35",
+        "Value": 0.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607118,
+        "TimeStamp": "2024-09-05T12:35",
+        "Value": 0.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607120,
+        "TimeStamp": "2024-09-05T12:35",
+        "Value": 0.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607124,
+        "TimeStamp": "2024-09-05T12:35",
+        "Value": 0.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607128,
+        "TimeStamp": "2024-09-05T12:35",
+        "Value": 550.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607132,
+        "TimeStamp": "2024-09-05T12:35",
+        "Value": 2.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607136,
+        "TimeStamp": "2024-09-05T12:35",
+        "Value": 1440.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607098,
+        "TimeStamp": "2024-09-05T12:40",
+        "Value": 56.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607099,
+        "TimeStamp": "2024-09-05T12:40",
+        "Value": 349.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607102,
+        "TimeStamp": "2024-09-05T12:40",
+        "Value": 19.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607106,
+        "TimeStamp": "2024-09-05T12:40",
+        "Value": 20.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607110,
+        "TimeStamp": "2024-09-05T12:40",
+        "Value": 5.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607114,
+        "TimeStamp": "2024-09-05T12:40",
+        "Value": 0.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607118,
+        "TimeStamp": "2024-09-05T12:40",
+        "Value": 0.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607120,
+        "TimeStamp": "2024-09-05T12:40",
+        "Value": 0.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607124,
+        "TimeStamp": "2024-09-05T12:40",
+        "Value": 0.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607128,
+        "TimeStamp": "2024-09-05T12:40",
+        "Value": 550.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607132,
+        "TimeStamp": "2024-09-05T12:40",
+        "Value": 2.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607136,
+        "TimeStamp": "2024-09-05T12:40",
+        "Value": 1440.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607098,
+        "TimeStamp": "2024-09-05T12:45",
+        "Value": 56.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607099,
+        "TimeStamp": "2024-09-05T12:45",
+        "Value": 349.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607102,
+        "TimeStamp": "2024-09-05T12:45",
+        "Value": 19.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607106,
+        "TimeStamp": "2024-09-05T12:45",
+        "Value": 20.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607110,
+        "TimeStamp": "2024-09-05T12:45",
+        "Value": 5.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607114,
+        "TimeStamp": "2024-09-05T12:45",
+        "Value": 0.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607118,
+        "TimeStamp": "2024-09-05T12:45",
+        "Value": 0.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607120,
+        "TimeStamp": "2024-09-05T12:45",
+        "Value": 0.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607124,
+        "TimeStamp": "2024-09-05T12:45",
+        "Value": 0.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607128,
+        "TimeStamp": "2024-09-05T12:45",
+        "Value": 550.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607132,
+        "TimeStamp": "2024-09-05T12:45",
+        "Value": 2.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607136,
+        "TimeStamp": "2024-09-05T12:45",
+        "Value": 1440.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607098,
+        "TimeStamp": "2024-09-05T12:50",
+        "Value": 56.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607099,
+        "TimeStamp": "2024-09-05T12:50",
+        "Value": 349.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607102,
+        "TimeStamp": "2024-09-05T12:50",
+        "Value": 19.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607106,
+        "TimeStamp": "2024-09-05T12:50",
+        "Value": 20.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607110,
+        "TimeStamp": "2024-09-05T12:50",
+        "Value": 5.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607114,
+        "TimeStamp": "2024-09-05T12:50",
+        "Value": 0.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607118,
+        "TimeStamp": "2024-09-05T12:50",
+        "Value": 0.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607120,
+        "TimeStamp": "2024-09-05T12:50",
+        "Value": 0.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607124,
+        "TimeStamp": "2024-09-05T12:50",
+        "Value": 0.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607128,
+        "TimeStamp": "2024-09-05T12:50",
+        "Value": 550.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607132,
+        "TimeStamp": "2024-09-05T12:50",
+        "Value": 2.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607136,
+        "TimeStamp": "2024-09-05T12:50",
+        "Value": 1440.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607098,
+        "TimeStamp": "2024-09-05T12:55",
+        "Value": 56.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607099,
+        "TimeStamp": "2024-09-05T12:55",
+        "Value": 349.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607102,
+        "TimeStamp": "2024-09-05T12:55",
+        "Value": 19.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607106,
+        "TimeStamp": "2024-09-05T12:55",
+        "Value": 20.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607110,
+        "TimeStamp": "2024-09-05T12:55",
+        "Value": 5.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607114,
+        "TimeStamp": "2024-09-05T12:55",
+        "Value": 0.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607118,
+        "TimeStamp": "2024-09-05T12:55",
+        "Value": 0.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607120,
+        "TimeStamp": "2024-09-05T12:55",
+        "Value": 0.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607124,
+        "TimeStamp": "2024-09-05T12:55",
+        "Value": 0.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607128,
+        "TimeStamp": "2024-09-05T12:55",
+        "Value": 550.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607132,
+        "TimeStamp": "2024-09-05T12:55",
+        "Value": 2.0,
+        "Offset": 0
+    },
+    {
+        "colId": 2607136,
+        "TimeStamp": "2024-09-05T12:55",
         "Value": 120.0,
         "Offset": 0
     },
     {
         "colId": 2607098,
-        "TimeStamp": "2024-09-05T12:05",
+        "TimeStamp": "2024-09-05T13:00",
         "Value": 56.0,
         "Offset": 0
     },
     {
         "colId": 2607099,
-        "TimeStamp": "2024-09-05T12:05",
+        "TimeStamp": "2024-09-05T13:00",
         "Value": 349.0,
         "Offset": 0
     },
     {
         "colId": 2607102,
-        "TimeStamp": "2024-09-05T12:05",
+        "TimeStamp": "2024-09-05T13:00",
         "Value": 19.0,
         "Offset": 0
     },
     {
         "colId": 2607106,
-        "TimeStamp": "2024-09-05T12:05",
+        "TimeStamp": "2024-09-05T13:00",
         "Value": 20.0,
         "Offset": 0
     },
     {
         "colId": 2607110,
-        "TimeStamp": "2024-09-05T12:05",
+        "TimeStamp": "2024-09-05T13:00",
         "Value": 5.0,
         "Offset": 0
     },
     {
         "colId": 2607114,
-        "TimeStamp": "2024-09-05T12:05",
+        "TimeStamp": "2024-09-05T13:00",
         "Value": 0.0,
         "Offset": 0
     },
     {
         "colId": 2607118,
-        "TimeStamp": "2024-09-05T12:05",
+        "TimeStamp": "2024-09-05T13:00",
         "Value": 0.0,
         "Offset": 0
     },
     {
         "colId": 2607120,
-        "TimeStamp": "2024-09-05T12:05",
+        "TimeStamp": "2024-09-05T13:00",
         "Value": 0.0,
         "Offset": 0
     },
     {
         "colId": 2607124,
-        "TimeStamp": "2024-09-05T12:05",
+        "TimeStamp": "2024-09-05T13:00",
         "Value": 0.0,
         "Offset": 0
     },
     {
         "colId": 2607128,
-        "TimeStamp": "2024-09-05T12:05",
+        "TimeStamp": "2024-09-05T13:00",
         "Value": 550.0,
         "Offset": 0
     },
     {
         "colId": 2607132,
-        "TimeStamp": "2024-09-05T12:05",
+        "TimeStamp": "2024-09-05T13:00",
         "Value": 2.0,
         "Offset": 0
     },
     {
         "colId": 2607136,
-        "TimeStamp": "2024-09-05T12:05",
+        "TimeStamp": "2024-09-05T13:00",
         "Value": 120.0,
         "Offset": 0
     },
     {
         "colId": 2607098,
-        "TimeStamp": "2024-09-05T12:10",
+        "TimeStamp": "2024-09-05T13:05",
         "Value": 56.0,
         "Offset": 0
     },
     {
         "colId": 2607099,
-        "TimeStamp": "2024-09-05T12:10",
+        "TimeStamp": "2024-09-05T13:05",
         "Value": 349.0,
         "Offset": 0
     },
     {
         "colId": 2607102,
-        "TimeStamp": "2024-09-05T12:10",
+        "TimeStamp": "2024-09-05T13:05",
         "Value": 19.0,
         "Offset": 0
     },
     {
         "colId": 2607106,
-        "TimeStamp": "2024-09-05T12:10",
+        "TimeStamp": "2024-09-05T13:05",
         "Value": 20.0,
         "Offset": 0
     },
     {
         "colId": 2607110,
-        "TimeStamp": "2024-09-05T12:10",
+        "TimeStamp": "2024-09-05T13:05",
         "Value": 5.0,
         "Offset": 0
     },
     {
         "colId": 2607114,
-        "TimeStamp": "2024-09-05T12:10",
+        "TimeStamp": "2024-09-05T13:05",
         "Value": 0.0,
         "Offset": 0
     },
     {
         "colId": 2607118,
-        "TimeStamp": "2024-09-05T12:10",
+        "TimeStamp": "2024-09-05T13:05",
         "Value": 0.0,
         "Offset": 0
     },
     {
         "colId": 2607120,
-        "TimeStamp": "2024-09-05T12:10",
+        "TimeStamp": "2024-09-05T13:05",
         "Value": 0.0,
         "Offset": 0
     },
     {
         "colId": 2607124,
-        "TimeStamp": "2024-09-05T12:10",
+        "TimeStamp": "2024-09-05T13:05",
         "Value": 0.0,
         "Offset": 0
     },
     {
         "colId": 2607128,
-        "TimeStamp": "2024-09-05T12:10",
+        "TimeStamp": "2024-09-05T13:05",
         "Value": 550.0,
         "Offset": 0
     },
     {
         "colId": 2607132,
-        "TimeStamp": "2024-09-05T12:10",
+        "TimeStamp": "2024-09-05T13:05",
         "Value": 2.0,
         "Offset": 0
     },
     {
         "colId": 2607136,
-        "TimeStamp": "2024-09-05T12:10",
+        "TimeStamp": "2024-09-05T13:05",
         "Value": 120.0,
         "Offset": 0
     },
     {
         "colId": 2607098,
-        "TimeStamp": "2024-09-05T12:15",
+        "TimeStamp": "2024-09-05T13:10",
         "Value": 56.0,
         "Offset": 0
     },
     {
         "colId": 2607099,
-        "TimeStamp": "2024-09-05T12:15",
+        "TimeStamp": "2024-09-05T13:10",
         "Value": 349.0,
         "Offset": 0
     },
     {
         "colId": 2607102,
-        "TimeStamp": "2024-09-05T12:15",
+        "TimeStamp": "2024-09-05T13:10",
         "Value": 19.0,
         "Offset": 0
     },
     {
         "colId": 2607106,
-        "TimeStamp": "2024-09-05T12:15",
+        "TimeStamp": "2024-09-05T13:10",
         "Value": 20.0,
         "Offset": 0
     },
     {
         "colId": 2607110,
-        "TimeStamp": "2024-09-05T12:15",
+        "TimeStamp": "2024-09-05T13:10",
         "Value": 5.0,
         "Offset": 0
     },
     {
         "colId": 2607114,
-        "TimeStamp": "2024-09-05T12:15",
+        "TimeStamp": "2024-09-05T13:10",
         "Value": 0.0,
         "Offset": 0
     },
     {
         "colId": 2607118,
-        "TimeStamp": "2024-09-05T12:15",
+        "TimeStamp": "2024-09-05T13:10",
         "Value": 0.0,
         "Offset": 0
     },
     {
         "colId": 2607120,
-        "TimeStamp": "2024-09-05T12:15",
-        "Value": 0.0,
+        "TimeStamp": "2024-09-05T13:10",
+        "Value": 75.0,
         "Offset": 0
     },
     {
         "colId": 2607124,
-        "TimeStamp": "2024-09-05T12:15",
+        "TimeStamp": "2024-09-05T13:10",
         "Value": 0.0,
         "Offset": 0
     },
     {
         "colId": 2607128,
-        "TimeStamp": "2024-09-05T12:15",
+        "TimeStamp": "2024-09-05T13:10",
         "Value": 550.0,
         "Offset": 0
     },
     {
         "colId": 2607132,
-        "TimeStamp": "2024-09-05T12:15",
+        "TimeStamp": "2024-09-05T13:10",
         "Value": 2.0,
         "Offset": 0
     },
     {
         "colId": 2607136,
-        "TimeStamp": "2024-09-05T12:15",
+        "TimeStamp": "2024-09-05T13:10",
         "Value": 120.0,
         "Offset": 0
     },
     {
         "colId": 2607098,
-        "TimeStamp": "2024-09-05T12:20",
+        "TimeStamp": "2024-09-05T13:15",
         "Value": 56.0,
         "Offset": 0
     },
     {
         "colId": 2607099,
-        "TimeStamp": "2024-09-05T12:20",
+        "TimeStamp": "2024-09-05T13:15",
         "Value": 349.0,
         "Offset": 0
     },
     {
         "colId": 2607102,
-        "TimeStamp": "2024-09-05T12:20",
+        "TimeStamp": "2024-09-05T13:15",
         "Value": 19.0,
         "Offset": 0
     },
     {
         "colId": 2607106,
-        "TimeStamp": "2024-09-05T12:20",
+        "TimeStamp": "2024-09-05T13:15",
         "Value": 20.0,
         "Offset": 0
     },
     {
         "colId": 2607110,
-        "TimeStamp": "2024-09-05T12:20",
+        "TimeStamp": "2024-09-05T13:15",
         "Value": 5.0,
         "Offset": 0
     },
     {
         "colId": 2607114,
-        "TimeStamp": "2024-09-05T12:20",
+        "TimeStamp": "2024-09-05T13:15",
         "Value": 0.0,
         "Offset": 0
     },
     {
         "colId": 2607118,
-        "TimeStamp": "2024-09-05T12:20",
+        "TimeStamp": "2024-09-05T13:15",
         "Value": 0.0,
         "Offset": 0
     },
     {
         "colId": 2607120,
-        "TimeStamp": "2024-09-05T12:20",
-        "Value": 0.0,
+        "TimeStamp": "2024-09-05T13:15",
+        "Value": 75.0,
         "Offset": 0
     },
     {
         "colId": 2607124,
-        "TimeStamp": "2024-09-05T12:20",
+        "TimeStamp": "2024-09-05T13:15",
         "Value": 0.0,
         "Offset": 0
     },
     {
         "colId": 2607128,
-        "TimeStamp": "2024-09-05T12:20",
+        "TimeStamp": "2024-09-05T13:15",
         "Value": 550.0,
         "Offset": 0
     },
     {
         "colId": 2607132,
-        "TimeStamp": "2024-09-05T12:20",
+        "TimeStamp": "2024-09-05T13:15",
         "Value": 2.0,
         "Offset": 0
     },
     {
         "colId": 2607136,
-        "TimeStamp": "2024-09-05T12:20",
+        "TimeStamp": "2024-09-05T13:15",
         "Value": 120.0,
         "Offset": 0
     },
     {
         "colId": 2607098,
-        "TimeStamp": "2024-09-05T12:25",
+        "TimeStamp": "2024-09-05T13:20",
         "Value": 56.0,
         "Offset": 0
     },
     {
         "colId": 2607099,
-        "TimeStamp": "2024-09-05T12:25",
+        "TimeStamp": "2024-09-05T13:20",
         "Value": 349.0,
         "Offset": 0
     },
     {
         "colId": 2607102,
-        "TimeStamp": "2024-09-05T12:25",
+        "TimeStamp": "2024-09-05T13:20",
         "Value": 19.0,
         "Offset": 0
     },
     {
         "colId": 2607106,
-        "TimeStamp": "2024-09-05T12:25",
+        "TimeStamp": "2024-09-05T13:20",
         "Value": 20.0,
         "Offset": 0
     },
     {
         "colId": 2607110,
-        "TimeStamp": "2024-09-05T12:25",
+        "TimeStamp": "2024-09-05T13:20",
         "Value": 5.0,
         "Offset": 0
     },
     {
         "colId": 2607114,
-        "TimeStamp": "2024-09-05T12:25",
+        "TimeStamp": "2024-09-05T13:20",
         "Value": 0.0,
         "Offset": 0
     },
     {
         "colId": 2607118,
-        "TimeStamp": "2024-09-05T12:25",
+        "TimeStamp": "2024-09-05T13:20",
         "Value": 0.0,
         "Offset": 0
     },
     {
         "colId": 2607120,
-        "TimeStamp": "2024-09-05T12:25",
-        "Value": 0.0,
+        "TimeStamp": "2024-09-05T13:20",
+        "Value": 75.0,
         "Offset": 0
     },
     {
         "colId": 2607124,
-        "TimeStamp": "2024-09-05T12:25",
+        "TimeStamp": "2024-09-05T13:20",
         "Value": 0.0,
         "Offset": 0
     },
     {
         "colId": 2607128,
-        "TimeStamp": "2024-09-05T12:25",
+        "TimeStamp": "2024-09-05T13:20",
         "Value": 550.0,
         "Offset": 0
     },
     {
         "colId": 2607132,
-        "TimeStamp": "2024-09-05T12:25",
+        "TimeStamp": "2024-09-05T13:20",
         "Value": 2.0,
         "Offset": 0
     },
     {
         "colId": 2607136,
-        "TimeStamp": "2024-09-05T12:25",
+        "TimeStamp": "2024-09-05T13:20",
         "Value": 120.0,
         "Offset": 0
     },
     {
         "colId": 2607098,
-        "TimeStamp": "2024-09-05T12:30",
+        "TimeStamp": "2024-09-05T13:25",
         "Value": 56.0,
         "Offset": 0
     },
     {
         "colId": 2607099,
-        "TimeStamp": "2024-09-05T12:30",
+        "TimeStamp": "2024-09-05T13:25",
         "Value": 349.0,
         "Offset": 0
     },
     {
         "colId": 2607102,
-        "TimeStamp": "2024-09-05T12:30",
+        "TimeStamp": "2024-09-05T13:25",
         "Value": 19.0,
         "Offset": 0
     },
     {
         "colId": 2607106,
-        "TimeStamp": "2024-09-05T12:30",
+        "TimeStamp": "2024-09-05T13:25",
         "Value": 20.0,
         "Offset": 0
     },
     {
         "colId": 2607110,
-        "TimeStamp": "2024-09-05T12:30",
+        "TimeStamp": "2024-09-05T13:25",
         "Value": 5.0,
         "Offset": 0
     },
     {
         "colId": 2607114,
-        "TimeStamp": "2024-09-05T12:30",
+        "TimeStamp": "2024-09-05T13:25",
         "Value": 0.0,
         "Offset": 0
     },
     {
         "colId": 2607118,
-        "TimeStamp": "2024-09-05T12:30",
+        "TimeStamp": "2024-09-05T13:25",
         "Value": 0.0,
         "Offset": 0
     },
     {
         "colId": 2607120,
-        "TimeStamp": "2024-09-05T12:30",
-        "Value": 0.0,
+        "TimeStamp": "2024-09-05T13:25",
+        "Value": 75.0,
         "Offset": 0
     },
     {
         "colId": 2607124,
-        "TimeStamp": "2024-09-05T12:30",
+        "TimeStamp": "2024-09-05T13:25",
         "Value": 0.0,
         "Offset": 0
     },
     {
         "colId": 2607128,
-        "TimeStamp": "2024-09-05T12:30",
+        "TimeStamp": "2024-09-05T13:25",
         "Value": 550.0,
         "Offset": 0
     },
     {
         "colId": 2607132,
-        "TimeStamp": "2024-09-05T12:30",
+        "TimeStamp": "2024-09-05T13:25",
         "Value": 2.0,
         "Offset": 0
     },
     {
         "colId": 2607136,
-        "TimeStamp": "2024-09-05T12:30",
+        "TimeStamp": "2024-09-05T13:25",
         "Value": 120.0,
         "Offset": 0
     },
     {
         "colId": 2607098,
-        "TimeStamp": "2024-09-05T12:35",
+        "TimeStamp": "2024-09-05T13:30",
         "Value": 56.0,
         "Offset": 0
     },
     {
         "colId": 2607099,
-        "TimeStamp": "2024-09-05T12:35",
+        "TimeStamp": "2024-09-05T13:30",
         "Value": 349.0,
         "Offset": 0
     },
     {
         "colId": 2607102,
-        "TimeStamp": "2024-09-05T12:35",
+        "TimeStamp": "2024-09-05T13:30",
         "Value": 19.0,
         "Offset": 0
     },
     {
         "colId": 2607106,
-        "TimeStamp": "2024-09-05T12:35",
+        "TimeStamp": "2024-09-05T13:30",
         "Value": 20.0,
         "Offset": 0
     },
     {
         "colId": 2607110,
-        "TimeStamp": "2024-09-05T12:35",
+        "TimeStamp": "2024-09-05T13:30",
         "Value": 5.0,
         "Offset": 0
     },
     {
         "colId": 2607114,
-        "TimeStamp": "2024-09-05T12:35",
+        "TimeStamp": "2024-09-05T13:30",
         "Value": 0.0,
         "Offset": 0
     },
     {
         "colId": 2607118,
-        "TimeStamp": "2024-09-05T12:35",
+        "TimeStamp": "2024-09-05T13:30",
         "Value": 0.0,
         "Offset": 0
     },
     {
         "colId": 2607120,
-        "TimeStamp": "2024-09-05T12:35",
-        "Value": 0.0,
+        "TimeStamp": "2024-09-05T13:30",
+        "Value": 75.0,
         "Offset": 0
     },
     {
         "colId": 2607124,
-        "TimeStamp": "2024-09-05T12:35",
+        "TimeStamp": "2024-09-05T13:30",
         "Value": 0.0,
         "Offset": 0
     },
     {
         "colId": 2607128,
-        "TimeStamp": "2024-09-05T12:35",
+        "TimeStamp": "2024-09-05T13:30",
         "Value": 550.0,
         "Offset": 0
     },
     {
         "colId": 2607132,
-        "TimeStamp": "2024-09-05T12:35",
+        "TimeStamp": "2024-09-05T13:30",
         "Value": 2.0,
         "Offset": 0
     },
     {
         "colId": 2607136,
-        "TimeStamp": "2024-09-05T12:35",
+        "TimeStamp": "2024-09-05T13:30",
         "Value": 120.0,
         "Offset": 0
     },
     {
         "colId": 2607098,
-        "TimeStamp": "2024-09-05T12:40",
+        "TimeStamp": "2024-09-05T13:35",
         "Value": 56.0,
         "Offset": 0
     },
     {
         "colId": 2607099,
-        "TimeStamp": "2024-09-05T12:40",
+        "TimeStamp": "2024-09-05T13:35",
         "Value": 349.0,
         "Offset": 0
     },
     {
         "colId": 2607102,
-        "TimeStamp": "2024-09-05T12:40",
+        "TimeStamp": "2024-09-05T13:35",
         "Value": 19.0,
         "Offset": 0
     },
     {
         "colId": 2607106,
-        "TimeStamp": "2024-09-05T12:40",
+        "TimeStamp": "2024-09-05T13:35",
         "Value": 20.0,
         "Offset": 0
     },
     {
         "colId": 2607110,
-        "TimeStamp": "2024-09-05T12:40",
+        "TimeStamp": "2024-09-05T13:35",
         "Value": 5.0,
         "Offset": 0
     },
     {
         "colId": 2607114,
-        "TimeStamp": "2024-09-05T12:40",
+        "TimeStamp": "2024-09-05T13:35",
         "Value": 0.0,
         "Offset": 0
     },
     {
         "colId": 2607118,
-        "TimeStamp": "2024-09-05T12:40",
+        "TimeStamp": "2024-09-05T13:35",
         "Value": 0.0,
         "Offset": 0
     },
     {
         "colId": 2607120,
-        "TimeStamp": "2024-09-05T12:40",
-        "Value": 0.0,
+        "TimeStamp": "2024-09-05T13:35",
+        "Value": 75.0,
         "Offset": 0
     },
     {
         "colId": 2607124,
-        "TimeStamp": "2024-09-05T12:40",
+        "TimeStamp": "2024-09-05T13:35",
         "Value": 0.0,
         "Offset": 0
     },
     {
         "colId": 2607128,
-        "TimeStamp": "2024-09-05T12:40",
+        "TimeStamp": "2024-09-05T13:35",
         "Value": 550.0,
         "Offset": 0
     },
     {
         "colId": 2607132,
-        "TimeStamp": "2024-09-05T12:40",
+        "TimeStamp": "2024-09-05T13:35",
         "Value": 2.0,
         "Offset": 0
     },
     {
         "colId": 2607136,
-        "TimeStamp": "2024-09-05T12:40",
+        "TimeStamp": "2024-09-05T13:35",
         "Value": 120.0,
         "Offset": 0
     },
     {
         "colId": 2607098,
-        "TimeStamp": "2024-09-05T12:45",
+        "TimeStamp": "2024-09-05T13:40",
         "Value": 56.0,
         "Offset": 0
     },
     {
         "colId": 2607099,
-        "TimeStamp": "2024-09-05T12:45",
+        "TimeStamp": "2024-09-05T13:40",
         "Value": 349.0,
         "Offset": 0
     },
     {
         "colId": 2607102,
-        "TimeStamp": "2024-09-05T12:45",
+        "TimeStamp": "2024-09-05T13:40",
         "Value": 19.0,
         "Offset": 0
     },
     {
         "colId": 2607106,
-        "TimeStamp": "2024-09-05T12:45",
+        "TimeStamp": "2024-09-05T13:40",
         "Value": 20.0,
         "Offset": 0
     },
     {
         "colId": 2607110,
-        "TimeStamp": "2024-09-05T12:45",
+        "TimeStamp": "2024-09-05T13:40",
         "Value": 5.0,
         "Offset": 0
     },
     {
         "colId": 2607114,
-        "TimeStamp": "2024-09-05T12:45",
+        "TimeStamp": "2024-09-05T13:40",
         "Value": 0.0,
         "Offset": 0
     },
     {
         "colId": 2607118,
-        "TimeStamp": "2024-09-05T12:45",
+        "TimeStamp": "2024-09-05T13:40",
         "Value": 0.0,
         "Offset": 0
     },
     {
         "colId": 2607120,
-        "TimeStamp": "2024-09-05T12:45",
-        "Value": 0.0,
+        "TimeStamp": "2024-09-05T13:40",
+        "Value": 75.0,
         "Offset": 0
     },
     {
         "colId": 2607124,
-        "TimeStamp": "2024-09-05T12:45",
+        "TimeStamp": "2024-09-05T13:40",
         "Value": 0.0,
         "Offset": 0
     },
     {
         "colId": 2607128,
-        "TimeStamp": "2024-09-05T12:45",
+        "TimeStamp": "2024-09-05T13:40",
         "Value": 550.0,
         "Offset": 0
     },
     {
         "colId": 2607132,
-        "TimeStamp": "2024-09-05T12:45",
+        "TimeStamp": "2024-09-05T13:40",
         "Value": 2.0,
         "Offset": 0
     },
     {
         "colId": 2607136,
-        "TimeStamp": "2024-09-05T12:45",
+        "TimeStamp": "2024-09-05T13:40",
         "Value": 120.0,
         "Offset": 0
     },
     {
         "colId": 2607098,
-        "TimeStamp": "2024-09-05T12:50",
+        "TimeStamp": "2024-09-05T13:45",
         "Value": 56.0,
         "Offset": 0
     },
     {
         "colId": 2607099,
-        "TimeStamp": "2024-09-05T12:50",
+        "TimeStamp": "2024-09-05T13:45",
         "Value": 349.0,
         "Offset": 0
     },
     {
         "colId": 2607102,
-        "TimeStamp": "2024-09-05T12:50",
+        "TimeStamp": "2024-09-05T13:45",
         "Value": 19.0,
         "Offset": 0
     },
     {
         "colId": 2607106,
-        "TimeStamp": "2024-09-05T12:50",
+        "TimeStamp": "2024-09-05T13:45",
         "Value": 20.0,
         "Offset": 0
     },
     {
         "colId": 2607110,
-        "TimeStamp": "2024-09-05T12:50",
+        "TimeStamp": "2024-09-05T13:45",
         "Value": 5.0,
         "Offset": 0
     },
     {
         "colId": 2607114,
-        "TimeStamp": "2024-09-05T12:50",
+        "TimeStamp": "2024-09-05T13:45",
         "Value": 0.0,
         "Offset": 0
     },
     {
         "colId": 2607118,
-        "TimeStamp": "2024-09-05T12:50",
+        "TimeStamp": "2024-09-05T13:45",
         "Value": 0.0,
         "Offset": 0
     },
     {
         "colId": 2607120,
-        "TimeStamp": "2024-09-05T12:50",
-        "Value": 0.0,
+        "TimeStamp": "2024-09-05T13:45",
+        "Value": 75.0,
         "Offset": 0
     },
     {
         "colId": 2607124,
-        "TimeStamp": "2024-09-05T12:50",
+        "TimeStamp": "2024-09-05T13:45",
         "Value": 0.0,
         "Offset": 0
     },
     {
         "colId": 2607128,
-        "TimeStamp": "2024-09-05T12:50",
+        "TimeStamp": "2024-09-05T13:45",
         "Value": 550.0,
         "Offset": 0
     },
     {
         "colId": 2607132,
-        "TimeStamp": "2024-09-05T12:50",
+        "TimeStamp": "2024-09-05T13:45",
         "Value": 2.0,
         "Offset": 0
     },
     {
         "colId": 2607136,
-        "TimeStamp": "2024-09-05T12:50",
+        "TimeStamp": "2024-09-05T13:45",
         "Value": 120.0,
         "Offset": 0
     },
     {
         "colId": 2607098,
-        "TimeStamp": "2024-09-05T12:55",
-        "Value": 56.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607099,
-        "TimeStamp": "2024-09-05T12:55",
-        "Value": 349.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607102,
-        "TimeStamp": "2024-09-05T12:55",
-        "Value": 19.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607106,
-        "TimeStamp": "2024-09-05T12:55",
-        "Value": 20.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607110,
-        "TimeStamp": "2024-09-05T12:55",
-        "Value": 5.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607114,
-        "TimeStamp": "2024-09-05T12:55",
-        "Value": 0.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607118,
-        "TimeStamp": "2024-09-05T12:55",
-        "Value": 0.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607120,
-        "TimeStamp": "2024-09-05T12:55",
-        "Value": 0.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607124,
-        "TimeStamp": "2024-09-05T12:55",
-        "Value": 0.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607128,
-        "TimeStamp": "2024-09-05T12:55",
-        "Value": 550.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607132,
-        "TimeStamp": "2024-09-05T12:55",
-        "Value": 2.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607136,
-        "TimeStamp": "2024-09-05T12:55",
-        "Value": 1440.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607098,
-        "TimeStamp": "2024-09-05T13:00",
-        "Value": 56.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607099,
-        "TimeStamp": "2024-09-05T13:00",
-        "Value": 349.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607102,
-        "TimeStamp": "2024-09-05T13:00",
-        "Value": 19.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607106,
-        "TimeStamp": "2024-09-05T13:00",
-        "Value": 20.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607110,
-        "TimeStamp": "2024-09-05T13:00",
-        "Value": 5.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607114,
-        "TimeStamp": "2024-09-05T13:00",
-        "Value": 0.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607118,
-        "TimeStamp": "2024-09-05T13:00",
-        "Value": 0.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607120,
-        "TimeStamp": "2024-09-05T13:00",
-        "Value": 0.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607124,
-        "TimeStamp": "2024-09-05T13:00",
-        "Value": 0.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607128,
-        "TimeStamp": "2024-09-05T13:00",
-        "Value": 550.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607132,
-        "TimeStamp": "2024-09-05T13:00",
-        "Value": 2.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607136,
-        "TimeStamp": "2024-09-05T13:00",
-        "Value": 1440.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607098,
-        "TimeStamp": "2024-09-05T13:05",
-        "Value": 56.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607099,
-        "TimeStamp": "2024-09-05T13:05",
-        "Value": 349.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607102,
-        "TimeStamp": "2024-09-05T13:05",
-        "Value": 19.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607106,
-        "TimeStamp": "2024-09-05T13:05",
-        "Value": 20.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607110,
-        "TimeStamp": "2024-09-05T13:05",
-        "Value": 5.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607114,
-        "TimeStamp": "2024-09-05T13:05",
-        "Value": 0.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607118,
-        "TimeStamp": "2024-09-05T13:05",
-        "Value": 0.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607120,
-        "TimeStamp": "2024-09-05T13:05",
-        "Value": 0.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607124,
-        "TimeStamp": "2024-09-05T13:05",
-        "Value": 0.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607128,
-        "TimeStamp": "2024-09-05T13:05",
-        "Value": 550.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607132,
-        "TimeStamp": "2024-09-05T13:05",
-        "Value": 2.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607136,
-        "TimeStamp": "2024-09-05T13:05",
-        "Value": 1440.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607098,
-        "TimeStamp": "2024-09-05T13:10",
-        "Value": 56.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607099,
-        "TimeStamp": "2024-09-05T13:10",
-        "Value": 349.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607102,
-        "TimeStamp": "2024-09-05T13:10",
-        "Value": 19.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607106,
-        "TimeStamp": "2024-09-05T13:10",
-        "Value": 20.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607110,
-        "TimeStamp": "2024-09-05T13:10",
-        "Value": 5.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607114,
-        "TimeStamp": "2024-09-05T13:10",
-        "Value": 0.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607118,
-        "TimeStamp": "2024-09-05T13:10",
-        "Value": 0.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607120,
-        "TimeStamp": "2024-09-05T13:10",
-        "Value": 0.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607124,
-        "TimeStamp": "2024-09-05T13:10",
-        "Value": 0.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607128,
-        "TimeStamp": "2024-09-05T13:10",
-        "Value": 550.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607132,
-        "TimeStamp": "2024-09-05T13:10",
-        "Value": 2.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607136,
-        "TimeStamp": "2024-09-05T13:10",
-        "Value": 1440.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607098,
-        "TimeStamp": "2024-09-05T13:15",
-        "Value": 56.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607099,
-        "TimeStamp": "2024-09-05T13:15",
-        "Value": 349.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607102,
-        "TimeStamp": "2024-09-05T13:15",
-        "Value": 19.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607106,
-        "TimeStamp": "2024-09-05T13:15",
-        "Value": 20.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607110,
-        "TimeStamp": "2024-09-05T13:15",
-        "Value": 5.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607114,
-        "TimeStamp": "2024-09-05T13:15",
-        "Value": 0.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607118,
-        "TimeStamp": "2024-09-05T13:15",
-        "Value": 0.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607120,
-        "TimeStamp": "2024-09-05T13:15",
-        "Value": 0.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607124,
-        "TimeStamp": "2024-09-05T13:15",
-        "Value": 0.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607128,
-        "TimeStamp": "2024-09-05T13:15",
-        "Value": 550.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607132,
-        "TimeStamp": "2024-09-05T13:15",
-        "Value": 2.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607136,
-        "TimeStamp": "2024-09-05T13:15",
-        "Value": 1440.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607098,
-        "TimeStamp": "2024-09-05T13:20",
-        "Value": 56.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607099,
-        "TimeStamp": "2024-09-05T13:20",
-        "Value": 349.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607102,
-        "TimeStamp": "2024-09-05T13:20",
-        "Value": 19.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607106,
-        "TimeStamp": "2024-09-05T13:20",
-        "Value": 20.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607110,
-        "TimeStamp": "2024-09-05T13:20",
-        "Value": 5.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607114,
-        "TimeStamp": "2024-09-05T13:20",
-        "Value": 0.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607118,
-        "TimeStamp": "2024-09-05T13:20",
-        "Value": 0.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607120,
-        "TimeStamp": "2024-09-05T13:20",
-        "Value": 0.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607124,
-        "TimeStamp": "2024-09-05T13:20",
-        "Value": 0.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607128,
-        "TimeStamp": "2024-09-05T13:20",
-        "Value": 550.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607132,
-        "TimeStamp": "2024-09-05T13:20",
-        "Value": 2.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607136,
-        "TimeStamp": "2024-09-05T13:20",
-        "Value": 1440.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607098,
-        "TimeStamp": "2024-09-05T13:25",
-        "Value": 56.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607099,
-        "TimeStamp": "2024-09-05T13:25",
-        "Value": 349.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607102,
-        "TimeStamp": "2024-09-05T13:25",
-        "Value": 19.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607106,
-        "TimeStamp": "2024-09-05T13:25",
-        "Value": 20.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607110,
-        "TimeStamp": "2024-09-05T13:25",
-        "Value": 5.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607114,
-        "TimeStamp": "2024-09-05T13:25",
-        "Value": 0.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607118,
-        "TimeStamp": "2024-09-05T13:25",
-        "Value": 0.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607120,
-        "TimeStamp": "2024-09-05T13:25",
-        "Value": 0.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607124,
-        "TimeStamp": "2024-09-05T13:25",
-        "Value": 0.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607128,
-        "TimeStamp": "2024-09-05T13:25",
-        "Value": 550.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607132,
-        "TimeStamp": "2024-09-05T13:25",
-        "Value": 2.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607136,
-        "TimeStamp": "2024-09-05T13:25",
-        "Value": 1440.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607098,
-        "TimeStamp": "2024-09-05T13:30",
-        "Value": 56.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607099,
-        "TimeStamp": "2024-09-05T13:30",
-        "Value": 349.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607102,
-        "TimeStamp": "2024-09-05T13:30",
-        "Value": 19.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607106,
-        "TimeStamp": "2024-09-05T13:30",
-        "Value": 20.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607110,
-        "TimeStamp": "2024-09-05T13:30",
-        "Value": 5.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607114,
-        "TimeStamp": "2024-09-05T13:30",
-        "Value": 0.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607118,
-        "TimeStamp": "2024-09-05T13:30",
-        "Value": 0.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607120,
-        "TimeStamp": "2024-09-05T13:30",
-        "Value": 0.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607124,
-        "TimeStamp": "2024-09-05T13:30",
-        "Value": 0.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607128,
-        "TimeStamp": "2024-09-05T13:30",
-        "Value": 550.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607132,
-        "TimeStamp": "2024-09-05T13:30",
-        "Value": 2.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607136,
-        "TimeStamp": "2024-09-05T13:30",
-        "Value": 1440.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607098,
-        "TimeStamp": "2024-09-05T13:35",
-        "Value": 56.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607099,
-        "TimeStamp": "2024-09-05T13:35",
-        "Value": 349.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607102,
-        "TimeStamp": "2024-09-05T13:35",
-        "Value": 19.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607106,
-        "TimeStamp": "2024-09-05T13:35",
-        "Value": 20.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607110,
-        "TimeStamp": "2024-09-05T13:35",
-        "Value": 5.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607114,
-        "TimeStamp": "2024-09-05T13:35",
-        "Value": 0.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607118,
-        "TimeStamp": "2024-09-05T13:35",
-        "Value": 0.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607120,
-        "TimeStamp": "2024-09-05T13:35",
-        "Value": 0.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607124,
-        "TimeStamp": "2024-09-05T13:35",
-        "Value": 0.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607128,
-        "TimeStamp": "2024-09-05T13:35",
-        "Value": 550.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607132,
-        "TimeStamp": "2024-09-05T13:35",
-        "Value": 2.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607136,
-        "TimeStamp": "2024-09-05T13:35",
-        "Value": 1440.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607098,
-        "TimeStamp": "2024-09-05T13:40",
-        "Value": 56.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607099,
-        "TimeStamp": "2024-09-05T13:40",
-        "Value": 349.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607102,
-        "TimeStamp": "2024-09-05T13:40",
-        "Value": 19.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607106,
-        "TimeStamp": "2024-09-05T13:40",
-        "Value": 20.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607110,
-        "TimeStamp": "2024-09-05T13:40",
-        "Value": 5.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607114,
-        "TimeStamp": "2024-09-05T13:40",
-        "Value": 0.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607118,
-        "TimeStamp": "2024-09-05T13:40",
-        "Value": 0.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607120,
-        "TimeStamp": "2024-09-05T13:40",
-        "Value": 0.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607124,
-        "TimeStamp": "2024-09-05T13:40",
-        "Value": 0.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607128,
-        "TimeStamp": "2024-09-05T13:40",
-        "Value": 550.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607132,
-        "TimeStamp": "2024-09-05T13:40",
-        "Value": 2.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607136,
-        "TimeStamp": "2024-09-05T13:40",
-        "Value": 1440.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607098,
-        "TimeStamp": "2024-09-05T13:45",
-        "Value": 56.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607099,
-        "TimeStamp": "2024-09-05T13:45",
-        "Value": 349.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607102,
-        "TimeStamp": "2024-09-05T13:45",
-        "Value": 19.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607106,
-        "TimeStamp": "2024-09-05T13:45",
-        "Value": 20.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607110,
-        "TimeStamp": "2024-09-05T13:45",
-        "Value": 5.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607114,
-        "TimeStamp": "2024-09-05T13:45",
-        "Value": 0.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607118,
-        "TimeStamp": "2024-09-05T13:45",
-        "Value": 0.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607120,
-        "TimeStamp": "2024-09-05T13:45",
-        "Value": 0.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607124,
-        "TimeStamp": "2024-09-05T13:45",
-        "Value": 0.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607128,
-        "TimeStamp": "2024-09-05T13:45",
-        "Value": 550.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607132,
-        "TimeStamp": "2024-09-05T13:45",
-        "Value": 2.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607136,
-        "TimeStamp": "2024-09-05T13:45",
-        "Value": 1440.0,
-        "Offset": 0
-    },
-    {
-        "colId": 2607098,
         "TimeStamp": "2024-09-05T13:50",
         "Value": 56.0,
         "Offset": 0
@@ -11996,7 +11996,7 @@
     {
         "colId": 2607120,
         "TimeStamp": "2024-09-05T13:50",
-        "Value": 0.0,
+        "Value": 75.0,
         "Offset": 0
     },
     {
@@ -12020,7 +12020,7 @@
     {
         "colId": 2607136,
         "TimeStamp": "2024-09-05T13:50",
-        "Value": 1440.0,
+        "Value": 120.0,
         "Offset": 0
     },
     {
@@ -12068,7 +12068,7 @@
     {
         "colId": 2607120,
         "TimeStamp": "2024-09-05T13:55",
-        "Value": 0.0,
+        "Value": 75.0,
         "Offset": 0
     },
     {
@@ -12140,7 +12140,7 @@
     {
         "colId": 2607120,
         "TimeStamp": "2024-09-05T14:00",
-        "Value": 0.0,
+        "Value": 75.0,
         "Offset": 0
     },
     {
@@ -12212,7 +12212,7 @@
     {
         "colId": 2607120,
         "TimeStamp": "2024-09-05T14:05",
-        "Value": 0.0,
+        "Value": 75.0,
         "Offset": 0
     },
     {
@@ -12284,7 +12284,7 @@
     {
         "colId": 2607120,
         "TimeStamp": "2024-09-05T14:10",
-        "Value": 0.0,
+        "Value": 75.0,
         "Offset": 0
     },
     {
@@ -12356,7 +12356,7 @@
     {
         "colId": 2607120,
         "TimeStamp": "2024-09-05T14:15",
-        "Value": 0.0,
+        "Value": 75.0,
         "Offset": 0
     },
     {
@@ -12428,7 +12428,7 @@
     {
         "colId": 2607120,
         "TimeStamp": "2024-09-05T14:20",
-        "Value": 0.0,
+        "Value": 75.0,
         "Offset": 0
     },
     {
@@ -12500,7 +12500,7 @@
     {
         "colId": 2607120,
         "TimeStamp": "2024-09-05T14:25",
-        "Value": 0.0,
+        "Value": 75.0,
         "Offset": 0
     },
     {
@@ -12572,7 +12572,7 @@
     {
         "colId": 2607120,
         "TimeStamp": "2024-09-05T14:30",
-        "Value": 0.0,
+        "Value": 75.0,
         "Offset": 0
     },
     {
@@ -12644,7 +12644,7 @@
     {
         "colId": 2607120,
         "TimeStamp": "2024-09-05T14:35",
-        "Value": 0.0,
+        "Value": 75.0,
         "Offset": 0
     },
     {
@@ -12716,7 +12716,7 @@
     {
         "colId": 2607120,
         "TimeStamp": "2024-09-05T14:40",
-        "Value": 0.0,
+        "Value": 75.0,
         "Offset": 0
     },
     {
@@ -12788,7 +12788,7 @@
     {
         "colId": 2607120,
         "TimeStamp": "2024-09-05T14:45",
-        "Value": 0.0,
+        "Value": 75.0,
         "Offset": 0
     },
     {
@@ -12860,7 +12860,7 @@
     {
         "colId": 2607120,
         "TimeStamp": "2024-09-05T14:50",
-        "Value": 0.0,
+        "Value": 75.0,
         "Offset": 0
     },
     {
@@ -12932,7 +12932,7 @@
     {
         "colId": 2607120,
         "TimeStamp": "2024-09-05T14:55",
-        "Value": 0.0,
+        "Value": 75.0,
         "Offset": 0
     },
     {
@@ -13004,7 +13004,7 @@
     {
         "colId": 2607120,
         "TimeStamp": "2024-09-05T15:00",
-        "Value": 0.0,
+        "Value": 75.0,
         "Offset": 0
     },
     {
@@ -13076,7 +13076,7 @@
     {
         "colId": 2607120,
         "TimeStamp": "2024-09-05T15:05",
-        "Value": 0.0,
+        "Value": 75.0,
         "Offset": 0
     },
     {
@@ -13148,7 +13148,7 @@
     {
         "colId": 2607120,
         "TimeStamp": "2024-09-05T15:10",
-        "Value": 0.0,
+        "Value": 75.0,
         "Offset": 0
     },
     {
@@ -13220,7 +13220,7 @@
     {
         "colId": 2607120,
         "TimeStamp": "2024-09-05T15:15",
-        "Value": 0.0,
+        "Value": 75.0,
         "Offset": 0
     },
     {
@@ -13292,7 +13292,7 @@
     {
         "colId": 2607120,
         "TimeStamp": "2024-09-05T15:20",
-        "Value": 0.0,
+        "Value": 75.0,
         "Offset": 0
     },
     {
@@ -13364,7 +13364,7 @@
     {
         "colId": 2607120,
         "TimeStamp": "2024-09-05T15:25",
-        "Value": 0.0,
+        "Value": 75.0,
         "Offset": 0
     },
     {
@@ -13436,7 +13436,7 @@
     {
         "colId": 2607120,
         "TimeStamp": "2024-09-05T15:30",
-        "Value": 0.0,
+        "Value": 75.0,
         "Offset": 0
     },
     {
@@ -13508,7 +13508,7 @@
     {
         "colId": 2607120,
         "TimeStamp": "2024-09-05T15:35",
-        "Value": 0.0,
+        "Value": 75.0,
         "Offset": 0
     },
     {
@@ -13580,7 +13580,7 @@
     {
         "colId": 2607120,
         "TimeStamp": "2024-09-05T15:40",
-        "Value": 0.0,
+        "Value": 75.0,
         "Offset": 0
     },
     {
@@ -13652,7 +13652,7 @@
     {
         "colId": 2607120,
         "TimeStamp": "2024-09-05T15:45",
-        "Value": 0.0,
+        "Value": 75.0,
         "Offset": 0
     },
     {
@@ -13724,7 +13724,7 @@
     {
         "colId": 2607120,
         "TimeStamp": "2024-09-05T15:50",
-        "Value": 0.0,
+        "Value": 75.0,
         "Offset": 0
     },
     {
@@ -13796,7 +13796,7 @@
     {
         "colId": 2607120,
         "TimeStamp": "2024-09-05T15:55",
-        "Value": 0.0,
+        "Value": 75.0,
         "Offset": 0
     },
     {
@@ -13868,7 +13868,7 @@
     {
         "colId": 2607120,
         "TimeStamp": "2024-09-05T16:00",
-        "Value": 0.0,
+        "Value": 75.0,
         "Offset": 0
     },
     {
@@ -13940,7 +13940,7 @@
     {
         "colId": 2607120,
         "TimeStamp": "2024-09-05T16:05",
-        "Value": 0.0,
+        "Value": 75.0,
         "Offset": 0
     },
     {
@@ -14012,7 +14012,7 @@
     {
         "colId": 2607120,
         "TimeStamp": "2024-09-05T16:10",
-        "Value": 0.0,
+        "Value": 75.0,
         "Offset": 0
     },
     {
@@ -16532,7 +16532,7 @@
     {
         "colId": 2607120,
         "TimeStamp": "2024-09-05T19:05",
-        "Value": 90.0,
+        "Value": 0.0,
         "Offset": 0
     },
     {

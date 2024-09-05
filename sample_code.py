@@ -180,7 +180,7 @@ if __name__ == "__main__":
     # for item in result2['ModuleItems']:
     #     print(f"{item['Description']}  : {item['ColId']}")
     
-    colid = 2664621
+    colid = 2664615
     # # colid = 2664622
     # colid = 2664615  # plant weight
 
@@ -188,7 +188,7 @@ if __name__ == "__main__":
     # put_value 나 put_values로 데이터 전송
     
     # date     
-    start_date = datetime(2024,9,1,0,0,0)
+    start_date = datetime(2024,9,5,0,0,0)
     end_date = datetime(2024,9,6,0,0,0)
         
     result3 = get_data(token,
@@ -198,9 +198,9 @@ if __name__ == "__main__":
                         end_date.isoformat()
                         )    
         
-    # print("data : " , result3)
+    print("data : " , result3)
     
-    # print("ok")
+    print("ok")
     
     # for colid in LETSGROW_MOD_COLS_MAP[GREENHOUSE_MODULE_ID]:
     #     start_date = datetime(2024,8,2,0,0,0)
