@@ -2,7 +2,7 @@ import os
 from datetime import date
 
 # 재배를 시작한 날자 nthdate 를 결정하는데 필요
-crop_begin_date = date(2024, 7, 15)
+crop_begin_date = date(2024, 9, 3)
 
 # timescale db 접속 정보
 timescale_db = os.getenv('timescale_db', 'postgres')

@@ -4,6 +4,7 @@ import json
 import yaml
 import traceback
 import time
+import pytz
 
 sys.path.append('./')
 
@@ -20,7 +21,7 @@ from aaaa.strategy.strategy import temperature_strategy_b, energy_screen_strateg
 
 def per_day():
     try:
-        today = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
+        today = datetime.now(pytz.timezone('Europe/Amsterdam')).replace(tzinfo=None).replace(hour=0, minute=0, second=0, microsecond=0)
         lg_service = LetsgrowService()
         lg_service.jsonbak_to_letsgrow(begin_time=today,
                                        json_path='a_util/rest_api/save_control.json')
@@ -34,6 +35,8 @@ def per_day():
                 
     # now = datetime(2024,8,25,0,0,0)    # 특정 날자 세팅
     now = None   # 만약 오늘을 집어넣고 싶으면 today는 None으로 설정
+    
+    print("############################ excution_time : ", datetime.now(pytz.timezone('Europe/Amsterdam')).replace(tzinfo=None)) 
         
     greenhouse = GreenhouseControl(      
         config=config,  
@@ -58,6 +61,8 @@ def per_day():
     # #print(greenhouse)
     greenhouse.save_to_db(setpoint)
     greenhouse.apply_to_greenhouse()
+    
+    print("per_day run successfully")
        
 if __name__ == "__main__":
     s =  per_day()

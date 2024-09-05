@@ -96,7 +96,10 @@ def led_strategy_b(_in: GreenHouseInput, _out: GreenHouseOutput):
     print("expected_DLI : ", expected_DLI)    
     if DLI_need > 0:
         # DLI 를 맞추기 위해 켜야 하는 LED 5분 틱 갯수
-        LED_time_per_5min = (DLI_need * 1e6) / (_in.config['base_LED_umol']*60*5)   # 100일때 200umol 이라 *2를 함. 1 틱이 5분단위 이므로 60*5초를 곱함)
+        if _in.now < datetime(2024,9,22,0,0,0):
+            LED_time_per_5min = (DLI_need * 1e6) / (_in.config['base_LED_umol']*60*5)   # 100일때 200umol 이라 *2를 함. 1 틱이 5분단위 이므로 60*5초를 곱함)
+        else:
+            LED_time_per_5min = (DLI_need * 1e6) / (_in.config['base_LED_umol']*2*60*5)
         
         filtered_by_threshold = _in.indoor_env['fc_radiation_5min'][_in.indoor_env['fc_radiation_5min']>50]
         # filtered_by_threshold = []
@@ -104,15 +107,22 @@ def led_strategy_b(_in: GreenHouseInput, _out: GreenHouseOutput):
             led_end_time_int = datetime_to_int(filtered_by_threshold.index[0])
             led_start_time_int = int(led_end_time_int-LED_time_per_5min)          
         else:             
-            led_start_time_int = datetime_to_int(datetime(2000,1,1,1,0,0))
+            led_start_time_int = datetime_to_int(datetime(2000,1,1,1,20,0))
             led_end_time_int = _in.set_time_int
             
-        if led_start_time_int < datetime_to_int(datetime(2000,1,1,1,0,0)):
-            led_start_time_int = datetime_to_int(datetime(2000,1,1,1,0,0))  
+        min_possible_led_on_time = (_in.set_time_int+6*12)-288
+        if min_possible_led_on_time < 12:
+            min_possible_led_on_time = 12
+        if led_start_time_int < min_possible_led_on_time:
+            # 6 시간 휴식 보장
+            led_start_time_int = min_possible_led_on_time 
+            # led_start_time_int = datetime_to_int(datetime(2000,1,1,1,20,0))  
         if led_end_time_int > _in.set_time_int:
             led_end_time_int = _in.set_time_int
-        
-        _out.setting_point['sp_value_to_isii_1_5min'][led_start_time_int:led_end_time_int] = _in.config['base_LED_umol'] / 2     ## 200umol -> 100%            
+        if _in.now < datetime(2024,9,22,0,0,0):
+            _out.setting_point['sp_value_to_isii_1_5min'][led_start_time_int:led_end_time_int] = _in.config['base_LED_umol'] / 2     ## 200umol -> 100%            
+        else:
+            _out.setting_point['sp_value_to_isii_1_5min'][led_start_time_int:led_end_time_int] = _in.config['base_LED_umol']     ## 200umol -> 100%            
     else:
         _out.setting_point['sp_value_to_isii_1_5min'] = [0]*288 
     
@@ -162,11 +172,11 @@ def co2_strategy_b(_in: GreenHouseInput, _out: GreenHouseOutput):
       after fruit stage :  more than 1000 correlation vent
     """
     _out.setting_point['sp_co2_setpoint_ppm_5min']  = 300
-    if _in.today <= datetime(2023,9,22):
-      _out.setting_point['sp_co2_setpoint_ppm_5min'][_in.set_time_int-1*12:_in.set_time_int+1*12] = 550
+    if _in.today <= datetime(2024,9,22):
+      _out.setting_point['sp_co2_setpoint_ppm_5min'][_in.rise_time_int-1*12:_in.set_time_int+1*12] = 550
       _out.setting_point['sp_co2_setpoint_ppm_5min'][_out.setting_point['sp_value_to_isii_1_5min']>0] = 550
     else:
-      _out.setting_point['sp_co2_setpoint_ppm_5min'][_in.set_time_int-1*12:_in.set_time_int+1*12] = 800  
+      _out.setting_point['sp_co2_setpoint_ppm_5min'][_in.rise_time_int-1*12:_in.set_time_int+1*12] = 800  
       _out.setting_point['sp_co2_setpoint_ppm_5min'][_out.setting_point['sp_value_to_isii_1_5min']>0] = 800
     
     return _out
@@ -205,9 +215,9 @@ def irrigation_strategy_b(_in: GreenHouseInput, _out: GreenHouseOutput):
     led_nonzero = _out.setting_point['sp_value_to_isii_1_5min'].to_numpy().nonzero()[0]
         
     if len(led_nonzero) != 0:
-        _out.setting_point['sp_irrigation_interval_time_setpoint_min_5min'][led_nonzero[0]] = 4
+        _out.setting_point['sp_irrigation_interval_time_setpoint_min_5min'][led_nonzero[0]+4] = 60 #광이 조사된뒤 20분 뒤부터 시작 
     else:
-        _out.setting_point['sp_irrigation_interval_time_setpoint_min_5min'][_in.rise_time_int] = 4
+        _out.setting_point['sp_irrigation_interval_time_setpoint_min_5min'][_in.rise_time_int] = 60
 
     _out.setting_point['shot_number'] = 1
 
@@ -253,6 +263,9 @@ def harvest_strategy_b(_in: GreenHouseInput, _out: GreenHouseOutput):
     """ 
     total_days = (datetime(2024,12,15) - datetime(2024,1,1,0,0)).days
     
+    if _in.now >= datetime(2024,11,20):
+        total_days = (datetime(2024,11,20) - datetime(2024,1,1,0,0)).days
+    
     _out.setting_point['sp_day_of_harvest_day_number'] = [total_days]*288   
       
     return _out  
@@ -295,8 +308,12 @@ def irrigation_control_strategy(_in: GreenHouseInput, _out: GreenHouseOutput) ->
     )
 
     shot_number = _in.indoor_env['shot_number'][-1]
+    
+    # shot_number = _in.indoor_env['water_supply_minutes_5min'][-1]
 
     irrigation_ml = _in.indoor_env['irrigation_ml'][-1]
+    
+    
 
     need_ml = current_DLI*irrigation_ml
 
@@ -307,7 +324,7 @@ def irrigation_control_strategy(_in: GreenHouseInput, _out: GreenHouseOutput) ->
 
     if need_ml//20 >= shot_number:
         target_index = datetime_to_int(_in.now + timedelta(minutes=10))
-        _out.setting_point['sp_irrigation_interval_time_setpoint_min_5min'][target_index] = 4
+        _out.setting_point['sp_irrigation_interval_time_setpoint_min_5min'][target_index:target_index+12] = 120
         _out.setting_point['shot_number'] = shot_number + 1
 
     return _out

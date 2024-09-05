@@ -5,7 +5,6 @@ import yaml
 import traceback
 import time
 import pytz
-import pandas as pd
 
 sys.path.append('./')
 

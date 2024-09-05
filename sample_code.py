@@ -180,22 +180,23 @@ if __name__ == "__main__":
     # for item in result2['ModuleItems']:
     #     print(f"{item['Description']}  : {item['ColId']}")
     
-    # colid = 2664621
+    colid = 2664621
     # # colid = 2664622
-    colid = 2664615  # plant weight
+    # colid = 2664615  # plant weight
 
     # to-do
     # put_value 나 put_values로 데이터 전송
     
-    # start_date = datetime(2024,9,1,0,0,0)
-    # end_date = datetime(2024,9,4,0,0,0)
+    # date     
+    start_date = datetime(2024,9,1,0,0,0)
+    end_date = datetime(2024,9,6,0,0,0)
         
-    # result3 = get_data(token,
-    #                     moduleId,
-    #                     colid,
-    #                     start_date.isoformat(),
-    #                     end_date.isoformat()
-    #                     )    
+    result3 = get_data(token,
+                        moduleId,
+                        colid,
+                        start_date.isoformat(),
+                        end_date.isoformat()
+                        )    
         
     # print("data : " , result3)
     

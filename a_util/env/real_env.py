@@ -75,16 +75,20 @@ class GreenhouseControl:
                 else:
                     yesterday_ml = self.indoor_env_yesterday['irrigation_ml'][-1]
                     yesterday_ec = sum(self.indoor_env_yesterday['drain_ec_5min'])/len(self.indoor_env_yesterday['drain_ec_5min'])
-                    if yesterday_ec < 1.8:
+                    if yesterday_ec < 2.8:
                         target_ml = yesterday_ml - 1 
                         if target_ml < 1:
                             target_ml = 1                    
-                    elif yesterday_ec > 2.2:
+                    elif yesterday_ec > 3.2:
                         target_ml = yesterday_ml + 1
                         if target_ml > 10:
                             target_ml = 10
                     else:
                         target_ml = yesterday_ml
+                    if target_ml < 3:
+                        target_ml = 3
+                    if target_ml > 7:
+                        target_ml = 7
                     self.indoor_env['irrigation_ml'] = target_ml     
             elif self.today < datetime(2024,9,29):
                 if self.today == datetime(2024,9,19):
@@ -102,6 +106,12 @@ class GreenhouseControl:
                             target_ml = 16
                     else:
                         target_ml = yesterday_ml
+                    
+                    if target_ml < 3:
+                        target_ml = 3
+                    if target_ml > 7:
+                        target_ml = 7
+                        
                     self.indoor_env['irrigation_ml'] = target_ml
             else:
                 if self.today == datetime(2024,9,29):
@@ -119,6 +129,12 @@ class GreenhouseControl:
                             target_ml = 16
                     else:
                         target_ml = yesterday_ml
+                    
+                    if target_ml < 6.3:
+                        target_ml = 6.3
+                    if target_ml > 10.3:
+                        target_ml = 10.3
+                        
                     self.indoor_env['irrigation_ml'] = target_ml
         except:
             print("ec smart control algorithm error")
@@ -241,6 +257,11 @@ class GreenHouseInput:
         self.setpoint = self.indoor_env[LETSGROW_CONTROL]
         
         self.rise_time, self.set_time = sun_cal(self.today, self.indoor_env, True)
+        
+        #CEST 시간 조정
+        if now < datetime(2024,10,27,0,0,0):
+            self.rise_time += timedelta(hours=1)
+            self.set_time += timedelta(hours=1)
         
         self.rise_time_int = datetime_to_int(self.rise_time)
         self.set_time_int = datetime_to_int(self.set_time)
