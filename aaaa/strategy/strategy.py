@@ -260,13 +260,25 @@ def harvest_strategy_b(_in: GreenHouseInput, _out: GreenHouseOutput):
     
     set november 20
     
+    tempsum = 1593
+    
     """ 
-    total_days = (datetime(2024,12,15) - datetime(2024,1,1,0,0)).days
-    
-    if _in.now >= datetime(2024,11,20):
-        total_days = (datetime(2024,11,20) - datetime(2024,1,1,0,0)).days
-    
-    _out.setting_point['sp_day_of_harvest_day_number'] = [total_days]*288   
+    try:
+        daily_mean_temperatures = _in.temperature_from_transplant_day.resample('D').mean()
+        accumulate_temperature = float(daily_mean_temperatures.sum())
+            
+            
+        total_days = (datetime(2024,12,15) - datetime(2024,1,1,0,0)).days
+        
+        if _in.now >= datetime(2024,11,20):
+            total_days = (datetime(2024,11,20) - datetime(2024,1,1,0,0)).days
+            
+        if accumulate_temperature > 1593:
+            total_days = (_in.now - datetime(2024,1,1,0,0)).days
+        
+        _out.setting_point['sp_day_of_harvest_day_number'] = [total_days]*288   
+    except:  
+        _out.setting_point['sp_day_of_harvest_day_number'] = [329]*288   
       
     return _out  
 
