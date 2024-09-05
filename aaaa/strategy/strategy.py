@@ -260,7 +260,7 @@ def harvest_strategy_b(_in: GreenHouseInput, _out: GreenHouseOutput):
     
     set november 20
     
-    tempsum = 1593
+    tempsum = 1593 + 20(9/4)
     
     """ 
     try:
@@ -273,7 +273,7 @@ def harvest_strategy_b(_in: GreenHouseInput, _out: GreenHouseOutput):
         if _in.now >= datetime(2024,11,20):
             total_days = (datetime(2024,11,20) - datetime(2024,1,1,0,0)).days
             
-        if accumulate_temperature > 1593:
+        if accumulate_temperature > 1613:
             total_days = (_in.now - datetime(2024,1,1,0,0)).days
         
         _out.setting_point['sp_day_of_harvest_day_number'] = [total_days]*288   

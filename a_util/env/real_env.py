@@ -28,7 +28,7 @@ class GreenhouseControl:
         self.lg_service = LetsgrowService()        
         
         self.temperature_from_transplant_day = self.get_data_5min_custom(
-            start_date=datetime(2024,9,5,0,0,0),
+            start_date=datetime(2024,9,4,0,0,0),
             end_date=self.today,
             columns='temperature_greenhouse_5min' 
             )
