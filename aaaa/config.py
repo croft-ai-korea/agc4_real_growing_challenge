@@ -8,8 +8,8 @@ crop_begin_date = date(2024, 9, 3)
 timescale_db = os.getenv('timescale_db', 'postgres')
 timescale_user = os.getenv('timescale_user', 'postgres')
 timescale_password = os.getenv('timescale_password', 'admin1234')
-# timescale_host = os.getenv('timescale_host', 'timescaledb')
-timescale_host = os.getenv('timescale_host', '127.0.0.1')
+timescale_host = os.getenv('timescale_host', 'timescaledb')
+# timescale_host = os.getenv('timescale_host', '127.0.0.1')
 timescale_port = os.getenv('timescale_port', 5432)
 
 
