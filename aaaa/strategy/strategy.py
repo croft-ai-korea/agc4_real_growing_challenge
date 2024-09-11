@@ -215,9 +215,9 @@ def irrigation_strategy_b(_in: GreenHouseInput, _out: GreenHouseOutput):
     led_nonzero = _out.setting_point['sp_value_to_isii_1_5min'].to_numpy().nonzero()[0]
         
     if len(led_nonzero) != 0:
-        _out.setting_point['sp_irrigation_interval_time_setpoint_min_5min'][led_nonzero[0]+4] = 60 #광이 조사된뒤 20분 뒤부터 시작 
+        _out.setting_point['sp_irrigation_interval_time_setpoint_min_5min'][led_nonzero[0]:led_nonzero[0]+12] = 120 #광이 조사된뒤 20분 뒤부터 시작 
     else:
-        _out.setting_point['sp_irrigation_interval_time_setpoint_min_5min'][_in.rise_time_int] = 60
+        _out.setting_point['sp_irrigation_interval_time_setpoint_min_5min'][_in.rise_time_int:_in.rise_time_int+12] = 120
 
     _out.setting_point['shot_number'] = 1
 
@@ -242,6 +242,8 @@ def plantdensity_strategy_b(_in: GreenHouseInput, _out: GreenHouseOutput):
     """    
     daily_mean_temperatures = _in.temperature_from_transplant_day.resample('D').mean()
     accumulate_temperature = float(daily_mean_temperatures.sum())
+    
+    print("accumulate_temperature : ", accumulate_temperature)
     
     if accumulate_temperature < 342 or accumulate_temperature is None:
         _out.setting_point['sp_plantdensity'] = [56]*288
@@ -333,6 +335,10 @@ def irrigation_control_strategy(_in: GreenHouseInput, _out: GreenHouseOutput) ->
     print("irrigation_ml : ", irrigation_ml)
     print("current dli : ", current_DLI)
     print("need ml : ", need_ml)
+    
+    if shot_number is None:
+        print("shot_number is None")
+        return _out
 
     if need_ml//20 >= shot_number:
         target_index = datetime_to_int(_in.now + timedelta(minutes=10))

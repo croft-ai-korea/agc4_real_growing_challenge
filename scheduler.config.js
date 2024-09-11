@@ -15,7 +15,7 @@ module.exports = {
         name: "per_day",
         script: "python3",
         args: "aaaa/per_day.py",
-        cron_restart: "0 1 * * *", // Run every day at 01:00
+        cron_restart: "0 0,1 * * *", // Run every day at 00:00, 01:00
         restart_delay : 60000,
         timezone: "Europe/Amsterdam", // 네덜란드 시간대 기준
         // watch: true,
