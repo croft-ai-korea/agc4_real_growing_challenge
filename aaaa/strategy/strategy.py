@@ -247,7 +247,7 @@ def plantdensity_strategy_b(_in: GreenHouseInput, _out: GreenHouseOutput):
        depth image -> height sensing 
        using given date 
 
-      56 : 적산온도 0~342
+      56 : 적산온도 0~312
       42 : 적산온도 343~427
       30 : 적산온도 428~577
       20 : 적산온도 578~
@@ -258,7 +258,7 @@ def plantdensity_strategy_b(_in: GreenHouseInput, _out: GreenHouseOutput):
     
     print("accumulate_temperature : ", accumulate_temperature)
     
-    if accumulate_temperature < 342 or accumulate_temperature is None:
+    if accumulate_temperature < 312 or accumulate_temperature is None:
         _out.setting_point['sp_plantdensity'] = [56]*288
     elif accumulate_temperature < 427:
         _out.setting_point['sp_plantdensity'] = [42]*288
