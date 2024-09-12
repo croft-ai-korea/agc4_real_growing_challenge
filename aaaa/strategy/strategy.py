@@ -23,21 +23,21 @@ def temperature_strategy_b(_in: GreenHouseInput, _out: GreenHouseOutput):
     - with light max 30 degree 
     - setting
         - veg 
-            - light : heat 19, vent 20
-            - no light : heat 18, vent 19
+            - light : heat 19, vent 21
+            - no light : heat 18, vent 20
         - generative
-            - light : heat 21, vent 22
-            - no light : heat 17, vent 18 
+            - light : heat 21, vent 23
+            - no light : heat 17, vent 19 
         
     """
     if _in.now < datetime(2024,9,22,0,0,0):
         _out.setting_point['sp_heating_temp_setpoint_5min'] = [18]*288
         _out.setting_point['sp_heating_temp_setpoint_5min'][_in.rise_time_int:_in.set_time_int] = 19
-        _out.setting_point['sp_vent_ilation_temp_setpoint_5min'] = _out.setting_point['sp_heating_temp_setpoint_5min']+1
+        _out.setting_point['sp_vent_ilation_temp_setpoint_5min'] = _out.setting_point['sp_heating_temp_setpoint_5min']+2
     else:
         _out.setting_point['sp_heating_temp_setpoint_5min'] = [17]*288
         _out.setting_point['sp_heating_temp_setpoint_5min'][_in.rise_time_int:_in.set_time_int] = 21
-        _out.setting_point['sp_vent_ilation_temp_setpoint_5min'] = _out.setting_point['sp_heating_temp_setpoint_5min']+1   
+        _out.setting_point['sp_vent_ilation_temp_setpoint_5min'] = _out.setting_point['sp_heating_temp_setpoint_5min']+2   
     
     return _out
   
@@ -110,7 +110,7 @@ def led_strategy_b(_in: GreenHouseInput, _out: GreenHouseOutput):
             led_start_time_int = datetime_to_int(datetime(2000,1,1,1,20,0))
             led_end_time_int = _in.set_time_int
             
-        min_possible_led_on_time = (_in.set_time_int+6*12)-288
+        min_possible_led_on_time = (_in.set_time_int+7*12)-288
         if min_possible_led_on_time < 12:
             min_possible_led_on_time = 12
         if led_start_time_int < min_possible_led_on_time:
@@ -135,9 +135,22 @@ def blackout_screen_strategy_b(_in: GreenHouseInput, _out: GreenHouseOutput):
     
     """
     _out.setting_point['sp_blackout_screen_setpoint_5min'] = [0]*288    
-    _out.setting_point['sp_blackout_screen_setpoint_5min'][_out.setting_point['sp_value_to_isii_1_5min']>0] = 95
+    _out.setting_point['sp_blackout_screen_setpoint_5min'][_out.setting_point['sp_value_to_isii_1_5min']>0] = 100
     _out.setting_point['sp_blackout_screen_setpoint_5min'][_in.rise_time_int:_in.set_time_int] = 0
   
+    return _out
+
+def blackout_screen_strategy_2(_in: GreenHouseInput, _out: GreenHouseOutput):
+    """
+    screen setting
+    at night, if led is on, then use blackout screen
+    
+    """
+    if _in.now >= datetime(2024,10,2) or _in.indoor_env['fc_temperature_5min'].min() < 10:
+        _out.setting_point['sp_blackout_screen_setpoint_5min'] = [95]*288    
+        _out.setting_point['sp_blackout_screen_setpoint_5min'][_out.setting_point['sp_value_to_isii_1_5min']>0] = 100
+        _out.setting_point['sp_blackout_screen_setpoint_5min'][_in.rise_time_int:_in.set_time_int] = 0
+    
     return _out
 
 def min_vent_strategy_b(_in: GreenHouseInput, _out: GreenHouseOutput):
@@ -173,8 +186,8 @@ def co2_strategy_b(_in: GreenHouseInput, _out: GreenHouseOutput):
     """
     _out.setting_point['sp_co2_setpoint_ppm_5min']  = 300
     if _in.today <= datetime(2024,9,22):
-      _out.setting_point['sp_co2_setpoint_ppm_5min'][_in.rise_time_int-1*12:_in.set_time_int+1*12] = 550
-      _out.setting_point['sp_co2_setpoint_ppm_5min'][_out.setting_point['sp_value_to_isii_1_5min']>0] = 550
+      _out.setting_point['sp_co2_setpoint_ppm_5min'][_in.rise_time_int-1*12:_in.set_time_int+1*12] = 600
+      _out.setting_point['sp_co2_setpoint_ppm_5min'][_out.setting_point['sp_value_to_isii_1_5min']>0] = 600
     else:
       _out.setting_point['sp_co2_setpoint_ppm_5min'][_in.rise_time_int-1*12:_in.set_time_int+1*12] = 800  
       _out.setting_point['sp_co2_setpoint_ppm_5min'][_out.setting_point['sp_value_to_isii_1_5min']>0] = 800

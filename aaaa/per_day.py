@@ -12,7 +12,7 @@ from a_util.service.letsgrow_service import LetsgrowService
 from a_util.env.real_env import GreenhouseControl
 from aaaa.strategy.strategy import temperature_strategy_b, energy_screen_strategy_b, \
     led_strategy_b, blackout_screen_strategy_b, min_vent_strategy_b, net_pipe_minimum_strategy_b, \
-    co2_strategy_b, hd_strategy_b, irrigation_strategy_b, plantdensity_strategy_b, harvest_strategy_b
+    co2_strategy_b, hd_strategy_b, irrigation_strategy_b, plantdensity_strategy_b, harvest_strategy_b, blackout_screen_strategy_2
 # from aaaa.strategy.strategy import base_strategy
 # from aaaa.strategy.strategy import temp_strategy, enrg_screen_strategy, radiation_strategy, co2_strategy, \
 #     humidity_strategy, base_strategy,statistics_temp_strategy_perday,\
@@ -51,7 +51,8 @@ def per_day():
                 hd_strategy_b,
                 irrigation_strategy_b,
                 plantdensity_strategy_b,
-                harvest_strategy_b                
+                harvest_strategy_b,
+                blackout_screen_strategy_2                
             ],
         now = now
     )

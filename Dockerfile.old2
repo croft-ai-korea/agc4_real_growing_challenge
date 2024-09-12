@@ -5,16 +5,11 @@ FROM python:3.9-bullseye
 
 RUN python -m pip install --upgrade pip
 
-ENV TZ=Europe/Amsterdam
-
 # Update and install necessary packages
 RUN apt-get update && apt-get install -y \
     curl \
     libpq-dev \
-    tzdata \
-    && rm -rf /var/lib/apt/lists/* \
-    && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime \
-    && echo $TZ > /etc/timezone
+    && rm -rf /var/lib/apt/lists/*
 
 # Install Python packages
 

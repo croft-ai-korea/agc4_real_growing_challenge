@@ -19,7 +19,7 @@ module.exports = {
         restart_delay : 60000,
         timezone: "Europe/Amsterdam", // 네덜란드 시간대 기준
         // watch: true,
-        max_restarts: 5, // 최대 재시도 횟수 5번
+        max_restarts: 3, // 최대 재시도 횟수 5번
         min_uptime: "180s", // 최소 3분 동안 실행되어야 함
         exec_mode: "fork", // 포크 모드로 실행
       },
@@ -30,7 +30,7 @@ module.exports = {
         cron_restart: "*/15 * * * *", // Run every day at 15min
         restart_delay : 60000, 
         // watch: true
-        max_restarts: 2, // 최대 재시도 횟수 5번
+        max_restarts: 1, // 최대 재시도 횟수 5번
         min_uptime: "180s", // 최소 3분 동안 실행되어야 함
         exec_mode: "fork", // 포크 모드로 실행
       }
